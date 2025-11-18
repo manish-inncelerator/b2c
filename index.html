@@ -17,6 +17,10 @@
             box-sizing: border-box;
         }
         
+        html {
+            overflow-x: hidden;
+        }
+        
         :root {
             --primary-color: #0066cc;
             --primary-dark: #0052a3;
@@ -40,6 +44,8 @@
             line-height: 1.6;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+            width: 100%;
         }
         
         /* Top Strip */
@@ -60,8 +66,11 @@
             background: #ffffff;
             border-bottom: 1px solid var(--border-color);
             padding: 0;
-            position: sticky;
+            position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
             z-index: 1000;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(20px);
@@ -1059,9 +1068,9 @@
         /* Hero Section */
         .hero-section {
             background: linear-gradient(135deg, #0066cc 0%, #0052a3 30%, #003d7a 70%, #002d5c 100%);
-            padding: 50px 0 100px;
+            padding: 120px 0 100px;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
         }
         
         .hero-section::before {
@@ -1076,7 +1085,6 @@
                 radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
             pointer-events: none;
-            animation: heroGlow 8s ease-in-out infinite;
         }
         
         .hero-section::after {
@@ -1088,18 +1096,7 @@
             height: 200%;
             background: 
                 repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px);
-            animation: heroPattern 20s linear infinite;
             pointer-events: none;
-        }
-        
-        @keyframes heroGlow {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-        }
-        
-        @keyframes heroPattern {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            100% { transform: translate(50px, 50px) rotate(360deg); }
         }
         
         .hero-content {
@@ -1107,6 +1104,7 @@
             z-index: 1;
             text-align: center;
             color: white;
+            overflow: visible;
         }
         
         .hero-title {
@@ -1116,7 +1114,6 @@
             letter-spacing: -1.5px;
             line-height: 1.15;
             text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
-            animation: fadeInUp 0.8s ease-out;
         }
         
         .hero-subtitle {
@@ -1129,18 +1126,6 @@
             margin-right: auto;
             line-height: 1.6;
             text-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
         
         @keyframes pulse {
@@ -1158,7 +1143,6 @@
             gap: 60px;
             margin-top: 50px;
             flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.4s both;
         }
         
         .hero-stat {
@@ -1236,8 +1220,8 @@
             margin-top: 40px;
             border: 1px solid rgba(255, 255, 255, 0.3);
             position: relative;
-            animation: fadeInUp 0.8s ease-out 0.6s both;
             backdrop-filter: blur(10px);
+            overflow: visible;
         }
         
         .search-box::before {
@@ -1317,12 +1301,29 @@
             grid-template-columns: 1fr 1fr 1fr 1fr auto;
             gap: 20px;
             align-items: end;
+            overflow: visible;
+        }
+        
+        .search-form[data-form="packages"],
+        .search-form[data-form="visa"] {
+            grid-template-columns: 1fr auto;
+        }
+        
+        .search-form[data-form="packages"] .form-group,
+        .search-form[data-form="visa"] .form-group {
+            width: 100%;
+        }
+        
+        .search-form[data-form="packages"] .form-control,
+        .search-form[data-form="visa"] .form-control {
+            width: 100%;
         }
         
         .form-group {
             display: flex;
             flex-direction: column;
             position: relative;
+            overflow: visible;
         }
         
         .form-group label {
@@ -1367,6 +1368,199 @@
         .form-control::placeholder {
             color: var(--text-light);
             font-weight: 400;
+        }
+        
+        /* Custom Select Dropdown */
+        .custom-select-wrapper {
+            position: relative;
+            width: 100%;
+            z-index: 1;
+        }
+        
+        .custom-select-wrapper.active {
+            z-index: 10001;
+        }
+        
+        .custom-select-trigger {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 18px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            background: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-color);
+            min-height: 50px;
+        }
+        
+        .custom-select-trigger:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .custom-select-wrapper.active .custom-select-trigger {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+        }
+        
+        .custom-select-value {
+            flex: 1;
+            text-align: left;
+        }
+        
+        .custom-select-value.placeholder {
+            color: var(--text-light);
+        }
+        
+        .custom-select-arrow {
+            font-size: 14px;
+            color: var(--text-light);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-left: 12px;
+        }
+        
+        .custom-select-wrapper.active .custom-select-arrow {
+            transform: rotate(180deg);
+            color: var(--primary-color);
+        }
+        
+        .custom-select-dropdown {
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+            z-index: 10000;
+            display: none;
+            overflow: hidden;
+            max-height: 400px;
+            flex-direction: column;
+        }
+        
+        .custom-select-wrapper.active .custom-select-dropdown {
+            display: flex;
+        }
+        
+        .custom-select-search {
+            position: relative;
+            padding: 16px;
+            border-bottom: 2px solid var(--light-bg);
+            background: white;
+        }
+        
+        .custom-select-search i {
+            position: absolute;
+            left: 28px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 16px;
+            pointer-events: none;
+        }
+        
+        .custom-select-search-input {
+            width: 100%;
+            padding: 12px 16px 12px 44px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-color);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--light-bg);
+        }
+        
+        .custom-select-search-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: white;
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+        }
+        
+        .custom-select-search-input::placeholder {
+            color: var(--text-light);
+            font-weight: 400;
+        }
+        
+        .custom-select-options {
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 8px;
+        }
+        
+        .custom-select-options::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .custom-select-options::-webkit-scrollbar-track {
+            background: var(--light-bg);
+            border-radius: 10px;
+        }
+        
+        .custom-select-options::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+        
+        .custom-select-options::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+        
+        .custom-select-option {
+            padding: 14px 16px;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-color);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .custom-select-option:hover {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.08) 0%, rgba(0, 82, 163, 0.08) 100%);
+            color: var(--primary-color);
+            transform: translateX(4px);
+        }
+        
+        .custom-select-option.selected {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .custom-select-option.selected::before {
+            content: '✓';
+            position: absolute;
+            right: 16px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .custom-select-option.hidden {
+            display: none;
+        }
+        
+        .custom-select-no-results {
+            padding: 20px;
+            text-align: center;
+            color: var(--text-light);
+            font-size: 14px;
+            font-weight: 500;
+            display: none;
+        }
+        
+        .custom-select-no-results.show {
+            display: block;
         }
         
         /* Autocomplete Suggestions */
@@ -1613,6 +1807,18 @@
                 padding: 12px 20px;
                 font-size: 14px;
                 white-space: nowrap;
+            }
+            
+            .custom-select-dropdown {
+                max-height: 350px;
+            }
+            
+            .custom-select-search {
+                padding: 12px;
+            }
+            
+            .custom-select-options {
+                max-height: 250px;
             }
         }
         
@@ -2792,8 +2998,8 @@
                         <span>Hotel</span>
                     </a>
                     <a href="#" class="nav-item">
-                        <i class="bi bi-tag-fill"></i>
-                        <span>Offers</span>
+                        <i class="bi bi-briefcase-fill"></i>
+                        <span>Corporate</span>
                     </a>
                 </div>
                 
@@ -2898,11 +3104,13 @@
                 
                 <div class="search-box">
                     <div class="search-tabs">
-                        <button class="search-tab active">Hotels</button>
-                        <button class="search-tab">Packages</button>
+                        <button class="search-tab active" data-tab="hotels">Hotels</button>
+                        <button class="search-tab" data-tab="packages">Packages</button>
+                        <button class="search-tab" data-tab="visa">Visa</button>
                     </div>
                     
-                    <form class="search-form">
+                    <!-- Hotels Form -->
+                    <form class="search-form" id="hotelsForm" data-form="hotels">
                         <div class="form-group">
                             <label><i class="bi bi-geo-alt-fill"></i>Destination</label>
                             <input type="text" id="destinationInput" class="form-control" placeholder="Where are you going?" autocomplete="off">
@@ -2930,25 +3138,88 @@
                             <span>Search</span>
                         </button>
                     </form>
-                </div>
-                
-                <div class="hero-stats">
-                    <div class="hero-stat">
-                        <span class="hero-stat-number">50K+</span>
-                        <span class="hero-stat-label">Hotels Worldwide</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-number">2M+</span>
-                        <span class="hero-stat-label">Happy Customers</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-number">4.8★</span>
-                        <span class="hero-stat-label">Average Rating</span>
-                    </div>
-                    <div class="hero-stat">
-                        <span class="hero-stat-number">150+</span>
-                        <span class="hero-stat-label">Destinations</span>
-                    </div>
+                    
+                    <!-- Packages Form -->
+                    <form class="search-form" id="packagesForm" data-form="packages" style="display: none;">
+                        <div class="form-group">
+                            <label><i class="bi bi-geo-alt-fill"></i>Destination</label>
+                            <div class="custom-select-wrapper" id="packagesSelectWrapper">
+                                <div class="custom-select-trigger" id="packagesSelectTrigger">
+                                    <span class="custom-select-value placeholder">Select Destination</span>
+                                    <i class="bi bi-chevron-down custom-select-arrow"></i>
+                                </div>
+                                <div class="custom-select-dropdown" id="packagesSelectDropdown">
+                                    <div class="custom-select-search">
+                                        <i class="bi bi-search"></i>
+                                        <input type="text" class="custom-select-search-input" id="packagesSearchInput" placeholder="Search destination...">
+                                    </div>
+                                    <div class="custom-select-options" id="packagesSelectOptions">
+                                        <div class="custom-select-option" data-value="mumbai">Mumbai, India</div>
+                                        <div class="custom-select-option" data-value="delhi">Delhi, India</div>
+                                        <div class="custom-select-option" data-value="goa">Goa, India</div>
+                                        <div class="custom-select-option" data-value="bangalore">Bangalore, India</div>
+                                        <div class="custom-select-option" data-value="kerala">Kerala, India</div>
+                                        <div class="custom-select-option" data-value="dubai">Dubai, UAE</div>
+                                        <div class="custom-select-option" data-value="singapore">Singapore</div>
+                                        <div class="custom-select-option" data-value="thailand">Thailand</div>
+                                        <div class="custom-select-option" data-value="malaysia">Malaysia</div>
+                                        <div class="custom-select-option" data-value="bali">Bali, Indonesia</div>
+                                        <div class="custom-select-option" data-value="paris">Paris, France</div>
+                                        <div class="custom-select-option" data-value="london">London, UK</div>
+                                        <div class="custom-select-option" data-value="newyork">New York, USA</div>
+                                        <div class="custom-select-option" data-value="tokyo">Tokyo, Japan</div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="packagesDestination" id="packagesDestination" value="">
+                            </div>
+                        </div>
+                        <button type="submit" class="search-btn">
+                            <i class="bi bi-search"></i>
+                            <span>Search</span>
+                        </button>
+                    </form>
+                    
+                    <!-- Visa Form -->
+                    <form class="search-form" id="visaForm" data-form="visa" style="display: none;">
+                        <div class="form-group">
+                            <label><i class="bi bi-geo-alt-fill"></i>Destination</label>
+                            <div class="custom-select-wrapper" id="visaSelectWrapper">
+                                <div class="custom-select-trigger" id="visaSelectTrigger">
+                                    <span class="custom-select-value placeholder">Select Destination</span>
+                                    <i class="bi bi-chevron-down custom-select-arrow"></i>
+                                </div>
+                                <div class="custom-select-dropdown" id="visaSelectDropdown">
+                                    <div class="custom-select-search">
+                                        <i class="bi bi-search"></i>
+                                        <input type="text" class="custom-select-search-input" id="visaSearchInput" placeholder="Search destination...">
+                                    </div>
+                                    <div class="custom-select-options" id="visaSelectOptions">
+                                        <div class="custom-select-option" data-value="usa">United States</div>
+                                        <div class="custom-select-option" data-value="uk">United Kingdom</div>
+                                        <div class="custom-select-option" data-value="canada">Canada</div>
+                                        <div class="custom-select-option" data-value="australia">Australia</div>
+                                        <div class="custom-select-option" data-value="germany">Germany</div>
+                                        <div class="custom-select-option" data-value="france">France</div>
+                                        <div class="custom-select-option" data-value="italy">Italy</div>
+                                        <div class="custom-select-option" data-value="spain">Spain</div>
+                                        <div class="custom-select-option" data-value="switzerland">Switzerland</div>
+                                        <div class="custom-select-option" data-value="japan">Japan</div>
+                                        <div class="custom-select-option" data-value="southkorea">South Korea</div>
+                                        <div class="custom-select-option" data-value="singapore">Singapore</div>
+                                        <div class="custom-select-option" data-value="malaysia">Malaysia</div>
+                                        <div class="custom-select-option" data-value="thailand">Thailand</div>
+                                        <div class="custom-select-option" data-value="dubai">Dubai, UAE</div>
+                                        <div class="custom-select-option" data-value="china">China</div>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="visaDestination" id="visaDestination" value="">
+                            </div>
+                        </div>
+                        <button type="submit" class="search-btn">
+                            <i class="bi bi-search"></i>
+                            <span>Search</span>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -3514,8 +3785,137 @@
             tab.addEventListener('click', function() {
                 document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
                 this.classList.add('active');
+                
+                // Get the tab type from data attribute
+                const tabType = this.getAttribute('data-tab');
+                
+                // Hide all forms
+                document.querySelectorAll('.search-form').forEach(form => {
+                    form.style.display = 'none';
+                });
+                
+                // Show the form corresponding to the active tab
+                const targetForm = document.querySelector(`[data-form="${tabType}"]`);
+                if (targetForm) {
+                    targetForm.style.display = 'flex';
+                }
             });
         });
+        
+        // Custom Select Dropdown Functionality
+        function initCustomSelect(selectId) {
+            const wrapper = document.getElementById(selectId + 'Wrapper');
+            if (!wrapper) return;
+            
+            const trigger = document.getElementById(selectId + 'Trigger');
+            const dropdown = document.getElementById(selectId + 'Dropdown');
+            const searchInput = document.getElementById(selectId + 'SearchInput');
+            const options = document.getElementById(selectId + 'Options');
+            const hiddenInputId = selectId.replace('Select', '') + 'Destination';
+            const hiddenInput = document.getElementById(hiddenInputId);
+            const valueSpan = trigger.querySelector('.custom-select-value');
+            const allOptions = options.querySelectorAll('.custom-select-option');
+            
+            // Toggle dropdown
+            trigger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isActive = wrapper.classList.contains('active');
+                
+                // Close all other selects
+                document.querySelectorAll('.custom-select-wrapper').forEach(w => {
+                    if (w !== wrapper) {
+                        w.classList.remove('active');
+                    }
+                });
+                
+                wrapper.classList.toggle('active');
+                
+                // Focus search input when opening
+                if (!isActive && searchInput) {
+                    setTimeout(() => searchInput.focus(), 100);
+                }
+            });
+            
+            // Search functionality
+            if (searchInput) {
+                searchInput.addEventListener('input', function(e) {
+                    const searchTerm = e.target.value.toLowerCase().trim();
+                    let visibleCount = 0;
+                    
+                    allOptions.forEach(option => {
+                        const text = option.textContent.toLowerCase();
+                        if (text.includes(searchTerm)) {
+                            option.classList.remove('hidden');
+                            visibleCount++;
+                        } else {
+                            option.classList.add('hidden');
+                        }
+                    });
+                    
+                    // Show/hide no results message
+                    let noResults = dropdown.querySelector('.custom-select-no-results');
+                    if (!noResults) {
+                        noResults = document.createElement('div');
+                        noResults.className = 'custom-select-no-results';
+                        noResults.textContent = 'No destinations found';
+                        dropdown.appendChild(noResults);
+                    }
+                    
+                    if (visibleCount === 0 && searchTerm !== '') {
+                        noResults.classList.add('show');
+                    } else {
+                        noResults.classList.remove('show');
+                    }
+                });
+            }
+            
+            // Option selection
+            allOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const value = this.getAttribute('data-value');
+                    const text = this.textContent;
+                    
+                    // Update selected state
+                    allOptions.forEach(opt => opt.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    // Update trigger value
+                    valueSpan.textContent = text;
+                    valueSpan.classList.remove('placeholder');
+                    
+                    // Update hidden input
+                    if (hiddenInput) {
+                        hiddenInput.value = value;
+                    }
+                    
+                    // Close dropdown
+                    wrapper.classList.remove('active');
+                    
+                    // Clear search
+                    if (searchInput) {
+                        searchInput.value = '';
+                        allOptions.forEach(opt => opt.classList.remove('hidden'));
+                    }
+                });
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!wrapper.contains(e.target)) {
+                    wrapper.classList.remove('active');
+                }
+            });
+            
+            // Prevent dropdown from closing when clicking inside
+            dropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+        
+        // Initialize custom selects
+        initCustomSelect('packagesSelect');
+        initCustomSelect('visaSelect');
         
         // Nav item active state
         document.querySelectorAll('.nav-item').forEach(item => {
