@@ -1,0 +1,2500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Search Results - Vimaansafar</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/air-datepicker@3.4.0/air-datepicker.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #0066cc;
+            --primary-dark: #0052a3;
+            --secondary-color: #20c997;
+            --accent-color: #ff6b35;
+            --success-color: #28a745;
+            --dark-color: #1a1a1a;
+            --text-color: #2c3e50;
+            --text-light: #6c757d;
+            --light-bg: #f8f9fa;
+            --border-color: #e0e0e0;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ffffff;
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Top Strip */
+        .top-strip {
+            background: linear-gradient(90deg, #c9a568 0%, #d4a574 50%, #c9a568 100%);
+            height: 3px;
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* Navbar Container */
+        .navbar {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.98);
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-bottom-color: var(--border-color);
+            background: rgba(255, 255, 255, 0.99);
+        }
+        
+        .navbar-container {
+            max-width: auto;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+        
+        .navbar-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            gap: 60px;
+        }
+        
+        /* Logo Section */
+        .logo-section {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+        }
+        
+        .logo-section:hover {
+            transform: translateY(-2px);
+        }
+        
+        .logo-image {
+            height: 44px;
+            width: auto;
+            object-fit: contain;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+        
+        .logo-section:hover .logo-image {
+            transform: scale(1.05) translateY(-1px);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+        }
+        
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            padding: 0 40px;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 14px 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-color);
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 12px;
+            min-width: 90px;
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 70%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+            border-radius: 3px 3px 0 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-item:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .nav-item:hover::before {
+            transform: translateX(-50%) scaleX(1);
+        }
+        
+        .nav-item.active {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .nav-item.active::before {
+            transform: translateX(-50%) scaleX(1);
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+            height: 4px;
+            width: 80%;
+        }
+        
+        .nav-item i {
+            font-size: 28px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--text-color);
+            display: block;
+        }
+        
+        .nav-item span {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-top: 2px;
+        }
+        
+        /* Right Section */
+        .right-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-shrink: 0;
+            position: relative;
+            margin-left: auto;
+        }
+        
+        .phone-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 18px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 82, 163, 0.05) 100%);
+            border: 1.5px solid rgba(0, 102, 204, 0.15);
+        }
+        
+        .phone-section:hover {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .phone-section i {
+            font-size: 18px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .phone-number {
+            font-weight: 700;
+            color: var(--dark-color);
+            font-size: 15px;
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+        }
+        
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            border: 1.5px solid transparent;
+        }
+        
+        .whatsapp-btn:hover {
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.05) 0%, rgba(25, 128, 56, 0.05) 100%);
+            border-color: rgba(37, 211, 102, 0.2);
+        }
+        
+        .whatsapp-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+        }
+        
+        .whatsapp-btn:hover .whatsapp-icon {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
+            border-color: rgba(37, 211, 102, 0.2);
+        }
+        
+        .whatsapp-icon i {
+            font-size: 19px;
+        }
+        
+        .menu-wrapper {
+            position: relative;
+        }
+        
+        .menu-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border: 1.5px solid transparent;
+        }
+        
+        .menu-toggle:hover {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 82, 163, 0.05) 100%);
+            border-color: rgba(0, 102, 204, 0.2);
+        }
+        
+        .menu-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+        }
+        
+        .menu-toggle:hover .menu-icon {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 102, 204, 0.35);
+            border-color: rgba(0, 102, 204, 0.2);
+        }
+        
+        .menu-icon i {
+            font-size: 19px;
+        }
+        
+        .user-profile-wrapper {
+            position: relative;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border: 1.5px solid transparent;
+        }
+        
+        .user-profile:hover {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 82, 163, 0.05) 100%);
+            border-color: rgba(0, 102, 204, 0.2);
+        }
+        
+        .user-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+        }
+        
+        .user-profile:hover .user-icon {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 102, 204, 0.35);
+            border-color: rgba(0, 102, 204, 0.2);
+        }
+        
+        .user-icon i {
+            font-size: 19px;
+        }
+        
+        .dropdown-menu {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            margin-top: 10px;
+            padding: 8px;
+            min-width: 180px;
+        }
+        
+        .dropdown-item {
+            padding: 12px 18px;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .dropdown-item:hover {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
+            color: var(--primary-color);
+            transform: translateX(4px);
+        }
+        
+        .dropdown-item i {
+            color: var(--primary-color);
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: var(--dark-color);
+            cursor: pointer;
+            padding: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-toggle:hover {
+            color: var(--primary-color);
+        }
+        
+        /* Fixed WhatsApp Button */
+        .whatsapp-fixed-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            animation: whatsappPulse 2s ease-in-out infinite;
+        }
+        
+        .whatsapp-fixed-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px rgba(37, 211, 102, 0.5);
+        }
+        
+        .whatsapp-fixed-icon {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .whatsapp-fixed-icon i {
+            font-size: 32px;
+        }
+        
+        @keyframes whatsappPulse {
+            0%, 100% {
+                box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 8px 24px rgba(37, 211, 102, 0.6), 0 0 0 10px rgba(37, 211, 102, 0.1);
+            }
+        }
+        
+        /* Search Results Header */
+        .search-results-header {
+            background: linear-gradient(135deg, #0066cc 0%, #0052a3 30%, #003d7a 70%, #002d5c 100%);
+            padding: 50px 0;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .search-results-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .search-results-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        }
+        
+        .search-results-header .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .search-info {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 32px;
+        }
+        
+        .search-info-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .search-info-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .search-info-item:hover::before {
+            left: 100%;
+        }
+        
+        .search-info-item:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.4);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .search-info-item i {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+        }
+        
+        .search-info-item span {
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        
+        .search-header-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .results-count-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        
+        .results-count-label {
+            font-size: 13px;
+            font-weight: 500;
+            opacity: 0.9;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+        
+        .results-count {
+            font-size: 32px;
+            font-weight: 900;
+            margin: 0;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.9) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .modify-search-btn {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modify-search-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .modify-search-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .modify-search-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+        
+        .modify-search-btn i {
+            font-size: 16px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .modify-search-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (max-width: 768px) {
+            .search-results-header {
+                padding: 32px 0;
+            }
+            
+            .search-info {
+                gap: 12px;
+                margin-bottom: 24px;
+            }
+            
+            .search-info-item {
+                padding: 10px 16px;
+                font-size: 13px;
+            }
+            
+            .search-header-bottom {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            
+            .results-count {
+                font-size: 24px;
+            }
+            
+            .modify-search-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 12px 24px;
+            }
+        }
+        
+        /* Filters and Results Section */
+        .results-section {
+            padding: 40px 0;
+            background: var(--light-bg);
+        }
+        
+        .filters-sidebar {
+            background: white;
+            border-radius: 20px;
+            padding: 0;
+            border: 2px solid var(--border-color);
+            position: sticky;
+            top: 100px;
+            max-height: calc(100vh - 120px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .filters-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            padding: 24px;
+            border-radius: 20px 20px 0 0;
+            color: white;
+            flex-shrink: 0;
+            z-index: 10;
+            box-shadow: 0 4px 16px rgba(0, 102, 204, 0.2);
+        }
+        
+        .filters-header-title {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.5px;
+        }
+        
+        .filters-header-title i {
+            font-size: 24px;
+        }
+        
+        .filters-header-subtitle {
+            font-size: 13px;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .filters-content {
+            padding: 24px;
+            overflow-y: auto;
+            overflow-x: hidden;
+            flex: 1;
+            min-height: 0;
+        }
+        
+        .filters-content::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .filters-content::-webkit-scrollbar-track {
+            background: var(--light-bg);
+            border-radius: 10px;
+        }
+        
+        .filters-content::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+        
+        .filters-content::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+        
+        .filter-group {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 2px solid var(--light-bg);
+            position: relative;
+        }
+        
+        .filter-group:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .filter-group-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+            cursor: pointer;
+            user-select: none;
+        }
+        
+        .filter-title {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--dark-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.3px;
+        }
+        
+        .filter-title-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-group-header:hover .filter-title-icon {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+        
+        .filter-title-text {
+            flex: 1;
+        }
+        
+        .filter-toggle {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        
+        .filter-group-header:hover .filter-toggle {
+            color: var(--primary-color);
+        }
+        
+        .filter-group-content {
+            padding-left: 46px;
+            animation: slideDown 0.3s ease;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .filter-option {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 14px 16px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 8px;
+            border: 2px solid transparent;
+            background: var(--light-bg);
+            position: relative;
+        }
+        
+        .filter-option:hover {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.08) 0%, rgba(0, 82, 163, 0.08) 100%);
+            border-color: rgba(0, 102, 204, 0.2);
+            transform: translateX(4px);
+        }
+        
+        .filter-option input[type="checkbox"],
+        .filter-option input[type="radio"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: var(--primary-color);
+            margin: 0;
+            flex-shrink: 0;
+        }
+        
+        .filter-option label {
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-color);
+            flex: 1;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .filter-option .count {
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 700;
+            background: rgba(0, 102, 204, 0.1);
+            padding: 4px 10px;
+            border-radius: 12px;
+            margin-left: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-option:hover .count {
+            background: rgba(0, 102, 204, 0.2);
+            color: var(--primary-color);
+        }
+        
+        .filter-option input[type="checkbox"]:checked ~ label,
+        .filter-option input[type="radio"]:checked ~ label {
+            color: var(--primary-color);
+        }
+        
+        .filter-option input[type="checkbox"]:checked ~ label .count,
+        .filter-option input[type="radio"]:checked ~ label .count {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .filter-group-content.collapsed {
+            display: none;
+        }
+        
+        .filter-group-header.active .filter-toggle {
+            transform: rotate(-90deg);
+        }
+        
+        .price-range {
+            margin-top: 18px;
+        }
+        
+        .price-range-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-light);
+        }
+        
+        .price-inputs {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
+        
+        .price-input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+        
+        .price-input-wrapper::before {
+            content: '₹';
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 14px;
+            z-index: 1;
+        }
+        
+        .price-input {
+            width: 100%;
+            padding: 12px 14px 12px 32px;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: white;
+            color: var(--text-color);
+        }
+        
+        .price-input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+            background: white;
+        }
+        
+        .price-input:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .filter-actions {
+            padding: 20px 24px;
+            background: var(--light-bg);
+            border-top: 2px solid var(--border-color);
+            display: flex;
+            gap: 12px;
+            flex-shrink: 0;
+            border-radius: 0 0 20px 20px;
+        }
+        
+        .apply-filters-btn {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .apply-filters-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .apply-filters-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .apply-filters-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+        }
+        
+        .apply-filters-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .reset-filters-btn {
+            padding: 16px 20px;
+            background: white;
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 50px;
+        }
+        
+        .reset-filters-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
+        }
+        
+        .reset-filters-btn i {
+            font-size: 18px;
+        }
+        
+        /* Results Area */
+        .results-area {
+            padding-left: 0;
+        }
+        
+        .results-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        /* Hotel Results Container */
+        .hotel-results {
+            transition: all 0.3s ease;
+        }
+        
+        .hotel-results.list-view {
+            display: block;
+        }
+        
+        .hotel-results.list-view .hotel-result-card {
+            margin-bottom: 24px;
+        }
+        
+        .hotel-results.grid-view {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+        
+        .hotel-results.grid-view .hotel-result-card {
+            margin-bottom: 0;
+        }
+        
+        @media (max-width: 1200px) {
+            .hotel-results.grid-view {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hotel-results.grid-view {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .sort-dropdown {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .sort-dropdown label {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text-color);
+        }
+        
+        .sort-select {
+            padding: 10px 16px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 600;
+            background: white;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 180px;
+        }
+        
+        .sort-select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+        }
+        
+        .view-toggle {
+            display: flex;
+            gap: 8px;
+        }
+        
+        .view-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            background: white;
+            color: var(--text-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .view-btn.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .view-btn:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .view-btn.active:hover {
+            color: white;
+        }
+        
+        /* Hotel Result Card */
+        .hotel-result-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .hotel-result-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-color);
+        }
+        
+        .hotel-result-content {
+            display: flex;
+            gap: 0;
+        }
+        
+        /* Grid View Card Styles */
+        .grid-view .hotel-result-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
+        .grid-view .hotel-result-content {
+            flex-direction: column;
+        }
+        
+        .grid-view .hotel-result-image {
+            width: 100%;
+            min-width: 100%;
+            height: 240px;
+        }
+        
+        .grid-view .hotel-result-details {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .grid-view .hotel-result-name {
+            font-size: 22px;
+            margin-bottom: 6px;
+        }
+        
+        .grid-view .hotel-result-location {
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+        
+        .grid-view .hotel-result-header {
+            flex-direction: column;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+        
+        .grid-view .hotel-result-rating {
+            flex-direction: row;
+            align-items: center;
+            gap: 12px;
+            margin-top: 8px;
+        }
+        
+        .grid-view .hotel-result-features {
+            margin-bottom: 16px;
+            gap: 8px;
+        }
+        
+        .grid-view .hotel-feature-tag {
+            font-size: 12px;
+            padding: 5px 10px;
+        }
+        
+        .grid-view .hotel-result-footer {
+            margin-top: auto;
+            padding-top: 16px;
+        }
+        
+        .grid-view .hotel-price {
+            font-size: 28px;
+        }
+        
+        .grid-view .book-now-btn {
+            padding: 14px 28px;
+            font-size: 14px;
+        }
+        
+        .hotel-result-image {
+            width: 320px;
+            min-width: 320px;
+            height: 280px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hotel-result-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hotel-result-card:hover .hotel-result-image img {
+            transform: scale(1.1);
+        }
+        
+        .hotel-image-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            z-index: 2;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+        }
+        
+        .hotel-result-details {
+            flex: 1;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        .hotel-result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+        
+        .hotel-result-name {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--dark-color);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        
+        .hotel-result-location {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 12px;
+        }
+        
+        .hotel-result-location i {
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+        
+        .hotel-result-rating {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+        
+        .rating-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(0, 102, 204, 0.1);
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            color: var(--primary-color);
+        }
+        
+        .rating-badge i {
+            color: #ffc107;
+            font-size: 16px;
+        }
+        
+        .review-count {
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        .hotel-result-features {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+        
+        .hotel-feature-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 12px;
+            background: rgba(0, 102, 204, 0.05);
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        
+        .hotel-feature-tag i {
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+        
+        .hotel-result-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            padding-top: 20px;
+            border-top: 2px solid var(--light-bg);
+        }
+        
+        .hotel-price-section {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .price-per-night {
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 500;
+            margin-bottom: 4px;
+        }
+        
+        .hotel-price {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--primary-color);
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+        
+        .price-tax {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 4px;
+        }
+        
+        .book-now-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .book-now-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .book-now-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .book-now-btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+        }
+        
+        .book-now-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Pagination */
+        .pagination-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+        
+        .pagination {
+            display: flex;
+            gap: 8px;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .pagination-item {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            background: white;
+            color: var(--text-color);
+            font-weight: 700;
+            font-size: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        
+        .pagination-item:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .pagination-item.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .pagination-item.active:hover {
+            color: white;
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            color: white;
+            padding: 40px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 102, 204, 0.5), transparent);
+        }
+        
+        .footer .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: white;
+            letter-spacing: -0.3px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+            border-radius: 2px;
+        }
+        
+        .footer p {
+            color: #b0b0b0;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+        
+        .footer-link {
+            color: #b0b0b0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 14px;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            font-weight: 400;
+            position: relative;
+            padding-left: 0;
+        }
+        
+        .footer-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: white;
+            padding-left: 12px;
+        }
+        
+        .footer-link:hover::before {
+            width: 8px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .footer a[style*="color: white"] {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            color: #b0b0b0 !important;
+            font-size: 18px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer a[style*="color: white"]:hover {
+            background: var(--primary-color);
+            color: white !important;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
+            border-color: var(--primary-color);
+        }
+        
+        .footer p[style*="color: #999"] {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            color: #b0b0b0;
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer p[style*="color: #999"]:hover {
+            color: white;
+        }
+        
+        .footer p[style*="color: #999"] i {
+            color: var(--primary-color);
+            font-size: 16px;
+            width: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 30px;
+            padding: 20px 0;
+            text-align: center;
+            color: #999;
+            background: rgba(0, 0, 0, 0.3);
+            font-size: 14px;
+        }
+        
+        @media (max-width: 991px) {
+            .navbar-container {
+                padding: 0 20px;
+            }
+            
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid var(--border-color);
+                gap: 10px;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .phone-number {
+                display: none;
+            }
+            
+            .hotel-result-content {
+                flex-direction: column;
+            }
+            
+            .hotel-result-image {
+                width: 100%;
+                min-width: 100%;
+                height: 240px;
+            }
+            
+            .filters-sidebar {
+                position: relative;
+                top: 0;
+                margin-bottom: 24px;
+            }
+            
+            .results-toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-strip"></div>
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <div class="navbar-content">
+                <a href="index.html" class="logo-section">
+                    <img src="https://fayyaztravels.com/visa/admin/assets/img/main-logo.png" alt="Vimaansafar Logo" class="logo-image">
+                </a>
+                
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="bi bi-list"></i>
+                </button>
+                
+                <div class="nav-menu" id="navMenu">
+                    <a href="#" class="nav-item">
+                        <i class="bi bi-airplane-fill"></i>
+                        <span>Flight</span>
+                    </a>
+                    <a href="#" class="nav-item active">
+                        <i class="bi bi-building-fill"></i>
+                        <span>Hotel</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="bi bi-tag-fill"></i>
+                        <span>Offers</span>
+                    </a>
+                </div>
+                
+                <div class="right-section">
+                    <div class="phone-section">
+                        <i class="bi bi-telephone-fill"></i>
+                        <span class="phone-number">+91 9953-888-841</span>
+                    </div>
+                    <a href="https://wa.me/919953888841" target="_blank" class="whatsapp-btn" title="WhatsApp">
+                        <div class="whatsapp-icon">
+                            <i class="bi bi-whatsapp"></i>
+                        </div>
+                    </a>
+                    <div class="menu-wrapper">
+                        <div class="menu-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="menu-icon">
+                                <i class="bi bi-list"></i>
+                            </div>
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle me-2"></i>About Us</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="user-profile-wrapper">
+                        <div class="user-profile" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="user-icon">
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-in-right me-2"></i>Login</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-person-plus me-2"></i>Sign Up</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Search Results Header -->
+    <div class="search-results-header">
+        <div class="container">
+            <div class="search-info">
+                <div class="search-info-item">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    <span>Mumbai, India</span>
+                </div>
+                <div class="search-info-item">
+                    <i class="bi bi-calendar-check-fill"></i>
+                    <span>15/01/2025</span>
+                </div>
+                <div class="search-info-item">
+                    <i class="bi bi-calendar-x-fill"></i>
+                    <span>18/01/2025</span>
+                </div>
+                <div class="search-info-item">
+                    <i class="bi bi-people-fill"></i>
+                    <span>2 Guests</span>
+                </div>
+            </div>
+            <div class="search-header-bottom">
+                <div class="results-count-wrapper">
+                    <div class="results-count-label">Search Results</div>
+                    <h2 class="results-count">245 Hotels Found</h2>
+                </div>
+                <a href="index.html" class="modify-search-btn">
+                    <i class="bi bi-pencil-fill"></i>
+                    <span>Modify Search</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Results Section -->
+    <div class="results-section">
+        <div class="container">
+            <div class="row">
+                <!-- Filters Sidebar -->
+                <div class="col-lg-3">
+                    <div class="filters-sidebar">
+                        <div class="filters-header">
+                            <div class="filters-header-title">
+                                <i class="bi bi-funnel-fill"></i>
+                                <span>Filters</span>
+                            </div>
+                            <div class="filters-header-subtitle">Refine your search results</div>
+                        </div>
+                        
+                        <div class="filters-content">
+                            <div class="filter-group">
+                                <div class="filter-group-header" onclick="toggleFilterGroup(this)">
+                                    <div class="filter-title">
+                                        <div class="filter-title-icon">
+                                            <i class="bi bi-currency-rupee"></i>
+                                        </div>
+                                        <span class="filter-title-text">Price Range</span>
+                                    </div>
+                                    <i class="bi bi-chevron-down filter-toggle"></i>
+                                </div>
+                                <div class="filter-group-content">
+                                    <div class="price-range-label">
+                                        <span>Min Price</span>
+                                        <span>Max Price</span>
+                                    </div>
+                                    <div class="price-range">
+                                        <div class="price-inputs">
+                                            <div class="price-input-wrapper">
+                                                <input type="number" class="price-input" placeholder="1000" value="1000" min="0">
+                                            </div>
+                                            <div class="price-input-wrapper">
+                                                <input type="number" class="price-input" placeholder="10000" value="10000" min="0">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <div class="filter-group-header" onclick="toggleFilterGroup(this)">
+                                    <div class="filter-title">
+                                        <div class="filter-title-icon">
+                                            <i class="bi bi-star-fill"></i>
+                                        </div>
+                                        <span class="filter-title-text">Star Rating</span>
+                                    </div>
+                                    <i class="bi bi-chevron-down filter-toggle"></i>
+                                </div>
+                                <div class="filter-group-content">
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="star5" checked>
+                                        <label for="star5">
+                                            <span>5 Stars</span>
+                                            <span class="count">45</span>
+                                        </label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="star4" checked>
+                                        <label for="star4">
+                                            <span>4 Stars</span>
+                                            <span class="count">120</span>
+                                        </label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="star3" checked>
+                                        <label for="star3">
+                                            <span>3 Stars</span>
+                                            <span class="count">80</span>
+                                        </label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="star2">
+                                        <label for="star2">
+                                            <span>2 Stars</span>
+                                            <span class="count">45</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <div class="filter-group-header" onclick="toggleFilterGroup(this)">
+                                    <div class="filter-title">
+                                        <div class="filter-title-icon">
+                                            <i class="bi bi-check-circle-fill"></i>
+                                        </div>
+                                        <span class="filter-title-text">Amenities</span>
+                                    </div>
+                                    <i class="bi bi-chevron-down filter-toggle"></i>
+                                </div>
+                                <div class="filter-group-content">
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="wifi" checked>
+                                        <label for="wifi">
+                                            <span>Free WiFi</span>
+                                            <span class="count">200</span>
+                                        </label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="breakfast">
+                                        <label for="breakfast">
+                                            <span>Breakfast</span>
+                                            <span class="count">150</span>
+                                        </label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="pool">
+                                        <label for="pool">
+                                            <span>Swimming Pool</span>
+                                            <span class="count">80</span>
+                                        </label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="parking">
+                                        <label for="parking">
+                                            <span>Parking</span>
+                                            <span class="count">120</span>
+                                        </label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="gym">
+                                        <label for="gym">
+                                            <span>Gym</span>
+                                            <span class="count">90</span>
+                                        </label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="spa">
+                                        <label for="spa">
+                                            <span>Spa</span>
+                                            <span class="count">65</span>
+                                        </label>
+                                    </div>
+                                    <div class="filter-option">
+                                        <input type="checkbox" id="restaurant">
+                                        <label for="restaurant">
+                                            <span>Restaurant</span>
+                                            <span class="count">180</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-actions">
+                            <button class="reset-filters-btn" onclick="resetFilters()" title="Reset Filters">
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                            </button>
+                            <button class="apply-filters-btn" onclick="applyFilters()">
+                                <span>Apply Filters</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Results Area -->
+                <div class="col-lg-9">
+                    <div class="results-area">
+                        <div class="results-toolbar">
+                            <div class="sort-dropdown">
+                                <label>Sort by:</label>
+                                <select class="sort-select">
+                                    <option>Price: Low to High</option>
+                                    <option>Price: High to Low</option>
+                                    <option>Rating: High to Low</option>
+                                    <option>Popularity</option>
+                                    <option>Distance</option>
+                                </select>
+                            </div>
+                            <div class="view-toggle">
+                                <button class="view-btn active" title="List View">
+                                    <i class="bi bi-list"></i>
+                                </button>
+                                <button class="view-btn" title="Grid View">
+                                    <i class="bi bi-grid"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Hotel Results -->
+                        <div class="hotel-results">
+                            <!-- Hotel 1 -->
+                            <div class="hotel-result-card">
+                                <div class="hotel-result-content">
+                                    <div class="hotel-result-image">
+                                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800" alt="Grand Luxury Resort">
+                                        <div class="hotel-image-badge">Popular</div>
+                                    </div>
+                                    <div class="hotel-result-details">
+                                        <div>
+                                            <div class="hotel-result-header">
+                                                <div>
+                                                    <div class="hotel-result-name">Grand Luxury Resort</div>
+                                                    <div class="hotel-result-location">
+                                                        <i class="bi bi-geo-alt-fill"></i>
+                                                        <span>Mumbai, Maharashtra, India</span>
+                                                    </div>
+                                                </div>
+                                                <div class="hotel-result-rating">
+                                                    <div class="rating-badge">
+                                                        <i class="bi bi-star-fill"></i>
+                                                        <span>4.8</span>
+                                                    </div>
+                                                    <div class="review-count">1,245 reviews</div>
+                                                </div>
+                                            </div>
+                                            <div class="hotel-result-features">
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-wifi"></i>
+                                                    <span>Free WiFi</span>
+                                                </span>
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-cup-straw"></i>
+                                                    <span>Breakfast</span>
+                                                </span>
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-parking"></i>
+                                                    <span>Parking</span>
+                                                </span>
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-water"></i>
+                                                    <span>Pool</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="hotel-result-footer">
+                                            <div class="hotel-price-section">
+                                                <div class="price-per-night">per night</div>
+                                                <div class="hotel-price">₹4,500</div>
+                                                <div class="price-tax">+ taxes & fees</div>
+                                            </div>
+                                            <button class="book-now-btn">
+                                                <span>Book Now</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Hotel 2 -->
+                            <div class="hotel-result-card">
+                                <div class="hotel-result-content">
+                                    <div class="hotel-result-image">
+                                        <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800" alt="Ocean View Hotel">
+                                        <div class="hotel-image-badge">Best Seller</div>
+                                    </div>
+                                    <div class="hotel-result-details">
+                                        <div>
+                                            <div class="hotel-result-header">
+                                                <div>
+                                                    <div class="hotel-result-name">Ocean View Hotel</div>
+                                                    <div class="hotel-result-location">
+                                                        <i class="bi bi-geo-alt-fill"></i>
+                                                        <span>Mumbai, Maharashtra, India</span>
+                                                    </div>
+                                                </div>
+                                                <div class="hotel-result-rating">
+                                                    <div class="rating-badge">
+                                                        <i class="bi bi-star-fill"></i>
+                                                        <span>4.9</span>
+                                                    </div>
+                                                    <div class="review-count">892 reviews</div>
+                                                </div>
+                                            </div>
+                                            <div class="hotel-result-features">
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-wifi"></i>
+                                                    <span>Free WiFi</span>
+                                                </span>
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-water"></i>
+                                                    <span>Pool</span>
+                                                </span>
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-cup-straw"></i>
+                                                    <span>Breakfast</span>
+                                                </span>
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-dumbbell"></i>
+                                                    <span>Gym</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="hotel-result-footer">
+                                            <div class="hotel-price-section">
+                                                <div class="price-per-night">per night</div>
+                                                <div class="hotel-price">₹6,200</div>
+                                                <div class="price-tax">+ taxes & fees</div>
+                                            </div>
+                                            <button class="book-now-btn">
+                                                <span>Book Now</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Hotel 3 -->
+                            <div class="hotel-result-card">
+                                <div class="hotel-result-content">
+                                    <div class="hotel-result-image">
+                                        <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800" alt="City Center Hotel">
+                                        <div class="hotel-image-badge">Great Value</div>
+                                    </div>
+                                    <div class="hotel-result-details">
+                                        <div>
+                                            <div class="hotel-result-header">
+                                                <div>
+                                                    <div class="hotel-result-name">City Center Hotel</div>
+                                                    <div class="hotel-result-location">
+                                                        <i class="bi bi-geo-alt-fill"></i>
+                                                        <span>Mumbai, Maharashtra, India</span>
+                                                    </div>
+                                                </div>
+                                                <div class="hotel-result-rating">
+                                                    <div class="rating-badge">
+                                                        <i class="bi bi-star-fill"></i>
+                                                        <span>4.7</span>
+                                                    </div>
+                                                    <div class="review-count">1,156 reviews</div>
+                                                </div>
+                                            </div>
+                                            <div class="hotel-result-features">
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-wifi"></i>
+                                                    <span>Free WiFi</span>
+                                                </span>
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-parking"></i>
+                                                    <span>Parking</span>
+                                                </span>
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-cup-straw"></i>
+                                                    <span>Breakfast</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="hotel-result-footer">
+                                            <div class="hotel-price-section">
+                                                <div class="price-per-night">per night</div>
+                                                <div class="hotel-price">₹3,800</div>
+                                                <div class="price-tax">+ taxes & fees</div>
+                                            </div>
+                                            <button class="book-now-btn">
+                                                <span>Book Now</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Hotel 4 -->
+                            <div class="hotel-result-card">
+                                <div class="hotel-result-content">
+                                    <div class="hotel-result-image">
+                                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=800" alt="Beachside Resort">
+                                        <div class="hotel-image-badge">Trending</div>
+                                    </div>
+                                    <div class="hotel-result-details">
+                                        <div>
+                                            <div class="hotel-result-header">
+                                                <div>
+                                                    <div class="hotel-result-name">Beachside Resort</div>
+                                                    <div class="hotel-result-location">
+                                                        <i class="bi bi-geo-alt-fill"></i>
+                                                        <span>Mumbai, Maharashtra, India</span>
+                                                    </div>
+                                                </div>
+                                                <div class="hotel-result-rating">
+                                                    <div class="rating-badge">
+                                                        <i class="bi bi-star-fill"></i>
+                                                        <span>4.6</span>
+                                                    </div>
+                                                    <div class="review-count">678 reviews</div>
+                                                </div>
+                                            </div>
+                                            <div class="hotel-result-features">
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-wifi"></i>
+                                                    <span>Free WiFi</span>
+                                                </span>
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-water"></i>
+                                                    <span>Pool</span>
+                                                </span>
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-cup-straw"></i>
+                                                    <span>Breakfast</span>
+                                                </span>
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-dumbbell"></i>
+                                                    <span>Gym</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="hotel-result-footer">
+                                            <div class="hotel-price-section">
+                                                <div class="price-per-night">per night</div>
+                                                <div class="hotel-price">₹5,500</div>
+                                                <div class="price-tax">+ taxes & fees</div>
+                                            </div>
+                                            <button class="book-now-btn">
+                                                <span>Book Now</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Hotel 5 -->
+                            <div class="hotel-result-card">
+                                <div class="hotel-result-content">
+                                    <div class="hotel-result-image">
+                                        <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800" alt="Business Hotel">
+                                        <div class="hotel-image-badge">Business</div>
+                                    </div>
+                                    <div class="hotel-result-details">
+                                        <div>
+                                            <div class="hotel-result-header">
+                                                <div>
+                                                    <div class="hotel-result-name">Business Hotel</div>
+                                                    <div class="hotel-result-location">
+                                                        <i class="bi bi-geo-alt-fill"></i>
+                                                        <span>Mumbai, Maharashtra, India</span>
+                                                    </div>
+                                                </div>
+                                                <div class="hotel-result-rating">
+                                                    <div class="rating-badge">
+                                                        <i class="bi bi-star-fill"></i>
+                                                        <span>4.5</span>
+                                                    </div>
+                                                    <div class="review-count">934 reviews</div>
+                                                </div>
+                                            </div>
+                                            <div class="hotel-result-features">
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-wifi"></i>
+                                                    <span>Free WiFi</span>
+                                                </span>
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-parking"></i>
+                                                    <span>Parking</span>
+                                                </span>
+                                                <span class="hotel-feature-tag">
+                                                    <i class="bi bi-dumbbell"></i>
+                                                    <span>Gym</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="hotel-result-footer">
+                                            <div class="hotel-price-section">
+                                                <div class="price-per-night">per night</div>
+                                                <div class="hotel-price">₹4,200</div>
+                                                <div class="price-tax">+ taxes & fees</div>
+                                            </div>
+                                            <button class="book-now-btn">
+                                                <span>Book Now</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Pagination -->
+                        <div class="pagination-wrapper">
+                            <ul class="pagination">
+                                <li><a href="#" class="pagination-item"><i class="bi bi-chevron-left"></i></a></li>
+                                <li><a href="#" class="pagination-item active">1</a></li>
+                                <li><a href="#" class="pagination-item">2</a></li>
+                                <li><a href="#" class="pagination-item">3</a></li>
+                                <li><a href="#" class="pagination-item">4</a></li>
+                                <li><a href="#" class="pagination-item">5</a></li>
+                                <li><a href="#" class="pagination-item"><i class="bi bi-chevron-right"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="footer-title">Vimaansafar</div>
+                    <p>Your trusted travel partner for flights, hotels, and vacation packages.</p>
+                    <div class="footer-social">
+                        <a href="#" style="color: white; font-size: 20px;"><i class="bi bi-facebook"></i></a>
+                        <a href="#" style="color: white; font-size: 20px;"><i class="bi bi-twitter"></i></a>
+                        <a href="#" style="color: white; font-size: 20px;"><i class="bi bi-instagram"></i></a>
+                        <a href="#" style="color: white; font-size: 20px;"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="footer-title">Company</div>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#" class="footer-link">Careers</a>
+                    <a href="#" class="footer-link">Contact</a>
+                    <a href="#" class="footer-link">Blog</a>
+                </div>
+                <div class="col-md-3">
+                    <div class="footer-title">Support</div>
+                    <a href="#" class="footer-link">Help Center</a>
+                    <a href="#" class="footer-link">FAQs</a>
+                    <a href="#" class="footer-link">Cancellation</a>
+                    <a href="#" class="footer-link">Refund Policy</a>
+                </div>
+                <div class="col-md-3">
+                    <div class="footer-title">Contact</div>
+                    <p style="color: #999; margin-bottom: 10px;">
+                        <i class="bi bi-telephone-fill"></i>+91 9953-888-841
+                    </p>
+                    <p style="color: #999; margin-bottom: 10px;">
+                        <i class="bi bi-envelope-fill"></i>support@vimaansafar.com
+                    </p>
+                    <p style="color: #999;">
+                        <i class="bi bi-geo-alt-fill"></i>Mumbai, India
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Vimaansafar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fixed WhatsApp Button -->
+    <a href="https://wa.me/919953888841" target="_blank" class="whatsapp-fixed-btn" title="Chat on WhatsApp">
+        <div class="whatsapp-fixed-icon">
+            <i class="bi bi-whatsapp"></i>
+        </div>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        if (mobileMenuToggle && navMenu) {
+            mobileMenuToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                const icon = this.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('bi-list');
+                    icon.classList.toggle('bi-x');
+                }
+            });
+        }
+        
+        // View toggle
+        const hotelResults = document.querySelector('.hotel-results');
+        const viewButtons = document.querySelectorAll('.view-btn');
+        
+        // Set initial view to list
+        if (hotelResults) {
+            hotelResults.classList.add('list-view');
+        }
+        
+        viewButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remove active class from all buttons
+                viewButtons.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Toggle view classes
+                if (hotelResults) {
+                    if (this.querySelector('.bi-list')) {
+                        // List view clicked
+                        hotelResults.classList.remove('grid-view');
+                        hotelResults.classList.add('list-view');
+                    } else if (this.querySelector('.bi-grid')) {
+                        // Grid view clicked
+                        hotelResults.classList.remove('list-view');
+                        hotelResults.classList.add('grid-view');
+                    }
+                }
+            });
+        });
+        
+        // Filter sidebar scroll
+        const filtersSidebar = document.querySelector('.filters-sidebar');
+        if (filtersSidebar) {
+            window.addEventListener('scroll', function() {
+                if (window.innerWidth > 991) {
+                    const scrollTop = window.pageYOffset;
+                    const headerHeight = document.querySelector('.search-results-header').offsetHeight;
+                    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                    
+                    if (scrollTop > headerHeight) {
+                        filtersSidebar.style.top = '20px';
+                    } else {
+                        filtersSidebar.style.top = '100px';
+                    }
+                }
+            });
+        }
+        
+        // Toggle filter group
+        function toggleFilterGroup(header) {
+            const group = header.closest('.filter-group');
+            const content = group.querySelector('.filter-group-content');
+            
+            content.classList.toggle('collapsed');
+            header.classList.toggle('active');
+        }
+        
+        // Reset all filters
+        function resetFilters() {
+            const checkboxes = document.querySelectorAll('.filters-sidebar input[type="checkbox"]');
+            const priceInputs = document.querySelectorAll('.price-input');
+            
+            checkboxes.forEach(cb => cb.checked = false);
+            priceInputs[0].value = '';
+            priceInputs[1].value = '';
+            
+            // Show notification
+            const btn = event.target.closest('.reset-filters-btn');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="bi bi-check"></i>';
+            btn.style.background = 'var(--success-color)';
+            btn.style.borderColor = 'var(--success-color)';
+            btn.style.color = 'white';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.style.background = '';
+                btn.style.borderColor = '';
+                btn.style.color = '';
+            }, 1500);
+        }
+        
+        // Apply filters
+        function applyFilters() {
+            const btn = event.target.closest('.apply-filters-btn');
+            const originalHTML = btn.innerHTML;
+            
+            btn.innerHTML = '<span><i class="bi bi-hourglass-split"></i> Applying...</span>';
+            btn.disabled = true;
+            
+            // Simulate filter application
+            setTimeout(() => {
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+                
+                // Show success feedback
+                btn.style.background = 'var(--success-color)';
+                setTimeout(() => {
+                    btn.style.background = '';
+                }, 1000);
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
+

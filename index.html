@@ -1,0 +1,3080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vimaansafar - Travel Booking Platform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/air-datepicker@3.4.0/air-datepicker.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-color: #0066cc;
+            --primary-dark: #0052a3;
+            --secondary-color: #20c997;
+            --accent-color: #ff6b35;
+            --success-color: #28a745;
+            --dark-color: #1a1a1a;
+            --text-color: #2c3e50;
+            --text-light: #6c757d;
+            --light-bg: #f8f9fa;
+            --border-color: #e0e0e0;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: #ffffff;
+            color: var(--text-color);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Top Strip */
+        .top-strip {
+            background: linear-gradient(90deg, #c9a568 0%, #d4a574 50%, #c9a568 100%);
+            height: 3px;
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+        
+        /* Navbar Container */
+        .navbar {
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-color);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.98);
+        }
+        
+        .navbar.scrolled {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            border-bottom-color: var(--border-color);
+            background: rgba(255, 255, 255, 0.99);
+        }
+        
+        .navbar-container {
+            max-width: auto;
+            margin: 0 auto;
+            padding: 0 50px;
+        }
+        
+        .navbar-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px 0;
+            gap: 60px;
+        }
+        
+        /* Logo Section */
+        .logo-section {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            flex-shrink: 0;
+        }
+        
+        .logo-section:hover {
+            transform: translateY(-2px);
+        }
+        
+        .logo-icon-wrapper {
+            position: relative;
+            width: 46px;
+            height: 46px;
+        }
+        
+        .logo-icon {
+            width: 46px;
+            height: 46px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-icon::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s;
+        }
+        
+        .logo-section:hover .logo-icon::before {
+            left: 100%;
+        }
+        
+        .logo-section:hover .logo-icon {
+            transform: rotate(5deg) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.3);
+        }
+        
+        .logo-image {
+            height: 44px;
+            width: auto;
+            object-fit: contain;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+        }
+        
+        .logo-section:hover .logo-image {
+            transform: scale(1.05) translateY(-1px);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+        }
+        
+        .logo-text {
+            font-size: 26px;
+            font-weight: 800;
+            color: var(--dark-color);
+            margin: 0;
+            letter-spacing: -0.8px;
+            background: linear-gradient(135deg, var(--dark-color) 0%, var(--text-color) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .logo-text sup {
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-light);
+            vertical-align: super;
+        }
+        
+        /* Navigation Menu */
+        .nav-menu {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            padding: 0 40px;
+        }
+        
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            padding: 14px 24px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--text-color);
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 12px;
+            min-width: 90px;
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 70%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+            border-radius: 3px 3px 0 0;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.06) 0%, rgba(0, 82, 163, 0.06) 100%);
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .nav-item:hover {
+            color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .nav-item:hover::after {
+            opacity: 1;
+        }
+        
+        .nav-item:hover::before {
+            transform: translateX(-50%) scaleX(1);
+        }
+        
+        .nav-item:hover i {
+            transform: scale(1.12) translateY(-2px);
+            color: var(--primary-color);
+        }
+        
+        .nav-item.active {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .nav-item.active::before {
+            transform: translateX(-50%) scaleX(1);
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+            height: 4px;
+            width: 80%;
+        }
+        
+        .nav-item.active::after {
+            opacity: 1;
+        }
+        
+        .nav-item.active i {
+            color: var(--primary-color);
+        }
+        
+        .nav-item.active span {
+            font-weight: 800;
+        }
+        
+        .nav-item i {
+            font-size: 28px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--text-color);
+            display: block;
+        }
+        
+        .nav-item span {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-top: 2px;
+        }
+        
+        .new-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #ff8c5a 100%);
+            color: white;
+            font-size: 8px;
+            font-weight: 800;
+            padding: 4px 9px;
+            border-radius: 10px;
+            letter-spacing: 0.8px;
+            box-shadow: 0 3px 8px rgba(255, 107, 53, 0.4);
+            animation: badgePulse 2s ease-in-out infinite;
+            z-index: 10;
+        }
+        
+        @keyframes badgePulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 3px 8px rgba(255, 107, 53, 0.4);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 4px 12px rgba(255, 107, 53, 0.6);
+            }
+        }
+        
+        /* Right Section */
+        .right-section {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-shrink: 0;
+            position: relative;
+            margin-left: auto;
+        }
+        
+        .right-section .dropdown-menu {
+            position: absolute;
+        }
+        
+        .phone-section {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 11px 18px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 82, 163, 0.05) 100%);
+            border: 1.5px solid rgba(0, 102, 204, 0.15);
+        }
+        
+        .phone-section:hover {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
+            border-color: var(--primary-color);
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
+            transform: translateY(-2px);
+        }
+        
+        .phone-section i {
+            font-size: 18px;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .phone-number {
+            font-weight: 700;
+            color: var(--dark-color);
+            font-size: 15px;
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+        }
+        
+        .live-assistance-btn {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            border-radius: 10px;
+            letter-spacing: 0.8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .live-assistance-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .live-assistance-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .live-assistance-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+        }
+        
+        .live-assistance-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .whatsapp-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            padding: 6px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            border: 1.5px solid transparent;
+        }
+        
+        .whatsapp-btn:hover {
+            background: linear-gradient(135deg, rgba(37, 211, 102, 0.05) 0%, rgba(25, 128, 56, 0.05) 100%);
+            border-color: rgba(37, 211, 102, 0.2);
+        }
+        
+        .whatsapp-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+        }
+        
+        .whatsapp-btn:hover .whatsapp-icon {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
+            border-color: rgba(37, 211, 102, 0.2);
+        }
+        
+        .whatsapp-icon i {
+            font-size: 19px;
+        }
+        
+        /* Fixed WhatsApp Button */
+        .whatsapp-fixed-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+            z-index: 999;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            animation: whatsappPulse 2s ease-in-out infinite;
+        }
+        
+        .whatsapp-fixed-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px rgba(37, 211, 102, 0.5);
+        }
+        
+        .whatsapp-fixed-icon {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+        
+        .whatsapp-fixed-icon i {
+            font-size: 32px;
+        }
+        
+        @keyframes whatsappPulse {
+            0%, 100% {
+                box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+            }
+            50% {
+                box-shadow: 0 8px 24px rgba(37, 211, 102, 0.6), 0 0 0 10px rgba(37, 211, 102, 0.1);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .whatsapp-fixed-btn {
+                width: 56px;
+                height: 56px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .whatsapp-fixed-icon i {
+                font-size: 28px;
+            }
+        }
+        
+        .menu-wrapper {
+            position: relative;
+        }
+        
+        .menu-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border: 1.5px solid transparent;
+        }
+        
+        .menu-toggle:hover {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 82, 163, 0.05) 100%);
+            border-color: rgba(0, 102, 204, 0.2);
+        }
+        
+        .menu-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+        }
+        
+        .menu-toggle:hover .menu-icon {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 102, 204, 0.35);
+            border-color: rgba(0, 102, 204, 0.2);
+        }
+        
+        .menu-icon i {
+            font-size: 19px;
+        }
+        
+        .menu-toggle .bi-chevron-down {
+            font-size: 12px;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+        
+        .menu-toggle:hover .bi-chevron-down {
+            transform: translateY(2px);
+            color: var(--primary-color);
+        }
+        
+        .menu-wrapper .dropdown-menu {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            margin-top: 10px;
+            padding: 8px;
+            min-width: 180px;
+            top: 100% !important;
+            left: 50% !important;
+            right: auto !important;
+            transform: translateX(-50%) !important;
+            position: absolute !important;
+        }
+        
+        .user-profile-wrapper {
+            position: relative;
+        }
+        
+        .user-profile {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border: 1.5px solid transparent;
+        }
+        
+        .user-profile:hover {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 82, 163, 0.05) 100%);
+            border-color: rgba(0, 102, 204, 0.2);
+        }
+        
+        .user-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+        }
+        
+        .user-profile:hover .user-icon {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 102, 204, 0.35);
+            border-color: rgba(0, 102, 204, 0.2);
+        }
+        
+        .user-icon i {
+            font-size: 19px;
+        }
+        
+        .user-profile .bi-chevron-down {
+            font-size: 12px;
+            color: var(--text-light);
+            transition: all 0.3s ease;
+        }
+        
+        .user-profile:hover .bi-chevron-down {
+            transform: translateY(2px);
+            color: var(--primary-color);
+        }
+        
+        .user-profile-wrapper .dropdown-menu {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            margin-top: 10px;
+            padding: 8px;
+            min-width: 180px;
+            top: 100% !important;
+            left: 50% !important;
+            right: auto !important;
+            transform: translateX(-50%) !important;
+            position: absolute !important;
+        }
+        
+        .dropdown-menu {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            margin-top: 10px;
+            padding: 8px;
+            min-width: 180px;
+        }
+        
+        .dropdown-item {
+            padding: 12px 18px;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .dropdown-item:hover {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
+            color: var(--primary-color);
+            transform: translateX(4px);
+        }
+        
+        .dropdown-item i {
+            color: var(--primary-color);
+            font-size: 16px;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .dropdown-item:hover i {
+            color: var(--primary-color);
+        }
+        
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 28px;
+            color: var(--dark-color);
+            cursor: pointer;
+            padding: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-toggle:hover {
+            color: var(--primary-color);
+        }
+        
+        .mobile-menu-toggle i {
+            display: block;
+        }
+        
+        @media (max-width: 1200px) {
+            .navbar-container {
+                padding: 0 20px;
+            }
+            
+            .nav-menu {
+                gap: 2px;
+            }
+            
+            .nav-item {
+                padding: 12px 16px;
+                min-width: 70px;
+            }
+            
+            .nav-item i {
+                font-size: 26px;
+            }
+            
+            .nav-item span {
+                font-size: 10px;
+            }
+        }
+        
+        @media (max-width: 991px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                border-top: 1px solid var(--border-color);
+                gap: 10px;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .nav-item {
+                width: 100%;
+                padding: 16px;
+                border-radius: 10px;
+            }
+            
+            .phone-number {
+                display: none;
+            }
+            
+            .right-section {
+                gap: 12px;
+            }
+            
+            .navbar-content {
+                position: relative;
+            }
+        }
+        
+        /* Trust Bar */
+        .trust-bar {
+            background: var(--light-bg);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 0;
+        }
+        
+        .trust-items {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-light);
+            font-size: 13px;
+            font-weight: 500;
+        }
+        
+        .trust-item i {
+            color: var(--primary-color);
+            font-size: 16px;
+            display: inline-flex;
+        }
+        
+        .trust-item i + i {
+            margin-left: 4px;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            background: linear-gradient(135deg, #0066cc 0%, #0052a3 30%, #003d7a 70%, #002d5c 100%);
+            padding: 80px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+            pointer-events: none;
+            animation: heroGlow 8s ease-in-out infinite;
+        }
+        
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: 
+                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px);
+            animation: heroPattern 20s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes heroGlow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        @keyframes heroPattern {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            100% { transform: translate(50px, 50px) rotate(360deg); }
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-title {
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -1.5px;
+            line-height: 1.15;
+            text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .hero-subtitle {
+            font-size: 22px;
+            margin-bottom: 50px;
+            opacity: 0.95;
+            font-weight: 400;
+            max-width: auto;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+            text-shadow: 0 1px 10px rgba(0, 0, 0, 0.15);
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 60px;
+            margin-top: 50px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s ease-out 0.4s both;
+        }
+        
+        .hero-stat {
+            text-align: center;
+            padding: 20px 30px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-stat::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(135deg, transparent 20%, rgba(255, 255, 255, 0.5) 50%, transparent 80%);
+            transform: rotate(45deg);
+            animation: statShine 3s infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes statShine {
+            0% {
+                transform: translateX(-150%) translateY(-150%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(150%) translateY(150%) rotate(45deg);
+            }
+        }
+        
+        .hero-stat:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero-stat:hover::before {
+            animation-duration: 1.5s;
+        }
+        
+        .hero-stat-number {
+            font-size: 40px;
+            font-weight: 900;
+            display: block;
+            margin-bottom: 6px;
+            background: linear-gradient(135deg, #ffffff 0%, rgba(255, 255, 255, 0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-stat-label {
+            font-size: 14px;
+            opacity: 0.95;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Search Box */
+        .search-box {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px 44px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+            margin-top: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            animation: fadeInUp 0.8s ease-out 0.6s both;
+            backdrop-filter: blur(10px);
+        }
+        
+        .search-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 24px;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(0, 82, 163, 0.1));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+        
+        .search-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 32px;
+            border-bottom: 2px solid var(--light-bg);
+            padding-bottom: 4px;
+        }
+        
+        .search-tab {
+            padding: 14px 28px;
+            background: none;
+            border: none;
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            border-radius: 10px 10px 0 0;
+        }
+        
+        .search-tab:hover {
+            color: var(--primary-color);
+            background: rgba(0, 102, 204, 0.05);
+        }
+        
+        .search-tab.active {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .search-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+            border-radius: 2px 2px 0 0;
+        }
+        
+        .search-tab.active::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-bottom: 4px solid var(--primary-color);
+        }
+        
+        .search-form {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr auto;
+            gap: 20px;
+            align-items: end;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .form-group label {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .form-group label i {
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+        
+        .form-control {
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 14px 18px;
+            font-size: 15px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #ffffff;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .form-control:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+            outline: none;
+            background: #ffffff;
+        }
+        
+        .form-control::placeholder {
+            color: var(--text-light);
+            font-weight: 400;
+        }
+        
+        /* Autocomplete Suggestions */
+        .autocomplete-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            margin-top: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .autocomplete-suggestions.show {
+            display: block;
+        }
+        
+        .autocomplete-suggestion {
+            padding: 12px 18px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .autocomplete-suggestion:last-child {
+            border-bottom: none;
+        }
+        
+        .autocomplete-suggestion:hover,
+        .autocomplete-suggestion.active {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
+            color: var(--primary-color);
+        }
+        
+        .autocomplete-suggestion i {
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+        
+        .autocomplete-suggestion-name {
+            font-weight: 600;
+            font-size: 15px;
+        }
+        
+        .autocomplete-suggestion-location {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+        
+        /* Air Datepicker Blue Styling */
+        .air-datepicker {
+            --adp-color-primary: var(--primary-color);
+            --adp-color-primary-hover: var(--primary-dark);
+            --adp-color-current-date: var(--primary-color);
+            --adp-color-selected-date: var(--primary-color);
+            --adp-color-selected-date-background: var(--primary-color);
+            --adp-color-selected-date-hover: var(--primary-dark);
+            --adp-color-day-name: var(--primary-color);
+            --adp-color-day-name-hover: var(--primary-dark);
+        }
+        
+        .air-datepicker-nav--title {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .air-datepicker-nav--title:hover {
+            color: var(--primary-dark);
+        }
+        
+        .air-datepicker-nav--action:hover {
+            background: rgba(0, 102, 204, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .air-datepicker-cell.-day-.-selected- {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .air-datepicker-cell.-day-.-selected-.-current- {
+            background: var(--primary-dark);
+            color: white;
+        }
+        
+        .air-datepicker-cell.-day-.-range-from-,
+        .air-datepicker-cell.-day-.-range-to- {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .air-datepicker-cell.-day-.-range-from-.-range-to- {
+            background: var(--primary-color);
+        }
+        
+        .air-datepicker-cell.-day-.-in-range- {
+            background: rgba(0, 102, 204, 0.1);
+            color: var(--primary-color);
+        }
+        
+        .air-datepicker-cell.-day-:hover {
+            background: rgba(0, 102, 204, 0.15);
+            color: var(--primary-color);
+        }
+        
+        .air-datepicker-cell.-day-.-current- {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .air-datepicker-cell.-day-.-current-:hover {
+            background: rgba(0, 102, 204, 0.15);
+        }
+        
+        .air-datepicker-cell.-day-.-weekend- {
+            color: var(--primary-color);
+        }
+        
+        .air-datepicker-cell.-day-.-weekend-:hover {
+            background: rgba(0, 102, 204, 0.15);
+        }
+        
+        .air-datepicker-cell.-day-.-other-month- {
+            color: var(--text-light);
+        }
+        
+        .air-datepicker-nav--action svg {
+            fill: var(--primary-color);
+        }
+        
+        .air-datepicker-nav--action:hover svg {
+            fill: var(--primary-dark);
+        }
+        
+        .air-datepicker-body--day-names {
+            color: var(--primary-color);
+        }
+        
+        .air-datepicker-body--day-name {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+        
+        .search-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 4px 16px rgba(0, 102, 204, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .search-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .search-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .search-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0, 102, 204, 0.4);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+        }
+        
+        .search-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        .search-btn i,
+        .search-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        @media (max-width: 991px) {
+            .hero-title {
+                font-size: 42px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .hero-stats {
+                gap: 20px;
+            }
+            
+            .hero-stat {
+                padding: 15px 20px;
+            }
+            
+            .hero-stat-number {
+                font-size: 32px;
+            }
+            
+            .search-box {
+                padding: 30px 24px;
+                margin-top: 30px;
+            }
+            
+            .search-form {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            
+            .search-tabs {
+                gap: 4px;
+                overflow-x: auto;
+            }
+            
+            .search-tab {
+                padding: 12px 20px;
+                font-size: 14px;
+                white-space: nowrap;
+            }
+        }
+        
+        /* Sections */
+        .section {
+            padding: 80px 0;
+        }
+        
+        .section-title {
+            font-size: 48px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 18px;
+            color: var(--dark-color);
+            letter-spacing: -1px;
+            line-height: 1.2;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 19px;
+            color: var(--text-light);
+            margin-bottom: 60px;
+            font-weight: 400;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Destination Cards */
+        .destination-card {
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            height: 360px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid transparent;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .destination-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0.7) 100%);
+            z-index: 1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .destination-card:hover::before {
+            opacity: 1;
+        }
+        
+        .destination-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary-color);
+        }
+        
+        .destination-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .destination-card:hover .destination-image {
+            transform: scale(1.15);
+        }
+        
+        .destination-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.6) 50%, transparent 100%);
+            padding: 30px;
+            color: white;
+            z-index: 2;
+            transition: all 0.4s ease;
+        }
+        
+        .destination-card:hover .destination-overlay {
+            padding-bottom: 35px;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
+        }
+        
+        .destination-name {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            letter-spacing: -0.5px;
+        }
+        
+        .destination-info {
+            font-size: 15px;
+            opacity: 0.95;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .destination-info i {
+            font-size: 16px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .destination-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            z-index: 3;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        
+        .destination-card:hover .destination-badge {
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Hotel Cards */
+        .hotel-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+        
+        .hotel-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.02) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+        
+        .hotel-card:hover::before {
+            opacity: 1;
+        }
+        
+        .hotel-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            border-color: var(--primary-color);
+        }
+        
+        .hotel-image-wrapper {
+            position: relative;
+            overflow: hidden;
+            height: 240px;
+        }
+        
+        .hotel-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .hotel-card:hover .hotel-image {
+            transform: scale(1.12);
+        }
+        
+        .hotel-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(15px);
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 11px;
+            font-weight: 800;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            z-index: 2;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(0, 102, 204, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .hotel-card:hover .hotel-badge {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hotel-rating {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(15px);
+            padding: 8px 14px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            z-index: 2;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .hotel-card:hover .hotel-rating {
+            background: rgba(0, 0, 0, 0.85);
+        }
+        
+        .hotel-rating i {
+            color: #ffc107;
+            font-size: 16px;
+        }
+        
+        .hotel-content {
+            padding: 28px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hotel-name {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--dark-color);
+            line-height: 1.3;
+            letter-spacing: -0.5px;
+        }
+        
+        .hotel-location {
+            color: var(--text-light);
+            font-size: 15px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+        
+        .hotel-location i {
+            color: var(--primary-color);
+            font-size: 16px;
+        }
+        
+        .hotel-features {
+            display: flex;
+            gap: 14px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .hotel-feature {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 13px;
+            color: var(--text-light);
+            font-weight: 600;
+            padding: 6px 12px;
+            background: rgba(0, 102, 204, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .hotel-card:hover .hotel-feature {
+            background: rgba(0, 102, 204, 0.08);
+        }
+        
+        .hotel-feature i {
+            color: var(--primary-color);
+            font-size: 15px;
+        }
+        
+        .hotel-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 2px solid var(--light-bg);
+        }
+        
+        .price-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .price {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--primary-color);
+            line-height: 1;
+            letter-spacing: -1px;
+        }
+        
+        .price-label {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 6px;
+            font-weight: 500;
+        }
+        
+        .book-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .book-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .book-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .book-btn:hover {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+        }
+        
+        .book-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Features Section */
+        .feature-card {
+            text-align: center;
+            padding: 40px 28px;
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px solid var(--border-color);
+            background: white;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.03) 0%, transparent 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .feature-card:hover::before {
+            opacity: 1;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+            border-color: var(--primary-color);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            font-size: 36px;
+            color: white;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.25);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 30px rgba(0, 102, 204, 0.35);
+        }
+        
+        .feature-icon::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 20px;
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .feature-card:hover .feature-icon::before {
+            opacity: 0.3;
+        }
+        
+        .feature-title {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--dark-color);
+            letter-spacing: -0.3px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .feature-text {
+            color: var(--text-light);
+            font-size: 15px;
+            line-height: 1.6;
+            font-weight: 400;
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Promotional Section - Redesigned */
+        .promo-section {
+            padding: 140px 0;
+            background: #ffffff;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .promo-background-pattern {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 15% 30%, rgba(0, 102, 204, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 85% 70%, rgba(0, 102, 204, 0.04) 0%, transparent 40%);
+            pointer-events: none;
+        }
+        
+        .promo-image-container {
+            position: relative;
+            padding-right: 40px;
+        }
+        
+        .promo-image-wrapper {
+            position: relative;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
+            background: #f8f9fa;
+            transform: perspective(1000px) rotateY(-2deg);
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .promo-image-container:hover .promo-image-wrapper {
+            transform: perspective(1000px) rotateY(0deg) scale(1.02);
+        }
+        
+        .promo-image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.1) 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .promo-image {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .promo-image-wrapper:hover .promo-image {
+            transform: scale(1.1);
+        }
+        
+        .promo-image-shine {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%);
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .promo-badge {
+            position: absolute;
+            bottom: 50px;
+            right: 50px;
+            background: linear-gradient(135deg, #20c997 0%, #17a2b8 100%);
+            padding: 0;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(32, 201, 151, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.2);
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 28px;
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            animation: floatBadge 3s ease-in-out infinite;
+        }
+        
+        @keyframes floatBadge {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .promo-badge-icon {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .promo-badge-content {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .promo-badge-number {
+            font-size: 32px;
+            font-weight: 900;
+            color: white;
+            line-height: 1;
+            margin-bottom: 4px;
+            letter-spacing: -1px;
+        }
+        
+        .promo-badge-text {
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            opacity: 0.95;
+        }
+        
+        .promo-image-decoration {
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            border-radius: 24px;
+            opacity: 0.1;
+            z-index: -1;
+            transform: rotate(-15deg);
+        }
+        
+        .promo-content-wrapper {
+            padding-left: 60px;
+        }
+        
+        .promo-content {
+            position: relative;
+        }
+        
+        .promo-label {
+            display: inline-block;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(0, 82, 163, 0.1));
+            border: 1px solid rgba(0, 102, 204, 0.2);
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 24px;
+        }
+        
+        .promo-title {
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+        
+        .promo-title-highlight {
+            display: block;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        
+        .promo-title-main {
+            display: block;
+            font-size: 52px;
+            font-weight: 900;
+            color: var(--dark-color);
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+        
+        .promo-description {
+            font-size: 17px;
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 48px;
+            max-width: 540px;
+        }
+        
+        .promo-benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        
+        .promo-benefit-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            padding: 24px;
+            background: white;
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .promo-benefit-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.03), rgba(0, 82, 163, 0.03));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .promo-benefit-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--primary-color);
+            box-shadow: 0 12px 30px rgba(0, 102, 204, 0.15);
+        }
+        
+        .promo-benefit-card:hover::before {
+            opacity: 1;
+        }
+        
+        .promo-benefit-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1), rgba(0, 82, 163, 0.1));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: var(--primary-color);
+            flex-shrink: 0;
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .promo-benefit-card:hover .promo-benefit-icon {
+            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            color: white;
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .promo-benefit-content {
+            flex: 1;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .promo-benefit-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 6px;
+            line-height: 1.3;
+        }
+        
+        .promo-benefit-desc {
+            font-size: 13px;
+            color: var(--text-light);
+            line-height: 1.5;
+        }
+        
+        @media (max-width: 1199px) {
+            .promo-content-wrapper {
+                padding-left: 40px;
+            }
+            
+            .promo-title-main {
+                font-size: 44px;
+            }
+        }
+        
+        @media (max-width: 991px) {
+            .promo-section {
+                padding: 100px 0;
+            }
+            
+            .promo-image-container {
+                padding-right: 0;
+                margin-bottom: 60px;
+            }
+            
+            .promo-image-wrapper {
+                transform: none;
+            }
+            
+            .promo-image {
+                height: 500px;
+            }
+            
+            .promo-badge {
+                bottom: 40px;
+                right: 40px;
+                padding: 16px 24px;
+            }
+            
+            .promo-badge-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+            
+            .promo-badge-number {
+                font-size: 28px;
+            }
+            
+            .promo-content-wrapper {
+                padding-left: 0;
+            }
+            
+            .promo-title-main {
+                font-size: 38px;
+            }
+            
+            .promo-description {
+                font-size: 16px;
+                margin-bottom: 40px;
+            }
+            
+            .promo-benefits-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            
+            .promo-benefit-card {
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 575px) {
+            .promo-title-main {
+                font-size: 32px;
+            }
+            
+            .promo-title-highlight {
+                font-size: 16px;
+            }
+            
+            .promo-badge {
+                flex-direction: column;
+                gap: 12px;
+                padding: 16px 20px;
+            }
+        }
+        
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
+            color: white;
+            padding: 40px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 102, 204, 0.5), transparent);
+        }
+        
+        .footer .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 24px;
+            color: white;
+            letter-spacing: -0.3px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+            border-radius: 2px;
+        }
+        
+        .footer p {
+            color: #b0b0b0;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+        
+        .footer-link {
+            color: #b0b0b0;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 14px;
+            transition: all 0.3s ease;
+            font-size: 15px;
+            font-weight: 400;
+            position: relative;
+            padding-left: 0;
+        }
+        
+        .footer-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: white;
+            padding-left: 12px;
+        }
+        
+        .footer-link:hover::before {
+            width: 8px;
+        }
+        
+        .footer-social {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+        }
+        
+        .footer a[style*="color: white"] {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            color: #b0b0b0 !important;
+            font-size: 18px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .footer a[style*="color: white"]:hover {
+            background: var(--primary-color);
+            color: white !important;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
+            border-color: var(--primary-color);
+        }
+        
+        .footer p[style*="color: #999"] {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px;
+            color: #b0b0b0;
+            font-size: 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer p[style*="color: #999"]:hover {
+            color: white;
+        }
+        
+        .footer p[style*="color: #999"] i {
+            color: var(--primary-color);
+            font-size: 16px;
+            width: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 30px;
+            padding: 20px 0;
+            text-align: center;
+            color: #999;
+            background: rgba(0, 0, 0, 0.3);
+            font-size: 14px;
+        }
+        
+        @media (max-width: 991px) {
+            .nav-menu {
+                gap: 4px;
+            }
+            
+            .nav-item {
+                padding: 8px 12px;
+            }
+            
+            .right-section {
+                gap: 12px;
+            }
+            
+            .phone-number {
+                font-size: 13px;
+            }
+            
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .search-form {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-strip"></div>
+    <nav class="navbar" id="navbar">
+        <div class="navbar-container">
+            <div class="navbar-content">
+                <a href="#" class="logo-section">
+                    <img src="https://fayyaztravels.com/visa/admin/assets/img/main-logo.png" alt="Vimaansafar Logo" class="logo-image">
+                </a>
+                
+                <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                    <i class="bi bi-list"></i>
+                </button>
+                
+                <div class="nav-menu" id="navMenu">
+                    <a href="#" class="nav-item">
+                        <i class="bi bi-airplane-fill"></i>
+                        <span>Flight</span>
+                    </a>
+                    <a href="#" class="nav-item active">
+                        <span class="new-badge">NEW</span>
+                        <i class="bi bi-building-fill"></i>
+                        <span>Hotel</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="bi bi-tag-fill"></i>
+                        <span>Offers</span>
+                    </a>
+                </div>
+                
+                <div class="right-section">
+                    <div class="phone-section">
+                        <i class="bi bi-telephone-fill"></i>
+                        <span class="phone-number">+91 9953-888-841</span>
+                    </div>
+                    <a href="https://wa.me/919953888841" target="_blank" class="whatsapp-btn" title="WhatsApp">
+                        <div class="whatsapp-icon">
+                            <i class="bi bi-whatsapp"></i>
+                        </div>
+                    </a>
+                    <div class="menu-wrapper">
+                        <div class="menu-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="menu-icon">
+                                <i class="bi bi-list"></i>
+                            </div>
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle me-2"></i>About Us</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Contact Us</a></li>
+                        </ul>
+                    </div>
+                    <div class="user-profile-wrapper">
+                        <div class="user-profile" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="user-icon">
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                            <i class="bi bi-chevron-down"></i>
+                        </div>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-in-right me-2"></i>Login</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-person-plus me-2"></i>Sign Up</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Trust Bar -->
+    <div class="trust-bar">
+        <div class="container">
+            <div class="trust-items">
+                <div class="trust-item">
+                    <i class="bi bi-lock-fill"></i>
+                    <span>Secure Booking</span>
+                </div>
+                <div class="trust-item">
+                    <i class="bi bi-award-fill"></i>
+                    <span>Best Price Guarantee</span>
+                </div>
+                <div class="trust-item">
+                    <i class="bi bi-headset"></i>
+                    <span>24/7 Customer Support</span>
+                </div>
+                <div class="trust-item">
+                    <i class="bi bi-people-fill"></i>
+                    <span>2M+ Happy Travelers</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Discover Your Perfect Getaway</h1>
+                <p class="hero-subtitle">Book flights, hotels, and packages with the best deals and exclusive offers</p>
+                
+                <div class="search-box">
+                    <div class="search-tabs">
+                        <button class="search-tab active">Hotels</button>
+                        <button class="search-tab">Flights</button>
+                        <button class="search-tab">Packages</button>
+                    </div>
+                    
+                    <form class="search-form">
+                        <div class="form-group">
+                            <label><i class="bi bi-geo-alt-fill"></i>Destination</label>
+                            <input type="text" id="destinationInput" class="form-control" placeholder="Where are you going?" autocomplete="off">
+                            <div class="autocomplete-suggestions" id="destinationSuggestions"></div>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="bi bi-calendar-check-fill"></i>Check-in</label>
+                            <input type="text" id="checkinInput" class="form-control" placeholder="Select check-in date" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="bi bi-calendar-x-fill"></i>Check-out</label>
+                            <input type="text" id="checkoutInput" class="form-control" placeholder="Select check-out date" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="bi bi-people-fill"></i>Guests</label>
+                            <select class="form-control">
+                                <option>1 Guest</option>
+                                <option>2 Guests</option>
+                                <option>3 Guests</option>
+                                <option>4+ Guests</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="search-btn">
+                            <i class="bi bi-search"></i>
+                            <span>Search</span>
+                        </button>
+                    </form>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">50K+</span>
+                        <span class="hero-stat-label">Hotels Worldwide</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">2M+</span>
+                        <span class="hero-stat-label">Happy Customers</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">4.8★</span>
+                        <span class="hero-stat-label">Average Rating</span>
+                    </div>
+                    <div class="hero-stat">
+                        <span class="hero-stat-number">150+</span>
+                        <span class="hero-stat-label">Destinations</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Destinations -->
+    <section class="section" style="background: var(--light-bg);">
+        <div class="container">
+            <h2 class="section-title">Popular Destinations</h2>
+            <p class="section-subtitle">Explore the world's most beautiful places</p>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="destination-card">
+                        <div class="destination-badge">Popular</div>
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800" alt="Mountain" class="destination-image">
+                        <div class="destination-overlay">
+                            <div class="destination-name">Mountain View</div>
+                            <div class="destination-info">
+                                <i class="bi bi-building-fill"></i>
+                                <span>120+ Hotels Available</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="destination-card">
+                        <div class="destination-badge">Trending</div>
+                        <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800" alt="Beach" class="destination-image">
+                        <div class="destination-overlay">
+                            <div class="destination-name">Beach Paradise</div>
+                            <div class="destination-info">
+                                <i class="bi bi-building-fill"></i>
+                                <span>85+ Hotels Available</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="destination-card">
+                        <div class="destination-badge">Best Seller</div>
+                        <img src="https://images.unsplash.com/photo-1498307833015-e7b400441eb8?w=800" alt="City" class="destination-image">
+                        <div class="destination-overlay">
+                            <div class="destination-name">City Lights</div>
+                            <div class="destination-info">
+                                <i class="bi bi-building-fill"></i>
+                                <span>200+ Hotels Available</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Hotels -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Hotels</h2>
+            <p class="section-subtitle">Handpicked accommodations for your comfort</p>
+            
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="hotel-card">
+                        <div class="hotel-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800" alt="Hotel" class="hotel-image">
+                            <div class="hotel-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <span>4.8</span>
+                            </div>
+                            <div class="hotel-badge">Popular</div>
+                        </div>
+                        <div class="hotel-content">
+                            <div class="hotel-name">Grand Luxury Resort</div>
+                            <div class="hotel-location">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <span>Mumbai, India</span>
+                            </div>
+                            <div class="hotel-features">
+                                <span class="hotel-feature">
+                                    <i class="bi bi-wifi"></i> Free WiFi
+                                </span>
+                                <span class="hotel-feature">
+                                    <i class="bi bi-cup-straw"></i> Breakfast
+                                </span>
+                                <span class="hotel-feature">
+                                    <i class="bi bi-parking"></i> Parking
+                                </span>
+                            </div>
+                            <div class="hotel-price">
+                                <div class="price-wrapper">
+                                    <div class="price">₹4,500</div>
+                                    <div class="price-label">per night</div>
+                                </div>
+                                <button class="book-btn"><span>Book Now</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="hotel-card">
+                        <div class="hotel-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800" alt="Hotel" class="hotel-image">
+                            <div class="hotel-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <span>4.9</span>
+                            </div>
+                            <div class="hotel-badge">Best Seller</div>
+                        </div>
+                        <div class="hotel-content">
+                            <div class="hotel-name">Ocean View Hotel</div>
+                            <div class="hotel-location">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <span>Goa, India</span>
+                            </div>
+                            <div class="hotel-features">
+                                <span class="hotel-feature">
+                                    <i class="bi bi-wifi"></i> Free WiFi
+                                </span>
+                                <span class="hotel-feature">
+                                    <i class="bi bi-water"></i> Pool
+                                </span>
+                                <span class="hotel-feature">
+                                    <i class="bi bi-cup-straw"></i> Breakfast
+                                </span>
+                            </div>
+                            <div class="hotel-price">
+                                <div class="price-wrapper">
+                                    <div class="price">₹6,200</div>
+                                    <div class="price-label">per night</div>
+                                </div>
+                                <button class="book-btn"><span>Book Now</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="hotel-card">
+                        <div class="hotel-image-wrapper">
+                            <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800" alt="Hotel" class="hotel-image">
+                            <div class="hotel-rating">
+                                <i class="bi bi-star-fill"></i>
+                                <span>4.7</span>
+                            </div>
+                            <div class="hotel-badge">Great Value</div>
+                        </div>
+                        <div class="hotel-content">
+                            <div class="hotel-name">City Center Hotel</div>
+                            <div class="hotel-location">
+                                <i class="bi bi-geo-alt-fill"></i>
+                                <span>Delhi, India</span>
+                            </div>
+                            <div class="hotel-features">
+                                <span class="hotel-feature">
+                                    <i class="bi bi-wifi"></i> Free WiFi
+                                </span>
+                                <span class="hotel-feature">
+                                    <i class="bi bi-parking"></i> Parking
+                                </span>
+                                <span class="hotel-feature">
+                                    <i class="bi bi-cup-straw"></i> Breakfast
+                                </span>
+                            </div>
+                            <div class="hotel-price">
+                                <div class="price-wrapper">
+                                    <div class="price">₹3,800</div>
+                                    <div class="price-label">per night</div>
+                                </div>
+                                <button class="book-btn"><span>Book Now</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="section" style="background: var(--light-bg);">
+        <div class="container">
+            <h2 class="section-title">Why Choose Vimaansafar</h2>
+            <p class="section-subtitle">Your trusted travel partner</p>
+            
+            <div class="row g-4">
+                <div class="col-md-3">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-lock-fill"></i>
+                        </div>
+                        <div class="feature-title">Secure Booking</div>
+                        <div class="feature-text">Your data and payments are protected with industry-leading security</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-tag-fill"></i>
+                        </div>
+                        <div class="feature-title">Best Prices</div>
+                        <div class="feature-text">Compare prices and get the best deals on hotels, flights, and packages</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-headset"></i>
+                        </div>
+                        <div class="feature-title">24/7 Support</div>
+                        <div class="feature-text">Round-the-clock customer support to assist you anytime</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="feature-card">
+                        <div class="feature-icon">
+                            <i class="bi bi-award-fill"></i>
+                        </div>
+                        <div class="feature-title">Trusted Partner</div>
+                        <div class="feature-text">Trusted by millions of travelers worldwide</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotional Section -->
+    <section class="promo-section">
+        <div class="promo-background-pattern"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="promo-image-container">
+                        <div class="promo-image-wrapper">
+                            <div class="promo-image-overlay"></div>
+                            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800" alt="Luxury Hotel Room" class="promo-image">
+                            <div class="promo-image-shine"></div>
+                        </div>
+                        <div class="promo-badge">
+                            <div class="promo-badge-icon">
+                                <i class="bi bi-people-fill"></i>
+                            </div>
+                            <div class="promo-badge-content">
+                                <div class="promo-badge-number">100k+</div>
+                                <div class="promo-badge-text">Happy Customers</div>
+                            </div>
+                        </div>
+                        <div class="promo-image-decoration"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="promo-content-wrapper">
+                        <div class="promo-content">
+                            <div class="promo-label">Why Choose Us</div>
+                            <h2 class="promo-title">
+                                <span class="promo-title-highlight">We always provide</span>
+                                <span class="promo-title-main">the best for our hotel visitors</span>
+                            </h2>
+                            <p class="promo-description">We are committed to delivering exceptional service and ensuring your stay exceeds expectations. Experience the difference with our premium offerings.</p>
+                            <div class="promo-benefits-grid">
+                                <div class="promo-benefit-card">
+                                    <div class="promo-benefit-icon">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                    </div>
+                                    <div class="promo-benefit-content">
+                                        <div class="promo-benefit-title">Best Rate Guaranteed</div>
+                                        <div class="promo-benefit-desc">Lowest prices or we match it</div>
+                                    </div>
+                                </div>
+                                <div class="promo-benefit-card">
+                                    <div class="promo-benefit-icon">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                    </div>
+                                    <div class="promo-benefit-content">
+                                        <div class="promo-benefit-title">Payment at Hotel</div>
+                                        <div class="promo-benefit-desc">Pay when you check-in</div>
+                                    </div>
+                                </div>
+                                <div class="promo-benefit-card">
+                                    <div class="promo-benefit-icon">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                    </div>
+                                    <div class="promo-benefit-content">
+                                        <div class="promo-benefit-title">Exclusive Rewards</div>
+                                        <div class="promo-benefit-desc">Earn points on every booking</div>
+                                    </div>
+                                </div>
+                                <div class="promo-benefit-card">
+                                    <div class="promo-benefit-icon">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                    </div>
+                                    <div class="promo-benefit-content">
+                                        <div class="promo-benefit-title">Free WiFi Access</div>
+                                        <div class="promo-benefit-desc">High-speed internet included</div>
+                                    </div>
+                                </div>
+                                <div class="promo-benefit-card">
+                                    <div class="promo-benefit-icon">
+                                        <i class="bi bi-check-circle-fill"></i>
+                                    </div>
+                                    <div class="promo-benefit-content">
+                                        <div class="promo-benefit-title">No Hidden Charges</div>
+                                        <div class="promo-benefit-desc">Transparent pricing always</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="footer-title">Vimaansafar</div>
+                    <p>Your trusted travel partner for flights, hotels, and vacation packages.</p>
+                    <div class="footer-social">
+                        <a href="#" style="color: white; font-size: 20px;"><i class="bi bi-facebook"></i></a>
+                        <a href="#" style="color: white; font-size: 20px;"><i class="bi bi-twitter"></i></a>
+                        <a href="#" style="color: white; font-size: 20px;"><i class="bi bi-instagram"></i></a>
+                        <a href="#" style="color: white; font-size: 20px;"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="footer-title">Company</div>
+                    <a href="#" class="footer-link">About Us</a>
+                    <a href="#" class="footer-link">Careers</a>
+                    <a href="#" class="footer-link">Contact</a>
+                    <a href="#" class="footer-link">Blog</a>
+                </div>
+                <div class="col-md-3">
+                    <div class="footer-title">Support</div>
+                    <a href="#" class="footer-link">Help Center</a>
+                    <a href="#" class="footer-link">FAQs</a>
+                    <a href="#" class="footer-link">Cancellation</a>
+                    <a href="#" class="footer-link">Refund Policy</a>
+                </div>
+                <div class="col-md-3">
+                    <div class="footer-title">Contact</div>
+                    <p style="color: #999; margin-bottom: 10px;">
+                        <i class="bi bi-telephone-fill"></i>+91 9953-888-841
+                    </p>
+                    <p style="color: #999; margin-bottom: 10px;">
+                        <i class="bi bi-envelope-fill"></i>support@vimaansafar.com
+                    </p>
+                    <p style="color: #999;">
+                        <i class="bi bi-geo-alt-fill"></i>Mumbai, India
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Vimaansafar. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fixed WhatsApp Button -->
+    <a href="https://wa.me/919953888841" target="_blank" class="whatsapp-fixed-btn" title="Chat on WhatsApp">
+        <div class="whatsapp-fixed-icon">
+            <i class="bi bi-whatsapp"></i>
+        </div>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.4.0/air-datepicker.min.js"></script>
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+        
+        window.addEventListener('scroll', function() {
+            const currentScroll = window.pageYOffset;
+            
+            if (currentScroll > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+            
+            lastScroll = currentScroll;
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navMenu = document.getElementById('navMenu');
+        
+        if (mobileMenuToggle && navMenu) {
+            mobileMenuToggle.addEventListener('click', function() {
+                navMenu.classList.toggle('active');
+                const icon = this.querySelector('i');
+                if (icon) {
+                    icon.classList.toggle('bi-list');
+                    icon.classList.toggle('bi-x');
+                }
+            });
+        }
+        
+        // Search tab switching
+        document.querySelectorAll('.search-tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('.search-tab').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Nav item active state
+        document.querySelectorAll('.nav-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+        
+        // Destination Autocomplete
+        const destinations = [
+            { name: 'Mumbai', location: 'Maharashtra, India', icon: 'bi-building' },
+            { name: 'Delhi', location: 'Delhi, India', icon: 'bi-building' },
+            { name: 'Bangalore', location: 'Karnataka, India', icon: 'bi-building' },
+            { name: 'Goa', location: 'Goa, India', icon: 'bi-water' },
+            { name: 'Kerala', location: 'Kerala, India', icon: 'bi-tree' },
+            { name: 'Rajasthan', location: 'Rajasthan, India', icon: 'bi-castle' },
+            { name: 'Pune', location: 'Maharashtra, India', icon: 'bi-building' },
+            { name: 'Hyderabad', location: 'Telangana, India', icon: 'bi-building' },
+            { name: 'Chennai', location: 'Tamil Nadu, India', icon: 'bi-building' },
+            { name: 'Kolkata', location: 'West Bengal, India', icon: 'bi-building' },
+            { name: 'Jaipur', location: 'Rajasthan, India', icon: 'bi-castle' },
+            { name: 'Udaipur', location: 'Rajasthan, India', icon: 'bi-castle' },
+            { name: 'Manali', location: 'Himachal Pradesh, India', icon: 'bi-mountain' },
+            { name: 'Shimla', location: 'Himachal Pradesh, India', icon: 'bi-mountain' },
+            { name: 'Darjeeling', location: 'West Bengal, India', icon: 'bi-mountain' },
+            { name: 'Ooty', location: 'Tamil Nadu, India', icon: 'bi-tree' },
+            { name: 'Mysore', location: 'Karnataka, India', icon: 'bi-building' },
+            { name: 'Agra', location: 'Uttar Pradesh, India', icon: 'bi-building' },
+            { name: 'Varanasi', location: 'Uttar Pradesh, India', icon: 'bi-building' },
+            { name: 'Rishikesh', location: 'Uttarakhand, India', icon: 'bi-water' }
+        ];
+        
+        const destinationInput = document.getElementById('destinationInput');
+        const destinationSuggestions = document.getElementById('destinationSuggestions');
+        let selectedIndex = -1;
+        
+        destinationInput.addEventListener('input', function() {
+            const query = this.value.toLowerCase().trim();
+            selectedIndex = -1;
+            
+            if (query.length === 0) {
+                destinationSuggestions.classList.remove('show');
+                return;
+            }
+            
+            const filtered = destinations.filter(dest => 
+                dest.name.toLowerCase().includes(query) || 
+                dest.location.toLowerCase().includes(query)
+            );
+            
+            if (filtered.length > 0) {
+                destinationSuggestions.innerHTML = filtered.map((dest, index) => `
+                    <div class="autocomplete-suggestion" data-index="${index}" data-value="${dest.name}">
+                        <i class="bi ${dest.icon}"></i>
+                        <div>
+                            <div class="autocomplete-suggestion-name">${dest.name}</div>
+                            <div class="autocomplete-suggestion-location">${dest.location}</div>
+                        </div>
+                    </div>
+                `).join('');
+                destinationSuggestions.classList.add('show');
+            } else {
+                destinationSuggestions.classList.remove('show');
+            }
+        });
+        
+        destinationInput.addEventListener('keydown', function(e) {
+            const suggestions = destinationSuggestions.querySelectorAll('.autocomplete-suggestion');
+            
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                selectedIndex = Math.min(selectedIndex + 1, suggestions.length - 1);
+                updateSelection(suggestions);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                selectedIndex = Math.max(selectedIndex - 1, -1);
+                updateSelection(suggestions);
+            } else if (e.key === 'Enter' && selectedIndex >= 0) {
+                e.preventDefault();
+                suggestions[selectedIndex].click();
+            } else if (e.key === 'Escape') {
+                destinationSuggestions.classList.remove('show');
+            }
+        });
+        
+        function updateSelection(suggestions) {
+            suggestions.forEach((s, i) => {
+                s.classList.toggle('active', i === selectedIndex);
+            });
+        }
+        
+        destinationSuggestions.addEventListener('click', function(e) {
+            const suggestion = e.target.closest('.autocomplete-suggestion');
+            if (suggestion) {
+                destinationInput.value = suggestion.dataset.value;
+                destinationSuggestions.classList.remove('show');
+            }
+        });
+        
+        document.addEventListener('click', function(e) {
+            if (!destinationInput.contains(e.target) && !destinationSuggestions.contains(e.target)) {
+                destinationSuggestions.classList.remove('show');
+            }
+        });
+        
+        // Air Datepicker English Locale
+        const englishLocale = {
+            days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+            daysMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+            months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+            monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+            today: 'Today',
+            clear: 'Clear',
+            dateFormat: 'dd/MM/yyyy',
+            timeFormat: 'hh:mm aa',
+            firstDay: 0
+        };
+        
+        // Air Datepicker for Check-in
+        const checkinInput = document.getElementById('checkinInput');
+        const checkoutInput = document.getElementById('checkoutInput');
+        
+        const checkinDatepicker = new AirDatepicker(checkinInput, {
+            minDate: new Date(),
+            dateFormat: 'dd/MM/yyyy',
+            locale: englishLocale,
+            onSelect: function({date}) {
+                if (date) {
+                    const minCheckout = new Date(date);
+                    minCheckout.setDate(minCheckout.getDate() + 1);
+                    checkoutDatepicker.update({
+                        minDate: minCheckout
+                    });
+                }
+            }
+        });
+        
+        // Air Datepicker for Check-out
+        const checkoutDatepicker = new AirDatepicker(checkoutInput, {
+            minDate: new Date(new Date().setDate(new Date().getDate() + 1)),
+            dateFormat: 'dd/MM/yyyy',
+            locale: englishLocale
+        });
+    </script>
+</body>
+</html>
