@@ -603,6 +603,248 @@
             }
         }
         
+        /* Secondary Navbar */
+        .secondary-navbar {
+            background: white;
+            border-bottom: 1px solid var(--border-color);
+            padding: 8px 0;
+            position: fixed;
+            top: 76px;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            transform: translateY(-100%);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
+            margin: 0;
+            height: 0;
+            overflow: hidden;
+        }
+        
+        .secondary-navbar.visible {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
+            height: auto;
+            overflow: visible;
+        }
+        
+        .secondary-navbar-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        @media (min-width: 576px) {
+            .secondary-navbar-container {
+                max-width: 540px;
+                padding: 0 20px;
+            }
+        }
+        
+        @media (min-width: 768px) {
+            .secondary-navbar-container {
+                max-width: 720px;
+                padding: 0 30px;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .secondary-navbar-container {
+                max-width: 960px;
+                padding: 0 40px;
+            }
+        }
+        
+        @media (min-width: 1200px) {
+            .secondary-navbar-container {
+                max-width: 1140px;
+                padding: 0 50px;
+            }
+        }
+        
+        @media (min-width: 1400px) {
+            .secondary-navbar-container {
+                max-width: 1320px;
+                padding: 0 50px;
+            }
+        }
+        
+        .secondary-search-form {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr auto;
+            gap: 12px;
+            align-items: end;
+        }
+        
+        .secondary-form-group {
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .secondary-form-group label {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .secondary-form-group label i {
+            color: var(--primary-color);
+            font-size: 12px;
+        }
+        
+        .secondary-form-control {
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 14px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: #ffffff;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .secondary-form-control:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .secondary-form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+            outline: none;
+            background: #ffffff;
+        }
+        
+        .secondary-form-control::placeholder {
+            color: var(--text-light);
+            font-weight: 400;
+        }
+        
+        .secondary-search-btn {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            white-space: nowrap;
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            height: fit-content;
+        }
+        
+        .secondary-search-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .secondary-search-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .secondary-search-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(0, 102, 204, 0.4);
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+        }
+        
+        .secondary-search-btn:active {
+            transform: translateY(0);
+        }
+        
+        .secondary-search-btn i,
+        .secondary-search-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .secondary-autocomplete-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            margin-top: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            display: none;
+        }
+        
+        .secondary-autocomplete-suggestions.show {
+            display: block;
+        }
+        
+        .secondary-autocomplete-suggestions .autocomplete-suggestion {
+            padding: 10px 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .secondary-autocomplete-suggestions .autocomplete-suggestion:last-child {
+            border-bottom: none;
+        }
+        
+        .secondary-autocomplete-suggestions .autocomplete-suggestion:hover,
+        .secondary-autocomplete-suggestions .autocomplete-suggestion.active {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
+            color: var(--primary-color);
+        }
+        
+        .secondary-autocomplete-suggestions .autocomplete-suggestion i {
+            color: var(--primary-color);
+            font-size: 14px;
+        }
+        
+        .secondary-autocomplete-suggestions .autocomplete-suggestion-name {
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .secondary-autocomplete-suggestions .autocomplete-suggestion-location {
+            font-size: 12px;
+            color: var(--text-light);
+        }
+        
+        @media (max-width: 991px) {
+            .secondary-navbar {
+                display: none !important;
+            }
+        }
+        
         .dropdown-menu {
             border: 1px solid var(--border-color);
             border-radius: 12px;
@@ -756,7 +998,8 @@
         .trust-bar {
             background: var(--light-bg);
             border-bottom: 1px solid var(--border-color);
-            padding: 12px 0;
+            padding: 8px 0;
+            margin-top: 0;
         }
         
         .trust-items {
@@ -2588,6 +2831,40 @@
         </div>
     </nav>
 
+    <!-- Secondary Navbar (Sticky Search Bar) -->
+    <div class="secondary-navbar" id="secondaryNavbar">
+        <div class="secondary-navbar-container">
+            <form class="secondary-search-form" id="secondarySearchForm">
+                <div class="secondary-form-group">
+                    <label><i class="bi bi-geo-alt-fill"></i>Destination</label>
+                    <input type="text" id="secondaryDestinationInput" class="secondary-form-control" placeholder="Where are you going?" autocomplete="off">
+                    <div class="secondary-autocomplete-suggestions" id="secondaryDestinationSuggestions"></div>
+                </div>
+                <div class="secondary-form-group">
+                    <label><i class="bi bi-calendar-check-fill"></i>Check-in</label>
+                    <input type="text" id="secondaryCheckinInput" class="secondary-form-control" placeholder="Check-in" readonly>
+                </div>
+                <div class="secondary-form-group">
+                    <label><i class="bi bi-calendar-x-fill"></i>Check-out</label>
+                    <input type="text" id="secondaryCheckoutInput" class="secondary-form-control" placeholder="Check-out" readonly>
+                </div>
+                <div class="secondary-form-group">
+                    <label><i class="bi bi-people-fill"></i>Guests</label>
+                    <select class="secondary-form-control" id="secondaryGuestsSelect">
+                        <option>1 Guest</option>
+                        <option>2 Guests</option>
+                        <option>3 Guests</option>
+                        <option>4+ Guests</option>
+                    </select>
+                </div>
+                <button type="submit" class="secondary-search-btn">
+                    <i class="bi bi-search"></i>
+                    <span>Search</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <!-- Trust Bar -->
     <div class="trust-bar">
         <div class="container">
@@ -3140,6 +3417,58 @@
         const navbar = document.getElementById('navbar');
         let lastScroll = 0;
         
+        // Secondary Navbar
+        const secondaryNavbar = document.getElementById('secondaryNavbar');
+        
+        // Calculate and set secondary navbar top position based on navbar height
+        function updateSecondaryNavbarPosition() {
+            if (navbar && secondaryNavbar) {
+                const navbarHeight = navbar.offsetHeight;
+                secondaryNavbar.style.top = navbarHeight + 'px';
+            }
+        }
+        
+        // Update position on load and resize
+        updateSecondaryNavbarPosition();
+        window.addEventListener('resize', updateSecondaryNavbarPosition);
+        
+        // Sync values from main form to secondary form (defined early for use in scroll handler)
+        function syncToSecondaryForm() {
+            const destinationInput = document.getElementById('destinationInput');
+            const secondaryDestinationInput = document.getElementById('secondaryDestinationInput');
+            const checkinInput = document.getElementById('checkinInput');
+            const secondaryCheckinInput = document.getElementById('secondaryCheckinInput');
+            const checkoutInput = document.getElementById('checkoutInput');
+            const secondaryCheckoutInput = document.getElementById('secondaryCheckoutInput');
+            const mainGuestsSelect = document.querySelector('.search-form select');
+            const secondaryGuestsSelect = document.getElementById('secondaryGuestsSelect');
+            
+            if (destinationInput && secondaryDestinationInput) {
+                secondaryDestinationInput.value = destinationInput.value;
+            }
+            if (checkinInput && secondaryCheckinInput) {
+                secondaryCheckinInput.value = checkinInput.value;
+            }
+            if (checkoutInput && secondaryCheckoutInput) {
+                secondaryCheckoutInput.value = checkoutInput.value;
+            }
+            if (mainGuestsSelect && secondaryGuestsSelect) {
+                secondaryGuestsSelect.value = mainGuestsSelect.value;
+            }
+        }
+        
+        // Get hero section element for calculating when to show secondary navbar
+        const heroSection = document.querySelector('.hero-section');
+        
+        function getHeroSectionEnd() {
+            if (heroSection) {
+                const heroRect = heroSection.getBoundingClientRect();
+                const heroTop = heroRect.top + window.pageYOffset;
+                return heroTop + heroSection.offsetHeight;
+            }
+            return 0;
+        }
+        
         window.addEventListener('scroll', function() {
             const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
             
@@ -3147,6 +3476,19 @@
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
+            }
+            
+            // Calculate hero section end on each scroll for accuracy
+            const heroSectionEnd = getHeroSectionEnd();
+            
+            // Show/hide secondary navbar only after hero section is crossed
+            if (currentScroll > heroSectionEnd && heroSectionEnd > 0) {
+                if (!secondaryNavbar.classList.contains('visible')) {
+                    syncToSecondaryForm(); // Sync values when showing
+                }
+                secondaryNavbar.classList.add('visible');
+            } else {
+                secondaryNavbar.classList.remove('visible');
             }
             
             lastScroll = currentScroll;
@@ -3320,6 +3662,181 @@
             dateFormat: 'dd/MM/yyyy',
             locale: englishLocale
         });
+        
+        // Secondary Navbar Functionality
+        const secondaryDestinationInput = document.getElementById('secondaryDestinationInput');
+        const secondaryDestinationSuggestions = document.getElementById('secondaryDestinationSuggestions');
+        const secondaryCheckinInput = document.getElementById('secondaryCheckinInput');
+        const secondaryCheckoutInput = document.getElementById('secondaryCheckoutInput');
+        const secondaryGuestsSelect = document.getElementById('secondaryGuestsSelect');
+        let secondarySelectedIndex = -1;
+        
+        // Secondary Destination Autocomplete
+        if (secondaryDestinationInput) {
+            secondaryDestinationInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                secondarySelectedIndex = -1;
+                
+                if (query.length === 0) {
+                    secondaryDestinationSuggestions.classList.remove('show');
+                    return;
+                }
+                
+                const filtered = destinations.filter(dest => 
+                    dest.name.toLowerCase().includes(query) || 
+                    dest.location.toLowerCase().includes(query)
+                );
+                
+                if (filtered.length > 0) {
+                    secondaryDestinationSuggestions.innerHTML = filtered.map((dest, index) => `
+                        <div class="autocomplete-suggestion" data-index="${index}" data-value="${dest.name}">
+                            <i class="bi ${dest.icon}"></i>
+                            <div>
+                                <div class="autocomplete-suggestion-name">${dest.name}</div>
+                                <div class="autocomplete-suggestion-location">${dest.location}</div>
+                            </div>
+                        </div>
+                    `).join('');
+                    secondaryDestinationSuggestions.classList.add('show');
+                } else {
+                    secondaryDestinationSuggestions.classList.remove('show');
+                }
+            });
+            
+            secondaryDestinationInput.addEventListener('keydown', function(e) {
+                const suggestions = secondaryDestinationSuggestions.querySelectorAll('.autocomplete-suggestion');
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    secondarySelectedIndex = Math.min(secondarySelectedIndex + 1, suggestions.length - 1);
+                    updateSecondarySelection(suggestions);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    secondarySelectedIndex = Math.max(secondarySelectedIndex - 1, -1);
+                    updateSecondarySelection(suggestions);
+                } else if (e.key === 'Enter' && secondarySelectedIndex >= 0) {
+                    e.preventDefault();
+                    suggestions[secondarySelectedIndex].click();
+                } else if (e.key === 'Escape') {
+                    secondaryDestinationSuggestions.classList.remove('show');
+                }
+            });
+            
+            function updateSecondarySelection(suggestions) {
+                suggestions.forEach((s, i) => {
+                    s.classList.toggle('active', i === secondarySelectedIndex);
+                });
+            }
+            
+            secondaryDestinationSuggestions.addEventListener('click', function(e) {
+                const suggestion = e.target.closest('.autocomplete-suggestion');
+                if (suggestion) {
+                    secondaryDestinationInput.value = suggestion.dataset.value;
+                    secondaryDestinationSuggestions.classList.remove('show');
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!secondaryDestinationInput.contains(e.target) && !secondaryDestinationSuggestions.contains(e.target)) {
+                    secondaryDestinationSuggestions.classList.remove('show');
+                }
+            });
+        }
+        
+        // Secondary Datepickers
+        let secondaryCheckinDatepicker, secondaryCheckoutDatepicker;
+        
+        if (secondaryCheckinInput && secondaryCheckoutInput) {
+            secondaryCheckinDatepicker = new AirDatepicker(secondaryCheckinInput, {
+                minDate: new Date(),
+                dateFormat: 'dd/MM/yyyy',
+                locale: englishLocale,
+                onSelect: function({date}) {
+                    if (date) {
+                        const minCheckout = new Date(date);
+                        minCheckout.setDate(minCheckout.getDate() + 1);
+                        secondaryCheckoutDatepicker.update({
+                            minDate: minCheckout
+                        });
+                    }
+                }
+            });
+            
+            secondaryCheckoutDatepicker = new AirDatepicker(secondaryCheckoutInput, {
+                minDate: new Date(new Date().setDate(new Date().getDate() + 1)),
+                dateFormat: 'dd/MM/yyyy',
+                locale: englishLocale
+            });
+        }
+        
+        // Sync values from secondary form to main form
+        function syncToMainForm() {
+            const destinationInput = document.getElementById('destinationInput');
+            const secondaryDestinationInput = document.getElementById('secondaryDestinationInput');
+            const checkinInput = document.getElementById('checkinInput');
+            const secondaryCheckinInput = document.getElementById('secondaryCheckinInput');
+            const checkoutInput = document.getElementById('checkoutInput');
+            const secondaryCheckoutInput = document.getElementById('secondaryCheckoutInput');
+            const mainGuestsSelect = document.querySelector('.search-form select');
+            const secondaryGuestsSelect = document.getElementById('secondaryGuestsSelect');
+            
+            if (secondaryDestinationInput && destinationInput) {
+                destinationInput.value = secondaryDestinationInput.value;
+            }
+            if (secondaryCheckinInput && checkinInput) {
+                checkinInput.value = secondaryCheckinInput.value;
+            }
+            if (secondaryCheckoutInput && checkoutInput) {
+                checkoutInput.value = secondaryCheckoutInput.value;
+            }
+            if (secondaryGuestsSelect && mainGuestsSelect) {
+                mainGuestsSelect.value = secondaryGuestsSelect.value;
+            }
+        }
+        
+        // Sync on main form changes (using already declared variables)
+        const mainGuestsSelect = document.querySelector('.search-form select');
+        
+        if (destinationInput) {
+            destinationInput.addEventListener('change', syncToSecondaryForm);
+        }
+        if (checkinInput) {
+            checkinInput.addEventListener('change', syncToSecondaryForm);
+        }
+        if (checkoutInput) {
+            checkoutInput.addEventListener('change', syncToSecondaryForm);
+        }
+        if (mainGuestsSelect) {
+            mainGuestsSelect.addEventListener('change', syncToSecondaryForm);
+        }
+        
+        // Sync on secondary form changes (using already declared variables)
+        if (secondaryDestinationInput) {
+            secondaryDestinationInput.addEventListener('change', syncToMainForm);
+        }
+        if (secondaryCheckinInput) {
+            secondaryCheckinInput.addEventListener('change', syncToMainForm);
+        }
+        if (secondaryCheckoutInput) {
+            secondaryCheckoutInput.addEventListener('change', syncToMainForm);
+        }
+        if (secondaryGuestsSelect) {
+            secondaryGuestsSelect.addEventListener('change', syncToMainForm);
+        }
+        
+        // Secondary form submission
+        const secondarySearchForm = document.getElementById('secondarySearchForm');
+        if (secondarySearchForm) {
+            secondarySearchForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                syncToMainForm();
+                // Trigger main form submission
+                const mainSearchForm = document.querySelector('.search-form');
+                if (mainSearchForm) {
+                    mainSearchForm.dispatchEvent(new Event('submit'));
+                }
+            });
+        }
     </script>
 </body>
 </html>
