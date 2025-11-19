@@ -22,6 +22,11 @@
             </div>
             
             <div class="right-section">
+                <a href="tel:+919953888841" class="phone-toggle">
+                    <div class="phone-icon">
+                        <i class="bi bi-telephone-fill"></i>
+                    </div>
+                </a>
                 <div class="menu-wrapper">
                     <div class="menu-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                         <div class="menu-icon">

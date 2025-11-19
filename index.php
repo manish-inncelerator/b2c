@@ -745,6 +745,7 @@
         @media (max-width: 991px) {
             .hero-title {
                 font-size: 42px;
+                margin-top: 40px;
             }
             
             .hero-subtitle {
@@ -1961,6 +1962,7 @@
             
             .hero-title {
                 font-size: 36px;
+                margin-top: 30px;
             }
             
             .hero-subtitle {
@@ -1973,6 +1975,12 @@
             
             .section-title {
                 font-size: 32px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                margin-top: 20px;
             }
         }
     </style>
@@ -2388,7 +2396,7 @@
         // Calculate and set secondary navbar top position based on navbar height
         function updateSecondaryNavbarPosition() {
             if (navbar && secondaryNavbar) {
-                secondaryNavbar.style.top = '150px';
+                secondaryNavbar.style.top = '122px';
             }
         }
         
