@@ -841,11 +841,16 @@
         .secondary-autocomplete-suggestions .autocomplete-suggestion-name {
             font-weight: 600;
             font-size: 14px;
+            color: var(--text-color);
         }
         
         .secondary-autocomplete-suggestions .autocomplete-suggestion-location {
             font-size: 12px;
             color: var(--text-light);
+        }
+        
+        .secondary-autocomplete-suggestions .autocomplete-suggestion {
+            color: var(--text-color);
         }
         
         @media (max-width: 991px) {
@@ -1615,11 +1620,16 @@
         .autocomplete-suggestion-name {
             font-weight: 600;
             font-size: 15px;
+            color: var(--text-color);
         }
         
         .autocomplete-suggestion-location {
             font-size: 13px;
             color: var(--text-light);
+        }
+        
+        .autocomplete-suggestion {
+            color: var(--text-color);
         }
         
         /* Air Datepicker Blue Styling */
@@ -1828,6 +1838,60 @@
         /* Sections */
         .section {
             padding: 80px 0;
+        }
+        
+        /* Content Section Styling */
+        .section h1 {
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--dark-color);
+            margin-bottom: 24px;
+            line-height: 1.3;
+        }
+        
+        .section h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-top: 48px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+        
+        .section h3 {
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-top: 32px;
+            margin-bottom: 12px;
+            line-height: 1.5;
+        }
+        
+        .section p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+        
+        @media (max-width: 768px) {
+            .section h1 {
+                font-size: 32px;
+            }
+            
+            .section h2 {
+                font-size: 26px;
+                margin-top: 36px;
+            }
+            
+            .section h3 {
+                font-size: 20px;
+                margin-top: 24px;
+            }
+            
+            .section p {
+                font-size: 15px;
+            }
         }
         
         .section-title {
@@ -3146,35 +3210,8 @@
                     <form class="search-form" id="packagesForm" data-form="packages" style="display: none;">
                         <div class="form-group">
                             <label><i class="bi bi-geo-alt-fill"></i>Destination</label>
-                            <div class="custom-select-wrapper" id="packagesSelectWrapper">
-                                <div class="custom-select-trigger" id="packagesSelectTrigger">
-                                    <span class="custom-select-value placeholder">Select Destination</span>
-                                    <i class="bi bi-chevron-down custom-select-arrow"></i>
-                                </div>
-                                <div class="custom-select-dropdown" id="packagesSelectDropdown">
-                                    <div class="custom-select-search">
-                                        <i class="bi bi-search"></i>
-                                        <input type="text" class="custom-select-search-input" id="packagesSearchInput" placeholder="Search destination...">
-                                    </div>
-                                    <div class="custom-select-options" id="packagesSelectOptions">
-                                        <div class="custom-select-option" data-value="mumbai">Mumbai, India</div>
-                                        <div class="custom-select-option" data-value="delhi">Delhi, India</div>
-                                        <div class="custom-select-option" data-value="goa">Goa, India</div>
-                                        <div class="custom-select-option" data-value="bangalore">Bangalore, India</div>
-                                        <div class="custom-select-option" data-value="kerala">Kerala, India</div>
-                                        <div class="custom-select-option" data-value="dubai">Dubai, UAE</div>
-                                        <div class="custom-select-option" data-value="singapore">Singapore</div>
-                                        <div class="custom-select-option" data-value="thailand">Thailand</div>
-                                        <div class="custom-select-option" data-value="malaysia">Malaysia</div>
-                                        <div class="custom-select-option" data-value="bali">Bali, Indonesia</div>
-                                        <div class="custom-select-option" data-value="paris">Paris, France</div>
-                                        <div class="custom-select-option" data-value="london">London, UK</div>
-                                        <div class="custom-select-option" data-value="newyork">New York, USA</div>
-                                        <div class="custom-select-option" data-value="tokyo">Tokyo, Japan</div>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="packagesDestination" id="packagesDestination" value="">
-                            </div>
+                            <input type="text" id="packagesDestinationInput" class="form-control" placeholder="Where are you going?" autocomplete="off">
+                            <div class="autocomplete-suggestions" id="packagesDestinationSuggestions"></div>
                         </div>
                         <button type="submit" class="search-btn">
                             <i class="bi bi-search"></i>
@@ -3186,37 +3223,8 @@
                     <form class="search-form" id="visaForm" data-form="visa" style="display: none;">
                         <div class="form-group">
                             <label><i class="bi bi-geo-alt-fill"></i>Destination</label>
-                            <div class="custom-select-wrapper" id="visaSelectWrapper">
-                                <div class="custom-select-trigger" id="visaSelectTrigger">
-                                    <span class="custom-select-value placeholder">Select Destination</span>
-                                    <i class="bi bi-chevron-down custom-select-arrow"></i>
-                                </div>
-                                <div class="custom-select-dropdown" id="visaSelectDropdown">
-                                    <div class="custom-select-search">
-                                        <i class="bi bi-search"></i>
-                                        <input type="text" class="custom-select-search-input" id="visaSearchInput" placeholder="Search destination...">
-                                    </div>
-                                    <div class="custom-select-options" id="visaSelectOptions">
-                                        <div class="custom-select-option" data-value="usa">United States</div>
-                                        <div class="custom-select-option" data-value="uk">United Kingdom</div>
-                                        <div class="custom-select-option" data-value="canada">Canada</div>
-                                        <div class="custom-select-option" data-value="australia">Australia</div>
-                                        <div class="custom-select-option" data-value="germany">Germany</div>
-                                        <div class="custom-select-option" data-value="france">France</div>
-                                        <div class="custom-select-option" data-value="italy">Italy</div>
-                                        <div class="custom-select-option" data-value="spain">Spain</div>
-                                        <div class="custom-select-option" data-value="switzerland">Switzerland</div>
-                                        <div class="custom-select-option" data-value="japan">Japan</div>
-                                        <div class="custom-select-option" data-value="southkorea">South Korea</div>
-                                        <div class="custom-select-option" data-value="singapore">Singapore</div>
-                                        <div class="custom-select-option" data-value="malaysia">Malaysia</div>
-                                        <div class="custom-select-option" data-value="thailand">Thailand</div>
-                                        <div class="custom-select-option" data-value="dubai">Dubai, UAE</div>
-                                        <div class="custom-select-option" data-value="china">China</div>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="visaDestination" id="visaDestination" value="">
-                            </div>
+                            <input type="text" id="visaDestinationInput" class="form-control" placeholder="Where are you going?" autocomplete="off">
+                            <div class="autocomplete-suggestions" id="visaDestinationSuggestions"></div>
                         </div>
                         <button type="submit" class="search-btn">
                             <i class="bi bi-search"></i>
@@ -3544,6 +3552,125 @@
             <span>Best Price Guaranteed &bull; Best Deals on Hotels &bull; #1 Hotel Booking Site in South East Asia</span>
         </div>
     </div>
+
+    <!-- Hotel Booking Content Section -->
+    <section class="section" style="background: #ffffff;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h1>Book Hotels Online with Fayyaz Travels for Your Next Trip</h1>
+                    
+                    <p>Are you in search of a perfect hotel stay for your next adventure? Fayyaz Travels makes hotel booking simple and hassle-free which helps in investing time on other plans. Whether you're travelling for leisure or business, Fayyaz Travels offers a wide range of hotels to suit every budget.</p>
+                    
+                    <p>With clear pricing, detailed descriptions, and an easy booking process, you can plan your stay with ease and find the perfect hotel.</p>
+                    
+                    <h2>Explore Our Hotel Options</h2>
+                    
+                    <p>Fayyaz Travels offers a variety of options to match your travel needs:</p>
+                    
+                    <h3>Luxury Hotels</h3>
+                    <p>Indulge in opulence with world-class amenities and top-tier services for a premium experience.</p>
+                    
+                    <h3>Business Hotels</h3>
+                    <p>Strategically located near commercial hubs, these properties have features like high-speed Wi-Fi and meeting spaces.</p>
+                    
+                    <h3>Family-Friendly Stays</h3>
+                    <p>Designed for families, these hotels offer spacious rooms, play areas, and kid-friendly facilities.</p>
+                    
+                    <h3>Budget Hotels</h3>
+                    <p>Affordable yet comfortable, these options provide essential amenities for cost-conscious travellers.</p>
+                    
+                    <h2>Why Book Hotels with Fayyaz Travels?</h2>
+                    
+                    <h3>Extensive Options</h3>
+                    <p>Choose from a broad selection of hotels tailored to suit different styles and budgets. Whether you're looking for 5-star luxury with spas and fine dining or budget-friendly boutique hotels, Fayyaz Travels ensures you find the right fit. Travellers seeking long-term stays can check serviced apartments with kitchenettes.</p>
+                    
+                    <h3>Seamless Booking Experience</h3>
+                    <p>Our easy-to-use platform simplifies hotel booking. Use filters to sort properties by price range, location, guest ratings, or amenities to find the perfect match. With transparent pricing and real-time availability, booking cheap hotels takes just a few clicks.</p>
+                    
+                    <h3>Global Reach, Local Expertise</h3>
+                    <p>Whether planning a stay in your city or abroad, Fayyaz Travels provides global coverage and local expertise. Our team helps you make informed decisions by offering insights into the best hotels in every destination.</p>
+                    
+                    <h3>Best Deals Guaranteed</h3>
+                    <p>Enjoy unbeatable value with Fayyaz Travels's special promotions and cashback offers. Save more on hotel deals with seasonal discounts and exclusive packages, including complimentary meals or airport transfers.</p>
+                    
+                    <h3>Verified Guest Reviews</h3>
+                    <p>Make informed decisions with honest feedback from verified travellers. Ratings and reviews provide detailed insights into service quality, cleanliness, and overall experience so that you can book confidently.</p>
+                    
+                    <h3>Cancel For No Reason (CFNR)</h3>
+                    <p>Change of plans? No worries. With CFNR you can cancel your hotel booking anytime before check-in and get a full refund, no questions asked. Total freedom. Zero stress.</p>
+                    
+                    <h3>Match your vibe</h3>
+                    <p>Whether you're planning a romantic getaway, an adventurous escape, or a laid-back retreat, this feature helps you discover accommodations that perfectly match your mood and travel vibe.</p>
+                    
+                    <h3>Supercoins</h3>
+                    <p>Get additional discount on your flight bookings & hotel booking using Supercoins. Earn 2 SuperCoins for every ₹100 you spend. SuperCoins will be added to your SuperCoins balance after you have completed the trip.</p>
+                    
+                    <h2>Advantages of Booking Hotels Online on Fayyaz Travels</h2>
+                    
+                    <h3>Prime Locations</h3>
+                    <p>Stay close to landmarks, transport hubs, and major attractions.</p>
+                    
+                    <h3>Modern Amenities</h3>
+                    <p>Get complimentary Wi-Fi, fitness centres, and pools during your hotel stay.</p>
+                    
+                    <h3>Flexible Policies</h3>
+                    <p>Many hotels offer free cancellations and flexible check-in options.</p>
+                    
+                    <h3>Special Offers</h3>
+                    <p>Benefit from loyalty rewards, upgrades, and value-added services.</p>
+                    
+                    <h2>How to Book Your Stay on Fayyaz Travels?</h2>
+                    
+                    <p>Follow these simple steps for a quick and easy hotel booking:</p>
+                    
+                    <h3>Search</h3>
+                    <p>Enter your destination, dates, and guest details.</p>
+                    
+                    <h3>Compare</h3>
+                    <p>Use filters to sort by price, reviews, or amenities.</p>
+                    
+                    <h3>Select</h3>
+                    <p>Choose a property that meets your needs.</p>
+                    
+                    <h3>Book</h3>
+                    <p>Finalise your reservation by adding guest details and making a payment.</p>
+                    
+                    <h3>Confirmation</h3>
+                    <p>Receive an instant booking confirmation through email.</p>
+                    
+                    <h2>FAQ: Book Hotels on Fayyaz Travels</h2>
+                    
+                    <h3>1. What types of hotels are available on Fayyaz Travels?</h3>
+                    <p>We provide options ranging from luxury hotels and boutique stays to budget-friendly hotels and family-friendly properties.</p>
+                    
+                    <h3>2. How do I book a hotel on Fayyaz Travels?</h3>
+                    <p>Search your destination, select your dates, and browse available options. Complete your hotel booking in just a few simple steps on Fayyaz Travels.</p>
+                    
+                    <h3>3. Are there discounts on hotel bookings?</h3>
+                    <p>Yes, Fayyaz Travels offers exclusive discounts, deals, and cashback options on select properties.</p>
+                    
+                    <h3>4. Can I modify or cancel my hotel reservation?</h3>
+                    <p>Depending on the hotel's cancellation policy, you can adjust or cancel your booking. Review the terms before completing the reservation.</p>
+                    
+                    <h3>5. Are the hotel prices displayed per person or room?</h3>
+                    <p>We typically list prices per room unless stated otherwise. Review the total cost of your stay at checkout.</p>
+                    
+                    <h3>6. Do I need to pay in advance for the hotel reservation?</h3>
+                    <p>Some hotels require advance payment, while others allow pay-at-check-in options. We will share the payment policy during the booking process.</p>
+                    
+                    <h3>7. Can I book a hotel for someone else?</h3>
+                    <p>Yes, simply provide their details during booking, and they can check in using the confirmation.</p>
+                    
+                    <h3>8. Is breakfast included in my hotel stay?</h3>
+                    <p>Many hotels offer complimentary breakfast. Filter your search to find options with this feature or check hotel details.</p>
+                    
+                    <h2>Disclaimer</h2>
+                    <p>Hotel amenities, rates, and policies may change based on availability or the time of booking. Always confirm specific details such as cancellation policies, additional charges, or special requirements directly with the hotel before completing your reservation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer class="footer">
@@ -3916,9 +4043,7 @@
             });
         }
         
-        // Initialize custom selects
-        initCustomSelect('packagesSelect');
-        initCustomSelect('visaSelect');
+        // Custom selects removed - using text inputs with autocomplete instead
         
         // Nav item active state
         document.querySelectorAll('.nav-item').forEach(item => {
@@ -4025,6 +4150,204 @@
                 destinationSuggestions.classList.remove('show');
             }
         });
+        
+        // Packages Destination Autocomplete
+        const packagesDestinations = [
+            { name: 'Mumbai', location: 'Maharashtra, India', icon: 'bi-building' },
+            { name: 'Delhi', location: 'Delhi, India', icon: 'bi-building' },
+            { name: 'Goa', location: 'Goa, India', icon: 'bi-water' },
+            { name: 'Bangalore', location: 'Karnataka, India', icon: 'bi-building' },
+            { name: 'Kerala', location: 'Kerala, India', icon: 'bi-tree' },
+            { name: 'Dubai', location: 'Dubai, UAE', icon: 'bi-building' },
+            { name: 'Singapore', location: 'Singapore', icon: 'bi-building' },
+            { name: 'Thailand', location: 'Thailand', icon: 'bi-water' },
+            { name: 'Malaysia', location: 'Malaysia', icon: 'bi-tree' },
+            { name: 'Bali', location: 'Bali, Indonesia', icon: 'bi-water' },
+            { name: 'Paris', location: 'Paris, France', icon: 'bi-building' },
+            { name: 'London', location: 'London, UK', icon: 'bi-building' },
+            { name: 'New York', location: 'New York, USA', icon: 'bi-building' },
+            { name: 'Tokyo', location: 'Tokyo, Japan', icon: 'bi-building' },
+            { name: 'Rajasthan', location: 'Rajasthan, India', icon: 'bi-castle' },
+            { name: 'Manali', location: 'Himachal Pradesh, India', icon: 'bi-mountain' },
+            { name: 'Shimla', location: 'Himachal Pradesh, India', icon: 'bi-mountain' },
+            { name: 'Ooty', location: 'Tamil Nadu, India', icon: 'bi-tree' },
+            { name: 'Mysore', location: 'Karnataka, India', icon: 'bi-building' },
+            { name: 'Agra', location: 'Uttar Pradesh, India', icon: 'bi-building' }
+        ];
+        
+        const packagesDestinationInput = document.getElementById('packagesDestinationInput');
+        const packagesDestinationSuggestions = document.getElementById('packagesDestinationSuggestions');
+        let packagesSelectedIndex = -1;
+        
+        if (packagesDestinationInput && packagesDestinationSuggestions) {
+            packagesDestinationInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                packagesSelectedIndex = -1;
+                
+                if (query.length === 0) {
+                    packagesDestinationSuggestions.classList.remove('show');
+                    return;
+                }
+                
+                const filtered = packagesDestinations.filter(dest => 
+                    dest.name.toLowerCase().includes(query) || 
+                    dest.location.toLowerCase().includes(query)
+                );
+                
+                if (filtered.length > 0) {
+                    packagesDestinationSuggestions.innerHTML = filtered.map((dest, index) => `
+                        <div class="autocomplete-suggestion" data-index="${index}" data-value="${dest.name}">
+                            <i class="bi ${dest.icon}"></i>
+                            <div>
+                                <div class="autocomplete-suggestion-name">${dest.name}</div>
+                                <div class="autocomplete-suggestion-location">${dest.location}</div>
+                            </div>
+                        </div>
+                    `).join('');
+                    packagesDestinationSuggestions.classList.add('show');
+                } else {
+                    packagesDestinationSuggestions.classList.remove('show');
+                }
+            });
+            
+            packagesDestinationInput.addEventListener('keydown', function(e) {
+                const suggestions = packagesDestinationSuggestions.querySelectorAll('.autocomplete-suggestion');
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    packagesSelectedIndex = Math.min(packagesSelectedIndex + 1, suggestions.length - 1);
+                    updatePackagesSelection(suggestions);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    packagesSelectedIndex = Math.max(packagesSelectedIndex - 1, -1);
+                    updatePackagesSelection(suggestions);
+                } else if (e.key === 'Enter' && packagesSelectedIndex >= 0) {
+                    e.preventDefault();
+                    suggestions[packagesSelectedIndex].click();
+                } else if (e.key === 'Escape') {
+                    packagesDestinationSuggestions.classList.remove('show');
+                }
+            });
+            
+            function updatePackagesSelection(suggestions) {
+                suggestions.forEach((s, i) => {
+                    s.classList.toggle('active', i === packagesSelectedIndex);
+                });
+            }
+            
+            packagesDestinationSuggestions.addEventListener('click', function(e) {
+                const suggestion = e.target.closest('.autocomplete-suggestion');
+                if (suggestion) {
+                    packagesDestinationInput.value = suggestion.dataset.value;
+                    packagesDestinationSuggestions.classList.remove('show');
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!packagesDestinationInput.contains(e.target) && !packagesDestinationSuggestions.contains(e.target)) {
+                    packagesDestinationSuggestions.classList.remove('show');
+                }
+            });
+        }
+        
+        // Visa Destination Autocomplete
+        const visaDestinations = [
+            { name: 'United States', location: 'USA', icon: 'bi-building' },
+            { name: 'United Kingdom', location: 'UK', icon: 'bi-building' },
+            { name: 'Canada', location: 'Canada', icon: 'bi-building' },
+            { name: 'Australia', location: 'Australia', icon: 'bi-building' },
+            { name: 'Germany', location: 'Germany', icon: 'bi-building' },
+            { name: 'France', location: 'France', icon: 'bi-building' },
+            { name: 'Italy', location: 'Italy', icon: 'bi-building' },
+            { name: 'Spain', location: 'Spain', icon: 'bi-building' },
+            { name: 'Switzerland', location: 'Switzerland', icon: 'bi-mountain' },
+            { name: 'Japan', location: 'Japan', icon: 'bi-building' },
+            { name: 'South Korea', location: 'South Korea', icon: 'bi-building' },
+            { name: 'Singapore', location: 'Singapore', icon: 'bi-building' },
+            { name: 'Malaysia', location: 'Malaysia', icon: 'bi-building' },
+            { name: 'Thailand', location: 'Thailand', icon: 'bi-water' },
+            { name: 'Dubai', location: 'Dubai, UAE', icon: 'bi-building' },
+            { name: 'China', location: 'China', icon: 'bi-building' },
+            { name: 'New Zealand', location: 'New Zealand', icon: 'bi-tree' },
+            { name: 'Netherlands', location: 'Netherlands', icon: 'bi-building' },
+            { name: 'Belgium', location: 'Belgium', icon: 'bi-building' },
+            { name: 'Austria', location: 'Austria', icon: 'bi-mountain' }
+        ];
+        
+        const visaDestinationInput = document.getElementById('visaDestinationInput');
+        const visaDestinationSuggestions = document.getElementById('visaDestinationSuggestions');
+        let visaSelectedIndex = -1;
+        
+        if (visaDestinationInput && visaDestinationSuggestions) {
+            visaDestinationInput.addEventListener('input', function() {
+                const query = this.value.toLowerCase().trim();
+                visaSelectedIndex = -1;
+                
+                if (query.length === 0) {
+                    visaDestinationSuggestions.classList.remove('show');
+                    return;
+                }
+                
+                const filtered = visaDestinations.filter(dest => 
+                    dest.name.toLowerCase().includes(query) || 
+                    dest.location.toLowerCase().includes(query)
+                );
+                
+                if (filtered.length > 0) {
+                    visaDestinationSuggestions.innerHTML = filtered.map((dest, index) => `
+                        <div class="autocomplete-suggestion" data-index="${index}" data-value="${dest.name}">
+                            <i class="bi ${dest.icon}"></i>
+                            <div>
+                                <div class="autocomplete-suggestion-name">${dest.name}</div>
+                                <div class="autocomplete-suggestion-location">${dest.location}</div>
+                            </div>
+                        </div>
+                    `).join('');
+                    visaDestinationSuggestions.classList.add('show');
+                } else {
+                    visaDestinationSuggestions.classList.remove('show');
+                }
+            });
+            
+            visaDestinationInput.addEventListener('keydown', function(e) {
+                const suggestions = visaDestinationSuggestions.querySelectorAll('.autocomplete-suggestion');
+                
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    visaSelectedIndex = Math.min(visaSelectedIndex + 1, suggestions.length - 1);
+                    updateVisaSelection(suggestions);
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    visaSelectedIndex = Math.max(visaSelectedIndex - 1, -1);
+                    updateVisaSelection(suggestions);
+                } else if (e.key === 'Enter' && visaSelectedIndex >= 0) {
+                    e.preventDefault();
+                    suggestions[visaSelectedIndex].click();
+                } else if (e.key === 'Escape') {
+                    visaDestinationSuggestions.classList.remove('show');
+                }
+            });
+            
+            function updateVisaSelection(suggestions) {
+                suggestions.forEach((s, i) => {
+                    s.classList.toggle('active', i === visaSelectedIndex);
+                });
+            }
+            
+            visaDestinationSuggestions.addEventListener('click', function(e) {
+                const suggestion = e.target.closest('.autocomplete-suggestion');
+                if (suggestion) {
+                    visaDestinationInput.value = suggestion.dataset.value;
+                    visaDestinationSuggestions.classList.remove('show');
+                }
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (!visaDestinationInput.contains(e.target) && !visaDestinationSuggestions.contains(e.target)) {
+                    visaDestinationSuggestions.classList.remove('show');
+                }
+            });
+        }
         
         // Air Datepicker English Locale
         const englishLocale = {
