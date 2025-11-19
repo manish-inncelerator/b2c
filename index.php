@@ -10,147 +10,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/air-datepicker@3.4.0/air-datepicker.min.css">
+    <link rel="stylesheet" href="assets/css/site.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        html {
-            overflow-x: hidden;
-        }
-        
-        :root {
-            --primary-color: #0066cc;
-            --primary-dark: #0052a3;
-            --secondary-color: #20c997;
-            --accent-color: #ff6b35;
-            --success-color: #28a745;
-            --dark-color: #1a1a1a;
-            --text-color: #2c3e50;
-            --text-light: #6c757d;
-            --light-bg: #f8f9fa;
-            --border-color: #e0e0e0;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background-color: #ffffff;
-            color: var(--text-color);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            overflow-x: hidden;
-            width: 100%;
-        }
-        
-        /* Top Strip */
-        .top-strip {
-            background: linear-gradient(90deg, #c9a568 0%, #d4a574 50%, #c9a568 100%);
-            height: 3px;
-            background-size: 200% 100%;
-            animation: shimmer 3s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-        
-        /* Navbar Container */
-        .navbar {
-            background: #ffffff;
-            border-bottom: 1px solid var(--border-color);
-            padding: 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            width: 100%;
-            z-index: 1000;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(20px);
-            background: rgba(255, 255, 255, 0.98);
-        }
-        
-        .navbar.scrolled {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            border-bottom: 2px solid var(--primary-color);
-            background: rgba(255, 255, 255, 0.99);
-        }
-        
-        .navbar-container {
-            width: 100%;
-            margin: 0 auto;
-            padding: 0 15px;
-            box-sizing: border-box;
-        }
-        
-        @media (min-width: 576px) {
-            .navbar-container {
-                max-width: 540px;
-                padding: 0 20px;
-            }
-        }
-        
-        @media (min-width: 768px) {
-            .navbar-container {
-                max-width: 720px;
-                padding: 0 30px;
-            }
-        }
-        
-        @media (min-width: 992px) {
-            .navbar-container {
-                max-width: 960px;
-                padding: 0 40px;
-            }
-        }
-        
-        @media (min-width: 1200px) {
-            .navbar-container {
-                max-width: 1140px;
-                padding: 0 50px;
-            }
-        }
-        
-        @media (min-width: 1400px) {
-            .navbar-container {
-                max-width: 1320px;
-                padding: 0 50px;
-            }
-        }
-        
-        .navbar-content {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            padding: 12px 0;
-            gap: 40px;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        
-        /* Logo Section */
-        .logo-section {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            flex-shrink: 0;
-            min-width: 0;
-            justify-self: start;
-            grid-column: 1;
-        }
-        
-        .logo-section:hover {
-            transform: translateY(-2px);
-        }
-        
+        /* Logo Icon Styles (page-specific) */
         .logo-icon-wrapper {
             position: relative;
             width: 46px;
@@ -160,7 +22,7 @@
         .logo-icon {
             width: 46px;
             height: 46px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -190,20 +52,7 @@
         
         .logo-section:hover .logo-icon {
             transform: rotate(5deg) scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.3);
-        }
-        
-        .logo-image {
-            height: 52px;
-            width: auto;
-            object-fit: contain;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-        }
-        
-        .logo-section:hover .logo-image {
-            transform: scale(1.05) translateY(-1px);
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
+            box-shadow: 0 8px 20px rgba(20, 56, 92, 0.3);
         }
         
         .logo-text {
@@ -225,194 +74,7 @@
             vertical-align: super;
         }
         
-        /* Navigation Menu */
-        .nav-menu {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            justify-content: center;
-            padding: 0 20px;
-            min-width: 0;
-            justify-self: center;
-            grid-column: 2;
-        }
-        
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            padding: 14px 24px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--text-color);
-            position: relative;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 12px;
-            min-width: 90px;
-        }
-        
-        .nav-item::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            width: 70%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
-            border-radius: 3px 3px 0 0;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .nav-item::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.06) 0%, rgba(0, 82, 163, 0.06) 100%);
-            border-radius: 12px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .nav-item:hover {
-            color: var(--primary-color);
-            transform: translateY(-2px);
-        }
-        
-        .nav-item:hover::after {
-            opacity: 1;
-        }
-        
-        .nav-item:hover::before {
-            transform: translateX(-50%) scaleX(1);
-        }
-        
-        .nav-item:hover i {
-            transform: scale(1.12) translateY(-2px);
-            color: var(--primary-color);
-        }
-        
-        .nav-item.active {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-        
-        .nav-item.active::before {
-            transform: translateX(-50%) scaleX(1);
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
-            height: 4px;
-            width: 80%;
-        }
-        
-        .nav-item.active::after {
-            opacity: 1;
-        }
-        
-        .nav-item.active i {
-            color: var(--primary-color);
-        }
-        
-        .nav-item.active span {
-            font-weight: 800;
-        }
-        
-        .nav-item i {
-            font-size: 28px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            color: var(--text-color);
-            display: block;
-        }
-        
-        .nav-item span {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-top: 2px;
-        }
-        
-        .new-badge {
-            position: absolute;
-            top: 6px;
-            right: 6px;
-            background: linear-gradient(135deg, var(--accent-color) 0%, #ff8c5a 100%);
-            color: white;
-            font-size: 8px;
-            font-weight: 800;
-            padding: 4px 9px;
-            border-radius: 10px;
-            letter-spacing: 0.8px;
-            box-shadow: 0 3px 8px rgba(255, 107, 53, 0.4);
-            animation: badgePulse 2s ease-in-out infinite;
-            z-index: 10;
-        }
-        
-        @keyframes badgePulse {
-            0%, 100% {
-                transform: scale(1);
-                box-shadow: 0 3px 8px rgba(255, 107, 53, 0.4);
-            }
-            50% {
-                transform: scale(1.1);
-                box-shadow: 0 4px 12px rgba(255, 107, 53, 0.6);
-            }
-        }
-        
-        /* Right Section */
-        .right-section {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-shrink: 0;
-            position: relative;
-            min-width: 0;
-            justify-self: end;
-            grid-column: 3;
-        }
-        
-        .right-section .dropdown-menu {
-            position: absolute;
-        }
-        
-        .phone-section {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 11px 18px;
-            border-radius: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 82, 163, 0.05) 100%);
-            border: 1.5px solid rgba(0, 102, 204, 0.15);
-        }
-        
-        .phone-section:hover {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
-            border-color: var(--primary-color);
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
-            transform: translateY(-2px);
-        }
-        
-        .phone-section i {
-            font-size: 18px;
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-        
-        .phone-number {
-            font-weight: 700;
-            color: var(--dark-color);
-            font-size: 15px;
-            letter-spacing: 0.2px;
-            white-space: nowrap;
-        }
-        
+        /* Live Assistance Button (page-specific) */
         .live-assistance-btn {
             background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
             color: white;
@@ -457,628 +119,18 @@
             z-index: 1;
         }
         
-        
-        .menu-wrapper {
-            position: relative;
-        }
-        
-        .menu-toggle {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            padding: 6px 12px;
-            border-radius: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            border: 1.5px solid transparent;
-        }
-        
-        .menu-toggle:hover {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 82, 163, 0.05) 100%);
-            border-color: rgba(0, 102, 204, 0.2);
-        }
-        
-        .menu-icon {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid transparent;
-        }
-        
-        .menu-toggle:hover .menu-icon {
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(0, 102, 204, 0.35);
-            border-color: rgba(0, 102, 204, 0.2);
-        }
-        
-        .menu-icon i {
-            font-size: 19px;
-        }
-        
-        .menu-toggle .bi-chevron-down {
-            font-size: 12px;
-            color: var(--text-light);
-            transition: all 0.3s ease;
-        }
-        
-        .menu-toggle:hover .bi-chevron-down {
-            transform: translateY(2px);
-            color: var(--primary-color);
-        }
-        
-        .menu-wrapper .dropdown-menu {
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            box-shadow: var(--shadow-lg);
-            margin-top: 10px;
-            padding: 8px;
-            min-width: 180px;
-            top: 100% !important;
-            left: 50% !important;
-            right: auto !important;
-            transform: translateX(-50%) !important;
-            position: absolute !important;
-        }
-        
-        .user-profile-wrapper {
-            position: relative;
-        }
-        
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            padding: 6px 12px;
-            border-radius: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            border: 1.5px solid transparent;
-        }
-        
-        .user-profile:hover {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 82, 163, 0.05) 100%);
-            border-color: rgba(0, 102, 204, 0.2);
-        }
-        
-        .user-icon {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 2px solid transparent;
-        }
-        
-        .user-profile:hover .user-icon {
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(0, 102, 204, 0.35);
-            border-color: rgba(0, 102, 204, 0.2);
-        }
-        
-        .user-icon i {
-            font-size: 19px;
-        }
-        
-        .user-profile .bi-chevron-down {
-            font-size: 12px;
-            color: var(--text-light);
-            transition: all 0.3s ease;
-        }
-        
-        .user-profile:hover .bi-chevron-down {
-            transform: translateY(2px);
-            color: var(--primary-color);
-        }
-        
-        .user-profile-wrapper .dropdown-menu {
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            box-shadow: var(--shadow-lg);
-            margin-top: 10px;
-            padding: 8px;
-            min-width: 180px;
-            top: 100% !important;
-            left: 50% !important;
-            right: auto !important;
-            transform: translateX(-50%) !important;
-            position: absolute !important;
-        }
-        
-        @media (max-width: 991px) {
-            .user-profile-wrapper .dropdown-menu {
-                left: auto !important;
-                right: 0 !important;
-                transform: translateX(0) !important;
-            }
-        }
-        
-        @media (max-width: 575px) {
-            .user-profile-wrapper .dropdown-menu {
-                left: auto !important;
-                right: -10px !important;
-                transform: translateX(0) !important;
-            }
-        }
-        
-        /* Secondary Navbar */
-        .secondary-navbar {
-            background: white;
-            border-bottom: 1px solid var(--border-color);
-            padding: 8px 0;
-            position: fixed;
-            top: 76px;
-            left: 0;
-            right: 0;
-            z-index: 999;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            transform: translateY(-100%);
-            opacity: 0;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none;
-            margin: 0;
-            height: 0;
-            overflow: hidden;
-        }
-        
-        .secondary-navbar.visible {
-            transform: translateY(0);
-            opacity: 1;
-            pointer-events: all;
-            height: auto;
-            overflow: visible;
-        }
-        
-        .secondary-navbar-container {
-            max-width: 100%;
-            margin: 0 auto;
-            padding: 0 15px;
-        }
-        
-        @media (min-width: 576px) {
-            .secondary-navbar-container {
-                max-width: 540px;
-                padding: 0 20px;
-            }
-        }
-        
-        @media (min-width: 768px) {
-            .secondary-navbar-container {
-                max-width: 720px;
-                padding: 0 30px;
-            }
-        }
-        
-        @media (min-width: 992px) {
-            .secondary-navbar-container {
-                max-width: 960px;
-                padding: 0 40px;
-            }
-        }
-        
-        @media (min-width: 1200px) {
-            .secondary-navbar-container {
-                max-width: 1140px;
-                padding: 0 50px;
-            }
-        }
-        
-        @media (min-width: 1400px) {
-            .secondary-navbar-container {
-                max-width: 1320px;
-                padding: 0 50px;
-            }
-        }
-        
-        .secondary-search-form {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr auto;
-            gap: 12px;
-            align-items: end;
-        }
-        
-        .secondary-form-group {
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-        
-        .secondary-form-group label {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--text-color);
-            margin-bottom: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        
-        .secondary-form-group label i {
-            color: var(--primary-color);
-            font-size: 12px;
-        }
-        
-        .secondary-form-control {
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
-            padding: 10px 14px;
-            font-size: 14px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: #ffffff;
-            font-weight: 500;
-            color: var(--text-color);
-        }
-        
-        .secondary-form-control:hover {
-            border-color: var(--primary-color);
-        }
-        
-        .secondary-form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
-            outline: none;
-            background: #ffffff;
-        }
-        
-        .secondary-form-control::placeholder {
-            color: var(--text-light);
-            font-weight: 400;
-        }
-        
-        .secondary-search-btn {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            height: fit-content;
-        }
-        
-        .secondary-search-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-        
-        .secondary-search-btn:hover::before {
-            width: 300px;
-            height: 300px;
-        }
-        
-        .secondary-search-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(0, 102, 204, 0.4);
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
-        }
-        
-        .secondary-search-btn:active {
-            transform: translateY(0);
-        }
-        
-        .secondary-search-btn i,
-        .secondary-search-btn span {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .secondary-autocomplete-suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            border: 2px solid var(--primary-color);
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            margin-top: 4px;
-            max-height: 300px;
-            overflow-y: auto;
-            z-index: 1000;
-            display: none;
-        }
-        
-        .secondary-autocomplete-suggestions.show {
-            display: block;
-        }
-        
-        .secondary-autocomplete-suggestions .autocomplete-suggestion {
-            padding: 10px 14px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .secondary-autocomplete-suggestions .autocomplete-suggestion:last-child {
-            border-bottom: none;
-        }
-        
-        .secondary-autocomplete-suggestions .autocomplete-suggestion:hover,
-        .secondary-autocomplete-suggestions .autocomplete-suggestion.active {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
-            color: var(--primary-color);
-        }
-        
-        .secondary-autocomplete-suggestions .autocomplete-suggestion i {
-            color: var(--primary-color);
-            font-size: 14px;
-        }
-        
-        .secondary-autocomplete-suggestions .autocomplete-suggestion-name {
-            font-weight: 600;
-            font-size: 14px;
-            color: var(--text-color);
-        }
-        
-        .secondary-autocomplete-suggestions .autocomplete-suggestion-location {
-            font-size: 12px;
-            color: var(--text-light);
-        }
-        
-        .secondary-autocomplete-suggestions .autocomplete-suggestion {
-            color: var(--text-color);
-        }
-        
-        @media (max-width: 991px) {
-            .secondary-navbar {
-                display: none !important;
-            }
-        }
-        
-        .dropdown-menu {
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            box-shadow: var(--shadow-lg);
-            margin-top: 10px;
-            padding: 8px;
-            min-width: 180px;
-        }
-        
-        .dropdown-item {
-            padding: 12px 18px;
-            transition: all 0.2s ease;
-            border-radius: 8px;
-            font-weight: 500;
-            color: var(--text-color);
-        }
-        
-        .dropdown-item:hover {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
-            color: var(--primary-color);
-            transform: translateX(4px);
-        }
-        
-        .dropdown-item i {
-            color: var(--primary-color);
-            font-size: 16px;
-            width: 20px;
-            text-align: center;
-        }
-        
-        .dropdown-item:hover i {
-            color: var(--primary-color);
-        }
-        
-        /* Mobile Menu Toggle */
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 28px;
-            color: var(--dark-color);
-            cursor: pointer;
-            padding: 8px;
-            transition: all 0.3s ease;
-        }
-        
-        .mobile-menu-toggle:hover {
-            color: var(--primary-color);
-        }
-        
-        .mobile-menu-toggle i {
-            display: block;
-        }
-        
-        @media (max-width: 1399px) {
-            .navbar-content {
-                gap: 30px;
-            }
-            
-            .nav-menu {
-                padding: 0 15px;
-                gap: 4px;
-            }
-            
-            .right-section {
-                gap: 10px;
-            }
-        }
-        
-        @media (max-width: 1199px) {
-            .navbar-content {
-                gap: 20px;
-            }
-            
-            .nav-menu {
-                gap: 2px;
-                padding: 0 10px;
-            }
-            
-            .nav-item {
-                padding: 12px 16px;
-                min-width: 70px;
-            }
-            
-            .nav-item i {
-                font-size: 26px;
-            }
-            
-            .nav-item span {
-                font-size: 10px;
-            }
-            
-            .phone-number {
-                font-size: 13px;
-            }
-            
-            .right-section {
-                gap: 8px;
-            }
-        }
-        
-        @media (max-width: 991px) {
-            .navbar-content {
-                gap: 12px;
-            }
-            
-            .mobile-menu-toggle {
-                display: none !important;
-            }
-            
-            .menu-wrapper {
-                display: none !important;
-            }
-            
-            .nav-menu {
-                display: none !important;
-            }
-            
-            .phone-number {
-                display: none;
-            }
-            
-            .phone-section {
-                padding: 8px 12px;
-            }
-            
-            .right-section {
-                gap: 8px;
-            }
-        }
-        
-        @media (max-width: 575px) {
-            .navbar-content {
-                gap: 8px;
-            }
-            
-            .phone-section {
-                padding: 6px 10px;
-            }
-            
-            .phone-section i {
-                font-size: 16px;
-            }
-            
-            .right-section {
-                gap: 6px;
-            }
-        }
-        
-        /* Trust Bar */
-        .trust-bar {
-            background: var(--light-bg);
-            border-bottom: 1px solid var(--border-color);
-            padding: 8px 0;
-            margin-top: 0;
-        }
-        
-        .trust-items {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
-        
-        .trust-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-light);
-            font-size: 13px;
-            font-weight: 500;
-        }
-        
-        .trust-item i {
-            color: var(--primary-color);
-            font-size: 16px;
-            display: inline-flex;
-        }
-        
-        .trust-item i + i {
-            margin-left: 4px;
-        }
-        
-        @media (max-width: 991px) {
-            .trust-bar {
-                overflow-x: auto;
-                overflow-y: hidden;
-                -webkit-overflow-scrolling: touch;
-                scrollbar-width: none;
-                -ms-overflow-style: none;
-            }
-            
-            .trust-bar::-webkit-scrollbar {
-                display: none;
-            }
-            
-            .trust-items {
-                justify-content: flex-start;
-                gap: 30px;
-                flex-wrap: nowrap;
-                padding: 0 20px;
-                min-width: max-content;
-            }
-            
-            .trust-item {
-                white-space: nowrap;
-                flex-shrink: 0;
-            }
-        }
-        
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(135deg, #0066cc 0%, #0052a3 30%, #003d7a 70%, #002d5c 100%);
-            min-height: 100vh;
-            padding: 120px 0 100px;
+            background-image: url('assets/images/hotel-room-bg.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            padding: 80px 0;
             position: relative;
-            overflow: visible;
+            overflow: hidden;
             display: flex;
             align-items: center;
+            justify-content: center;
         }
         
         .hero-section::before {
@@ -1088,45 +140,52 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+            background: rgba(0, 0, 0, 0.65);
             pointer-events: none;
+            z-index: 1;
         }
         
         .hero-section::after {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: 
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255, 255, 255, 0.03) 2px, rgba(255, 255, 255, 0.03) 4px);
-            pointer-events: none;
+            display: none;
+        }
+        
+        .hero-section .container {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 40px 20px;
         }
         
         .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 3;
             text-align: center;
             color: white;
             overflow: visible;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
         }
         
         .hero-title {
             font-size: 56px;
             font-weight: 900;
-            margin-bottom: 20px;
+            margin: 0 0 20px 0;
             letter-spacing: -1.5px;
             line-height: 1.15;
+            margin-top:100px;
             text-shadow: 0 2px 20px rgba(0, 0, 0, 0.2);
         }
         
         .hero-subtitle {
             font-size: 22px;
-            margin-bottom: 50px;
+            margin-bottom: 20px;
             opacity: 0.95;
             font-weight: 400;
             max-width: auto;
@@ -1223,13 +282,23 @@
         .search-box {
             background: #ffffff;
             border-radius: 24px;
-            padding: 40px 44px;
+            padding: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.05);
-            margin-top: 40px;
+            margin-top: 20px;
             border: 1px solid rgba(255, 255, 255, 0.3);
             position: relative;
             backdrop-filter: blur(10px);
             overflow: visible;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 100%;
+        }
+        
+        @media (min-width: 992px) {
+            .search-box {
+                min-width: 1200px;
+            }
         }
         
         .search-box::before {
@@ -1271,12 +340,12 @@
         }
         
         .search-tab:hover {
-            color: var(--primary-color);
-            background: rgba(0, 102, 204, 0.05);
+            color: var(--blue);
+            background: rgba(20, 56, 92, 0.05);
         }
         
         .search-tab.active {
-            color: var(--primary-color);
+            color: var(--blue);
             font-weight: 700;
         }
         
@@ -1287,7 +356,7 @@
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+            background: linear-gradient(90deg, var(--blue), var(--blue-dark));
             border-radius: 2px 2px 0 0;
         }
         
@@ -1301,7 +370,7 @@
             height: 0;
             border-left: 6px solid transparent;
             border-right: 6px solid transparent;
-            border-bottom: 4px solid var(--primary-color);
+            border-bottom: 4px solid var(--blue);
         }
         
         .search-form {
@@ -1310,15 +379,18 @@
             gap: 20px;
             align-items: end;
             overflow: visible;
+            width: 100%;
+            min-width: 100%;
         }
         
         .search-form[data-form="packages"],
         .search-form[data-form="visa"] {
-            grid-template-columns: 1fr auto;
+            grid-template-columns: 1fr 1fr 1fr 1fr auto;
         }
         
         .search-form[data-form="packages"] .form-group,
         .search-form[data-form="visa"] .form-group {
+            grid-column: 1 / 5;
             width: 100%;
         }
         
@@ -1327,56 +399,6 @@
             width: 100%;
         }
         
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            overflow: visible;
-        }
-        
-        .form-group label {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--text-color);
-            margin-bottom: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        
-        .form-group label i {
-            color: var(--primary-color);
-            font-size: 14px;
-        }
-        
-        .form-control {
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            padding: 14px 18px;
-            font-size: 15px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: #ffffff;
-            font-weight: 500;
-            color: var(--text-color);
-        }
-        
-        .form-control:hover {
-            border-color: var(--primary-color);
-        }
-        
-        .form-control:focus {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
-            outline: none;
-            background: #ffffff;
-        }
-        
-        .form-control::placeholder {
-            color: var(--text-light);
-            font-weight: 400;
-        }
         
         /* Custom Select Dropdown */
         .custom-select-wrapper {
@@ -1406,12 +428,12 @@
         }
         
         .custom-select-trigger:hover {
-            border-color: var(--primary-color);
+            border-color: var(--blue);
         }
         
         .custom-select-wrapper.active .custom-select-trigger {
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+            border-color: var(--blue);
+            box-shadow: 0 0 0 4px rgba(20, 56, 92, 0.1);
         }
         
         .custom-select-value {
@@ -1432,7 +454,7 @@
         
         .custom-select-wrapper.active .custom-select-arrow {
             transform: rotate(180deg);
-            color: var(--primary-color);
+            color: var(--blue);
         }
         
         .custom-select-dropdown {
@@ -1441,7 +463,7 @@
             left: 0;
             right: 0;
             background: white;
-            border: 2px solid var(--primary-color);
+            border: 2px solid var(--blue);
             border-radius: 12px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
             z-index: 10000;
@@ -1486,9 +508,9 @@
         
         .custom-select-search-input:focus {
             outline: none;
-            border-color: var(--primary-color);
+            border-color: var(--blue);
             background: white;
-            box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+            box-shadow: 0 0 0 3px rgba(20, 56, 92, 0.1);
         }
         
         .custom-select-search-input::placeholder {
@@ -1535,14 +557,14 @@
         }
         
         .custom-select-option:hover {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.08) 0%, rgba(0, 82, 163, 0.08) 100%);
-            color: var(--primary-color);
+            background: linear-gradient(135deg, rgba(20, 56, 92, 0.08) 0%, rgba(12, 44, 68, 0.08) 100%);
+            color: var(--blue);
             transform: translateX(4px);
         }
         
         .custom-select-option.selected {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
-            color: var(--primary-color);
+            background: linear-gradient(135deg, rgba(20, 56, 92, 0.1) 0%, rgba(12, 44, 68, 0.1) 100%);
+            color: var(--blue);
             font-weight: 600;
         }
         
@@ -1550,7 +572,7 @@
             content: '✓';
             position: absolute;
             right: 16px;
-            color: var(--primary-color);
+            color: var(--blue);
             font-weight: 700;
         }
         
@@ -1571,138 +593,78 @@
             display: block;
         }
         
-        /* Autocomplete Suggestions */
-        .autocomplete-suggestions {
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            border: 2px solid var(--primary-color);
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-            margin-top: 4px;
-            max-height: 300px;
-            overflow-y: auto;
-            z-index: 1000;
-            display: none;
-        }
-        
-        .autocomplete-suggestions.show {
-            display: block;
-        }
-        
-        .autocomplete-suggestion {
-            padding: 12px 18px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .autocomplete-suggestion:last-child {
-            border-bottom: none;
-        }
-        
-        .autocomplete-suggestion:hover,
-        .autocomplete-suggestion.active {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
-            color: var(--primary-color);
-        }
-        
-        .autocomplete-suggestion i {
-            color: var(--primary-color);
-            font-size: 16px;
-        }
-        
-        .autocomplete-suggestion-name {
-            font-weight: 600;
-            font-size: 15px;
-            color: var(--text-color);
-        }
-        
-        .autocomplete-suggestion-location {
-            font-size: 13px;
-            color: var(--text-light);
-        }
-        
-        .autocomplete-suggestion {
-            color: var(--text-color);
-        }
         
         /* Air Datepicker Blue Styling */
         .air-datepicker {
-            --adp-color-primary: var(--primary-color);
-            --adp-color-primary-hover: var(--primary-dark);
-            --adp-color-current-date: var(--primary-color);
-            --adp-color-selected-date: var(--primary-color);
-            --adp-color-selected-date-background: var(--primary-color);
-            --adp-color-selected-date-hover: var(--primary-dark);
-            --adp-color-day-name: var(--primary-color);
-            --adp-color-day-name-hover: var(--primary-dark);
+            --adp-color-primary: var(--blue);
+            --adp-color-primary-hover: var(--blue-dark);
+            --adp-color-current-date: var(--blue);
+            --adp-color-selected-date: var(--blue);
+            --adp-color-selected-date-background: var(--blue);
+            --adp-color-selected-date-hover: var(--blue-dark);
+            --adp-color-day-name: var(--blue);
+            --adp-color-day-name-hover: var(--blue-dark);
         }
         
         .air-datepicker-nav--title {
-            color: var(--primary-color);
+            color: var(--blue);
             font-weight: 700;
         }
         
         .air-datepicker-nav--title:hover {
-            color: var(--primary-dark);
+            color: var(--blue-dark);
         }
         
         .air-datepicker-nav--action:hover {
-            background: rgba(0, 102, 204, 0.1);
-            color: var(--primary-color);
+            background: rgba(20, 56, 92, 0.1);
+            color: var(--blue);
         }
         
         .air-datepicker-cell.-day-.-selected- {
-            background: var(--primary-color);
+            background: var(--blue);
             color: white;
         }
         
         .air-datepicker-cell.-day-.-selected-.-current- {
-            background: var(--primary-dark);
+            background: var(--blue-dark);
             color: white;
         }
         
         .air-datepicker-cell.-day-.-range-from-,
         .air-datepicker-cell.-day-.-range-to- {
-            background: var(--primary-color);
+            background: var(--blue);
             color: white;
         }
         
         .air-datepicker-cell.-day-.-range-from-.-range-to- {
-            background: var(--primary-color);
+            background: var(--blue);
         }
         
         .air-datepicker-cell.-day-.-in-range- {
-            background: rgba(0, 102, 204, 0.1);
-            color: var(--primary-color);
+            background: rgba(20, 56, 92, 0.1);
+            color: var(--blue);
         }
         
         .air-datepicker-cell.-day-:hover {
-            background: rgba(0, 102, 204, 0.15);
-            color: var(--primary-color);
+            background: rgba(20, 56, 92, 0.15);
+            color: var(--blue);
         }
         
         .air-datepicker-cell.-day-.-current- {
-            color: var(--primary-color);
+            color: var(--blue);
             font-weight: 700;
         }
         
         .air-datepicker-cell.-day-.-current-:hover {
-            background: rgba(0, 102, 204, 0.15);
+            background: rgba(20, 56, 92, 0.15);
         }
         
         .air-datepicker-cell.-day-.-weekend- {
-            color: var(--primary-color);
+            color: var(--blue);
         }
         
         .air-datepicker-cell.-day-.-weekend-:hover {
-            background: rgba(0, 102, 204, 0.15);
+            background: rgba(20, 56, 92, 0.15);
         }
         
         .air-datepicker-cell.-day-.-other-month- {
@@ -1710,24 +672,24 @@
         }
         
         .air-datepicker-nav--action svg {
-            fill: var(--primary-color);
+            fill: var(--blue);
         }
         
         .air-datepicker-nav--action:hover svg {
-            fill: var(--primary-dark);
+            fill: var(--blue-dark);
         }
         
         .air-datepicker-body--day-names {
-            color: var(--primary-color);
+            color: var(--blue);
         }
         
         .air-datepicker-body--day-name {
-            color: var(--primary-color);
+            color: var(--blue);
             font-weight: 700;
         }
         
         .search-btn {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--golden) 0%, var(--golden-dark) 100%);
             color: white;
             border: none;
             padding: 16px 40px;
@@ -1737,7 +699,7 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
-            box-shadow: 0 4px 16px rgba(0, 102, 204, 0.3);
+            box-shadow: 0 4px 16px rgba(175, 135, 0, 0.3);
             position: relative;
             overflow: hidden;
             display: flex;
@@ -1766,8 +728,8 @@
         
         .search-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(0, 102, 204, 0.4);
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            box-shadow: 0 8px 24px rgba(175, 135, 0, 0.4);
+            background: linear-gradient(135deg, var(--golden-dark) 0%, var(--golden) 100%);
         }
         
         .search-btn:active {
@@ -1835,11 +797,6 @@
             }
         }
         
-        /* Sections */
-        .section {
-            padding: 80px 0;
-        }
-        
         /* Content Section Styling */
         .section h1 {
             font-size: 42px;
@@ -1850,7 +807,7 @@
         }
         
         .section h2 {
-            font-size: 32px;
+            font-size: 48px;
             font-weight: 700;
             color: var(--dark-color);
             margin-top: 48px;
@@ -1861,7 +818,7 @@
         .section h3 {
             font-size: 22px;
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--blue);
             margin-top: 32px;
             margin-bottom: 12px;
             line-height: 1.5;
@@ -1892,27 +849,6 @@
             .section p {
                 font-size: 15px;
             }
-        }
-        
-        .section-title {
-            font-size: 48px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 18px;
-            color: var(--dark-color);
-            letter-spacing: -1px;
-            line-height: 1.2;
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            font-size: 19px;
-            color: var(--text-light);
-            margin-bottom: 60px;
-            font-weight: 400;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
         }
         
         /* Destination Cards */
@@ -1947,7 +883,7 @@
         .destination-card:hover {
             transform: translateY(-12px) scale(1.02);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            border-color: var(--primary-color);
+            border-color: var(--blue);
         }
         
         .destination-image {
@@ -2010,7 +946,7 @@
             border-radius: 20px;
             font-size: 12px;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--blue);
             text-transform: uppercase;
             letter-spacing: 0.5px;
             z-index: 3;
@@ -2055,7 +991,7 @@
         .hotel-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-            border-color: var(--primary-color);
+            border-color: var(--blue);
         }
         
         .hotel-image-wrapper {
@@ -2085,12 +1021,12 @@
             border-radius: 25px;
             font-size: 11px;
             font-weight: 800;
-            color: var(--primary-color);
+            color: var(--blue);
             text-transform: uppercase;
             letter-spacing: 0.8px;
             z-index: 2;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
-            border: 1px solid rgba(0, 102, 204, 0.1);
+            border: 1px solid rgba(20, 56, 92, 0.1);
             transition: all 0.3s ease;
         }
         
@@ -2153,7 +1089,7 @@
         }
         
         .hotel-location i {
-            color: var(--primary-color);
+            color: var(--blue);
             font-size: 16px;
         }
         
@@ -2172,17 +1108,17 @@
             color: var(--text-light);
             font-weight: 600;
             padding: 6px 12px;
-            background: rgba(0, 102, 204, 0.05);
+            background: rgba(20, 56, 92, 0.05);
             border-radius: 8px;
             transition: all 0.3s ease;
         }
         
         .hotel-card:hover .hotel-feature {
-            background: rgba(0, 102, 204, 0.08);
+            background: rgba(20, 56, 92, 0.08);
         }
         
         .hotel-feature i {
-            color: var(--primary-color);
+            color: var(--blue);
             font-size: 15px;
         }
         
@@ -2203,7 +1139,7 @@
         .price {
             font-size: 32px;
             font-weight: 900;
-            color: var(--primary-color);
+            color: var(--blue);
             line-height: 1;
             letter-spacing: -1px;
         }
@@ -2216,7 +1152,7 @@
         }
         
         .book-btn {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--golden) 0%, var(--golden-dark) 100%);
             color: white;
             border: none;
             padding: 14px 32px;
@@ -2227,7 +1163,7 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
+            box-shadow: 0 4px 12px rgba(175, 135, 0, 0.25);
             position: relative;
             overflow: hidden;
         }
@@ -2251,9 +1187,9 @@
         }
         
         .book-btn:hover {
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            background: linear-gradient(135deg, var(--golden-dark) 0%, var(--golden) 100%);
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+            box-shadow: 0 6px 20px rgba(175, 135, 0, 0.4);
         }
         
         .book-btn span {
@@ -2293,13 +1229,13 @@
         .feature-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
-            border-color: var(--primary-color);
+            border-color: var(--blue);
         }
         
         .feature-icon {
             width: 80px;
             height: 80px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
             border-radius: 20px;
             display: flex;
             align-items: center;
@@ -2308,14 +1244,14 @@
             font-size: 36px;
             color: white;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 8px 20px rgba(0, 102, 204, 0.25);
+            box-shadow: 0 8px 20px rgba(20, 56, 92, 0.25);
             position: relative;
             z-index: 1;
         }
         
         .feature-card:hover .feature-icon {
             transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 12px 30px rgba(0, 102, 204, 0.35);
+            box-shadow: 0 12px 30px rgba(20, 56, 92, 0.35);
         }
         
         .feature-icon::before {
@@ -2325,7 +1261,7 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            background: linear-gradient(135deg, var(--blue), var(--blue-dark));
             border-radius: 20px;
             z-index: -1;
             opacity: 0;
@@ -2523,7 +1459,7 @@
             border-radius: 50px;
             font-size: 13px;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--blue);
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-bottom: 24px;
@@ -2538,7 +1474,7 @@
             display: block;
             font-size: 20px;
             font-weight: 600;
-            color: var(--primary-color);
+            color: var(--blue);
             margin-bottom: 8px;
             letter-spacing: 0.5px;
         }
@@ -2593,7 +1529,7 @@
         
         .promo-benefit-card:hover {
             transform: translateY(-4px);
-            border-color: var(--primary-color);
+            border-color: var(--blue);
             box-shadow: 0 12px 30px rgba(0, 102, 204, 0.15);
         }
         
@@ -2610,7 +1546,7 @@
             align-items: center;
             justify-content: center;
             font-size: 22px;
-            color: var(--primary-color);
+            color: var(--blue);
             flex-shrink: 0;
             transition: all 0.4s ease;
             position: relative;
@@ -2728,7 +1664,7 @@
         
         /* Scrolling Text Banner */
         .scrolling-banner {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
             padding: 14px 0;
             overflow: hidden;
             position: relative;
@@ -2828,7 +1764,7 @@
             left: 0;
             width: 40px;
             height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+            background: linear-gradient(90deg, var(--blue), var(--blue-dark));
             border-radius: 2px;
         }
         
@@ -2896,7 +1832,7 @@
             color: white !important;
             transform: translateY(-3px);
             box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
-            border-color: var(--primary-color);
+            border-color: var(--blue);
         }
         
         .footer p[style*="color: #999"] {
@@ -2914,7 +1850,7 @@
         }
         
         .footer p[style*="color: #999"] i {
-            color: var(--primary-color);
+            color: var(--blue);
             font-size: 16px;
             width: 20px;
             display: flex;
@@ -3023,10 +1959,6 @@
                 gap: 12px;
             }
             
-            .phone-number {
-                font-size: 13px;
-            }
-            
             .hero-title {
                 font-size: 36px;
             }
@@ -3046,121 +1978,9 @@
     </style>
 </head>
 <body>
-    <div class="top-strip"></div>
-    <nav class="navbar" id="navbar">
-        <div class="navbar-container">
-            <div class="navbar-content">
-                <a href="#" class="logo-section">
-                    <img src="https://fayyaztravels.com/visa/admin/assets/img/main-logo.png" alt="Fayyaz Travels Logo" class="logo-image">
-                </a>
-                
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                    <i class="bi bi-list"></i>
-                </button>
-                
-                <div class="nav-menu" id="navMenu">
-                    <a href="#" class="nav-item active">
-                        <span class="new-badge">NEW</span>
-                        <i class="bi bi-building-fill"></i>
-                        <span>Hotel</span>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <i class="bi bi-briefcase-fill"></i>
-                        <span>Corporate</span>
-                    </a>
-                </div>
-                
-                <div class="right-section">
-                    <div class="phone-section">
-                        <i class="bi bi-telephone-fill"></i>
-                        <span class="phone-number">+91 9953-888-841</span>
-                    </div>
-                    <div class="menu-wrapper">
-                        <div class="menu-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="menu-icon">
-                                <i class="bi bi-list"></i>
-                            </div>
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-info-circle me-2"></i>About Us</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-envelope me-2"></i>Contact Us</a></li>
-                        </ul>
-                    </div>
-                    <div class="user-profile-wrapper">
-                        <div class="user-profile" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="user-icon">
-                                <i class="bi bi-person-fill"></i>
-                            </div>
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-in-right me-2"></i>Login</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-person-plus me-2"></i>Sign Up</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Secondary Navbar (Sticky Search Bar) -->
-    <div class="secondary-navbar" id="secondaryNavbar">
-        <div class="secondary-navbar-container">
-            <form class="secondary-search-form" id="secondarySearchForm">
-                <div class="secondary-form-group">
-                    <label><i class="bi bi-geo-alt-fill"></i>Destination</label>
-                    <input type="text" id="secondaryDestinationInput" class="secondary-form-control" placeholder="Where are you going?" autocomplete="off">
-                    <div class="secondary-autocomplete-suggestions" id="secondaryDestinationSuggestions"></div>
-                </div>
-                <div class="secondary-form-group">
-                    <label><i class="bi bi-calendar-check-fill"></i>Check-in</label>
-                    <input type="text" id="secondaryCheckinInput" class="secondary-form-control" placeholder="Check-in" readonly>
-                </div>
-                <div class="secondary-form-group">
-                    <label><i class="bi bi-calendar-x-fill"></i>Check-out</label>
-                    <input type="text" id="secondaryCheckoutInput" class="secondary-form-control" placeholder="Check-out" readonly>
-                </div>
-                <div class="secondary-form-group">
-                    <label><i class="bi bi-people-fill"></i>Guests</label>
-                    <select class="secondary-form-control" id="secondaryGuestsSelect">
-                        <option>1 Guest</option>
-                        <option>2 Guests</option>
-                        <option>3 Guests</option>
-                        <option>4+ Guests</option>
-                    </select>
-                </div>
-                <button type="submit" class="secondary-search-btn">
-                    <i class="bi bi-search"></i>
-                    <span>Search</span>
-                </button>
-            </form>
-        </div>
-    </div>
-
-    <!-- Trust Bar -->
-    <div class="trust-bar">
-        <div class="container">
-            <div class="trust-items">
-                <div class="trust-item">
-                    <i class="bi bi-lock-fill"></i>
-                    <span>Secure Booking</span>
-                </div>
-                <div class="trust-item">
-                    <i class="bi bi-award-fill"></i>
-                    <span>Best Price Guarantee</span>
-                </div>
-                <div class="trust-item">
-                    <i class="bi bi-headset"></i>
-                    <span>24/7 Customer Support</span>
-                </div>
-                <div class="trust-item">
-                    <i class="bi bi-people-fill"></i>
-                    <span>2M+ Happy Travelers</span>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php include __DIR__ . '/components/header.php'; ?>
+    <?php include __DIR__ . '/components/navbar.php'; ?>
+    <?php include __DIR__ . '/components/trust-bar.php'; ?>
 
     <!-- Hero Section -->
     <section class="hero-section">
@@ -3553,263 +2373,7 @@
         </div>
     </div>
 
-    <!-- Hotel Booking Content Section -->
-    <section class="section" style="background: #ffffff;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 mx-auto">
-                    <h1>Book Hotels Online with Fayyaz Travels for Your Next Trip</h1>
-                    
-                    <p>Are you in search of a perfect hotel stay for your next adventure? Fayyaz Travels makes hotel booking simple and hassle-free which helps in investing time on other plans. Whether you're travelling for leisure or business, Fayyaz Travels offers a wide range of hotels to suit every budget.</p>
-                    
-                    <p>With clear pricing, detailed descriptions, and an easy booking process, you can plan your stay with ease and find the perfect hotel.</p>
-                    
-                    <h2>Explore Our Hotel Options</h2>
-                    
-                    <p>Fayyaz Travels offers a variety of options to match your travel needs:</p>
-                    
-                    <h3>Luxury Hotels</h3>
-                    <p>Indulge in opulence with world-class amenities and top-tier services for a premium experience.</p>
-                    
-                    <h3>Business Hotels</h3>
-                    <p>Strategically located near commercial hubs, these properties have features like high-speed Wi-Fi and meeting spaces.</p>
-                    
-                    <h3>Family-Friendly Stays</h3>
-                    <p>Designed for families, these hotels offer spacious rooms, play areas, and kid-friendly facilities.</p>
-                    
-                    <h3>Budget Hotels</h3>
-                    <p>Affordable yet comfortable, these options provide essential amenities for cost-conscious travellers.</p>
-                    
-                    <h2>Why Book Hotels with Fayyaz Travels?</h2>
-                    
-                    <h3>Extensive Options</h3>
-                    <p>Choose from a broad selection of hotels tailored to suit different styles and budgets. Whether you're looking for 5-star luxury with spas and fine dining or budget-friendly boutique hotels, Fayyaz Travels ensures you find the right fit. Travellers seeking long-term stays can check serviced apartments with kitchenettes.</p>
-                    
-                    <h3>Seamless Booking Experience</h3>
-                    <p>Our easy-to-use platform simplifies hotel booking. Use filters to sort properties by price range, location, guest ratings, or amenities to find the perfect match. With transparent pricing and real-time availability, booking cheap hotels takes just a few clicks.</p>
-                    
-                    <h3>Global Reach, Local Expertise</h3>
-                    <p>Whether planning a stay in your city or abroad, Fayyaz Travels provides global coverage and local expertise. Our team helps you make informed decisions by offering insights into the best hotels in every destination.</p>
-                    
-                    <h3>Best Deals Guaranteed</h3>
-                    <p>Enjoy unbeatable value with Fayyaz Travels's special promotions and cashback offers. Save more on hotel deals with seasonal discounts and exclusive packages, including complimentary meals or airport transfers.</p>
-                    
-                    <h3>Verified Guest Reviews</h3>
-                    <p>Make informed decisions with honest feedback from verified travellers. Ratings and reviews provide detailed insights into service quality, cleanliness, and overall experience so that you can book confidently.</p>
-                    
-                    <h3>Cancel For No Reason (CFNR)</h3>
-                    <p>Change of plans? No worries. With CFNR you can cancel your hotel booking anytime before check-in and get a full refund, no questions asked. Total freedom. Zero stress.</p>
-                    
-                    <h3>Match your vibe</h3>
-                    <p>Whether you're planning a romantic getaway, an adventurous escape, or a laid-back retreat, this feature helps you discover accommodations that perfectly match your mood and travel vibe.</p>
-                    
-                    <h3>Supercoins</h3>
-                    <p>Get additional discount on your flight bookings & hotel booking using Supercoins. Earn 2 SuperCoins for every ₹100 you spend. SuperCoins will be added to your SuperCoins balance after you have completed the trip.</p>
-                    
-                    <h2>Advantages of Booking Hotels Online on Fayyaz Travels</h2>
-                    
-                    <h3>Prime Locations</h3>
-                    <p>Stay close to landmarks, transport hubs, and major attractions.</p>
-                    
-                    <h3>Modern Amenities</h3>
-                    <p>Get complimentary Wi-Fi, fitness centres, and pools during your hotel stay.</p>
-                    
-                    <h3>Flexible Policies</h3>
-                    <p>Many hotels offer free cancellations and flexible check-in options.</p>
-                    
-                    <h3>Special Offers</h3>
-                    <p>Benefit from loyalty rewards, upgrades, and value-added services.</p>
-                    
-                    <h2>How to Book Your Stay on Fayyaz Travels?</h2>
-                    
-                    <p>Follow these simple steps for a quick and easy hotel booking:</p>
-                    
-                    <h3>Search</h3>
-                    <p>Enter your destination, dates, and guest details.</p>
-                    
-                    <h3>Compare</h3>
-                    <p>Use filters to sort by price, reviews, or amenities.</p>
-                    
-                    <h3>Select</h3>
-                    <p>Choose a property that meets your needs.</p>
-                    
-                    <h3>Book</h3>
-                    <p>Finalise your reservation by adding guest details and making a payment.</p>
-                    
-                    <h3>Confirmation</h3>
-                    <p>Receive an instant booking confirmation through email.</p>
-                    
-                    <h2>FAQ: Book Hotels on Fayyaz Travels</h2>
-                    
-                    <h3>1. What types of hotels are available on Fayyaz Travels?</h3>
-                    <p>We provide options ranging from luxury hotels and boutique stays to budget-friendly hotels and family-friendly properties.</p>
-                    
-                    <h3>2. How do I book a hotel on Fayyaz Travels?</h3>
-                    <p>Search your destination, select your dates, and browse available options. Complete your hotel booking in just a few simple steps on Fayyaz Travels.</p>
-                    
-                    <h3>3. Are there discounts on hotel bookings?</h3>
-                    <p>Yes, Fayyaz Travels offers exclusive discounts, deals, and cashback options on select properties.</p>
-                    
-                    <h3>4. Can I modify or cancel my hotel reservation?</h3>
-                    <p>Depending on the hotel's cancellation policy, you can adjust or cancel your booking. Review the terms before completing the reservation.</p>
-                    
-                    <h3>5. Are the hotel prices displayed per person or room?</h3>
-                    <p>We typically list prices per room unless stated otherwise. Review the total cost of your stay at checkout.</p>
-                    
-                    <h3>6. Do I need to pay in advance for the hotel reservation?</h3>
-                    <p>Some hotels require advance payment, while others allow pay-at-check-in options. We will share the payment policy during the booking process.</p>
-                    
-                    <h3>7. Can I book a hotel for someone else?</h3>
-                    <p>Yes, simply provide their details during booking, and they can check in using the confirmation.</p>
-                    
-                    <h3>8. Is breakfast included in my hotel stay?</h3>
-                    <p>Many hotels offer complimentary breakfast. Filter your search to find options with this feature or check hotel details.</p>
-                    
-                    <h2>Disclaimer</h2>
-                    <p>Hotel amenities, rates, and policies may change based on availability or the time of booking. Always confirm specific details such as cancellation policies, additional charges, or special requirements directly with the hotel before completing your reservation.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="footer-title">Fayyaz Travels</div>
-                    <p>Your trusted travel partner for hotels and vacation packages.</p>
-                    <div class="footer-social">
-                        <a href="#" style="color: white; font-size: 20px;"><i class="bi bi-facebook"></i></a>
-                        <a href="#" style="color: white; font-size: 20px;"><i class="bi bi-twitter"></i></a>
-                        <a href="#" style="color: white; font-size: 20px;"><i class="bi bi-instagram"></i></a>
-                        <a href="#" style="color: white; font-size: 20px;"><i class="bi bi-linkedin"></i></a>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="footer-title">Company</div>
-                    <a href="#" class="footer-link">About Us</a>
-                    <a href="#" class="footer-link">Careers</a>
-                    <a href="#" class="footer-link">Contact</a>
-                    <a href="#" class="footer-link">Blog</a>
-                </div>
-                <div class="col-md-3">
-                    <div class="footer-title">Support</div>
-                    <a href="#" class="footer-link">Help Center</a>
-                    <a href="#" class="footer-link">FAQs</a>
-                    <a href="#" class="footer-link">Cancellation</a>
-                    <a href="#" class="footer-link">Refund Policy</a>
-                </div>
-                <div class="col-md-3">
-                    <div class="footer-title">Contact</div>
-                    <p style="color: #999; margin-bottom: 10px;">
-                        <i class="bi bi-telephone-fill"></i>+91 9953-888-841
-                    </p>
-                    <p style="color: #999; margin-bottom: 10px;">
-                        <i class="bi bi-envelope-fill"></i>support@fayyaztravels.com
-                    </p>
-                    <p style="color: #999;">
-                        <i class="bi bi-geo-alt-fill"></i>Mumbai, India
-                    </p>
-                </div>
-            </div>
-            
-            <!-- SEO Links Section -->
-            <div class="footer-seo-section">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="footer-seo-title">Hotels in Malaysia</div>
-                        <div class="footer-seo-links">
-                            <a href="#" class="footer-seo-link">Hotels in Kuala Lumpur</a>
-                            <a href="#" class="footer-seo-link">Hotels in Penang</a>
-                            <a href="#" class="footer-seo-link">Hotels in Langkawi</a>
-                            <a href="#" class="footer-seo-link">Hotels in Malacca</a>
-                            <a href="#" class="footer-seo-link">Hotels in Johor Bahru</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="footer-seo-title">Hotels in Thailand</div>
-                        <div class="footer-seo-links">
-                            <a href="#" class="footer-seo-link">Hotels in Bangkok</a>
-                            <a href="#" class="footer-seo-link">Hotels in Phuket</a>
-                            <a href="#" class="footer-seo-link">Hotels in Pattaya</a>
-                            <a href="#" class="footer-seo-link">Hotels in Chiang Mai</a>
-                            <a href="#" class="footer-seo-link">Hotels in Krabi</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="footer-seo-title">Hotels in Indonesia</div>
-                        <div class="footer-seo-links">
-                            <a href="#" class="footer-seo-link">Hotels in Bali</a>
-                            <a href="#" class="footer-seo-link">Hotels in Jakarta</a>
-                            <a href="#" class="footer-seo-link">Hotels in Yogyakarta</a>
-                            <a href="#" class="footer-seo-link">Hotels in Bandung</a>
-                            <a href="#" class="footer-seo-link">Hotels in Surabaya</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="footer-seo-title">Hotels in Other Countries</div>
-                        <div class="footer-seo-links">
-                            <a href="#" class="footer-seo-link">Hotels in Singapore</a>
-                            <a href="#" class="footer-seo-link">Hotels in Sri Lanka</a>
-                            <a href="#" class="footer-seo-link">Hotels in Nepal</a>
-                            <a href="#" class="footer-seo-link">Hotels in Bangladesh</a>
-                            <a href="#" class="footer-seo-link">Hotels in Pakistan</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Popular Hotels Section -->
-            <div class="footer-seo-section">
-                <div class="row">
-                    <div class="col-md-3 col-sm-6">
-                        <div class="footer-seo-title">Popular Hotels in Malaysia</div>
-                        <div class="footer-seo-links">
-                            <a href="#" class="footer-seo-link">Grand Hyatt Kuala Lumpur</a>
-                            <a href="#" class="footer-seo-link">Shangri-La Hotel Kuala Lumpur</a>
-                            <a href="#" class="footer-seo-link">The Ritz-Carlton Kuala Lumpur</a>
-                            <a href="#" class="footer-seo-link">Mandarin Oriental Kuala Lumpur</a>
-                            <a href="#" class="footer-seo-link">Hilton Kuala Lumpur</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="footer-seo-title">Popular Hotels in Thailand</div>
-                        <div class="footer-seo-links">
-                            <a href="#" class="footer-seo-link">Mandarin Oriental Bangkok</a>
-                            <a href="#" class="footer-seo-link">The Peninsula Bangkok</a>
-                            <a href="#" class="footer-seo-link">JW Marriott Phuket</a>
-                            <a href="#" class="footer-seo-link">Banyan Tree Phuket</a>
-                            <a href="#" class="footer-seo-link">Grand Hyatt Erawan Bangkok</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="footer-seo-title">Popular Hotels in Indonesia</div>
-                        <div class="footer-seo-links">
-                            <a href="#" class="footer-seo-link">The St. Regis Bali Resort</a>
-                            <a href="#" class="footer-seo-link">Four Seasons Resort Bali</a>
-                            <a href="#" class="footer-seo-link">W Bali Seminyak</a>
-                            <a href="#" class="footer-seo-link">The Ritz-Carlton Jakarta</a>
-                            <a href="#" class="footer-seo-link">Grand Hyatt Jakarta</a>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-6">
-                        <div class="footer-seo-title">Popular Hotels in Singapore</div>
-                        <div class="footer-seo-links">
-                            <a href="#" class="footer-seo-link">Marina Bay Sands</a>
-                            <a href="#" class="footer-seo-link">The Ritz-Carlton Singapore</a>
-                            <a href="#" class="footer-seo-link">Mandarin Oriental Singapore</a>
-                            <a href="#" class="footer-seo-link">Shangri-La Hotel Singapore</a>
-                            <a href="#" class="footer-seo-link">Raffles Hotel Singapore</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2024 Fayyaz Travels. All rights reserved.</p>
-        </div>
-    </footer>
+    <?php include __DIR__ . '/components/footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.4.0/air-datepicker.min.js"></script>
@@ -3824,8 +2388,7 @@
         // Calculate and set secondary navbar top position based on navbar height
         function updateSecondaryNavbarPosition() {
             if (navbar && secondaryNavbar) {
-                const navbarHeight = navbar.offsetHeight;
-                secondaryNavbar.style.top = navbarHeight + 'px';
+                secondaryNavbar.style.top = '150px';
             }
         }
         
