@@ -918,6 +918,14 @@
             transform: scale(1);
         }
         
+        /* Booking Card Container - Ensure sticky works on desktop */
+        @media (min-width: 992px) {
+            .row .col-lg-4 {
+                display: flex;
+                flex-direction: column;
+            }
+        }
+        
         /* Booking Card */
         .booking-card {
             background: white;
@@ -925,18 +933,23 @@
             border-radius: 24px;
             padding: 0;
             box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+            position: -webkit-sticky;
             position: sticky;
             top: 100px;
             margin-top: 40px;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             align-self: flex-start;
+            z-index: 10;
+            width: 100%;
+            height: fit-content;
         }
         
         @media (max-width: 991px) {
             .booking-card {
                 position: relative;
                 top: 0;
+                align-self: stretch;
             }
         }
         
@@ -3706,7 +3719,7 @@
         // Initialize guests dropdown
         initGuestsDropdown('guestsInputDetails', 'guestsDropdownDetails');
         
-        // Sticky Booking Card - Stop at Footer
+        // Sticky Booking Card - Stop at Footer (only handles footer stop, CSS handles sticky)
         (function() {
             const bookingCard = document.querySelector('.booking-card');
             const footer = document.querySelector('.footer');
@@ -3723,18 +3736,17 @@
             let isStopped = false;
             
             function updateBookingCardSticky() {
-                // Mobile - no sticky
+                // Mobile - CSS handles this, no JS needed
                 if (window.innerWidth <= 991) {
-                    bookingCard.style.position = '';
-                    bookingCard.style.top = '';
-                    bookingCard.style.bottom = '';
-                    isStopped = false;
+                    if (isStopped) {
+                        bookingCard.style.position = '';
+                        bookingCard.style.top = '';
+                        bookingCard.style.bottom = '';
+                        isStopped = false;
+                    }
                     return;
                 }
                 
-                const navbar = document.getElementById('navbar');
-                const navbarHeight = navbar ? navbar.offsetHeight : 0;
-                const stickyTop = navbarHeight + 20;
                 const padding = 20;
                 
                 // Get current positions
@@ -3765,7 +3777,7 @@
                         bookingCard.style.bottom = Math.max(0, bottomValue) + 'px';
                     }
                 } else {
-                    // Use sticky positioning (let CSS handle it)
+                    // Let CSS sticky handle it - remove any inline styles
                     if (isStopped) {
                         bookingCard.style.position = '';
                         bookingCard.style.top = '';
@@ -3777,12 +3789,7 @@
             
             // Wait for page to load
             function initSticky() {
-                if (window.innerWidth > 991) {
-                    // Don't interfere with CSS sticky initially
-                    bookingCard.style.position = '';
-                    bookingCard.style.top = '';
-                    bookingCard.style.bottom = '';
-                }
+                // CSS handles sticky, JS only handles footer stop
                 setTimeout(updateBookingCardSticky, 100);
             }
             
