@@ -7,351 +7,37 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/air-datepicker@3.4.0/air-datepicker.min.css">
+    <link rel="stylesheet" href="assets/css/site.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         
-        :root {
-            --primary-color: #0066cc;
-            --primary-dark: #0052a3;
-            --secondary-color: #20c997;
-            --accent-color: #ff6b35;
-            --success-color: #28a745;
-            --dark-color: #1a1a1a;
-            --text-color: #2c3e50;
-            --text-light: #6c757d;
-            --light-bg: #f8f9fa;
-            --border-color: #e0e0e0;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background-color: #ffffff;
-            color: var(--text-color);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        
-        /* Top Strip */
-        .top-strip {
-            background: linear-gradient(90deg, #c9a568 0%, #d4a574 50%, #c9a568 100%);
-            height: 3px;
-            background-size: 200% 100%;
-            animation: shimmer 3s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-        
-        /* Navbar - Same as index.html */
-        .navbar {
-            background: #ffffff;
-            border-bottom: 1px solid var(--border-color);
-            padding: 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            backdrop-filter: blur(20px);
-            background: rgba(255, 255, 255, 0.98);
-        }
-        
-        .navbar.scrolled {
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-        }
-        
-        .navbar-container {
-            max-width: auto;
-            margin: 0 auto;
-            padding: 0 50px;
-        }
-        
-        .navbar-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 0;
-            gap: 60px;
-        }
-        
-        .logo-section {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            flex-shrink: 0;
-        }
-        
-        .logo-section:hover {
-            transform: translateY(-2px);
-        }
-        
-        .logo-image {
-            height: 44px;
-            width: auto;
-            object-fit: contain;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-        }
-        
-        .logo-section:hover .logo-image {
-            transform: scale(1.05) translateY(-1px);
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
-        }
-        
-        .nav-menu {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
-            padding: 0 40px;
-        }
-        
-        .nav-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 6px;
-            padding: 14px 24px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            text-decoration: none;
-            color: var(--text-color);
-            position: relative;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 12px;
-            min-width: 90px;
-        }
-        
-        .nav-item::before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%) scaleX(0);
-            width: 70%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
-            border-radius: 3px 3px 0 0;
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .nav-item:hover {
-            color: var(--primary-color);
-            transform: translateY(-2px);
-        }
-        
-        .nav-item:hover::before {
-            transform: translateX(-50%) scaleX(1);
-        }
-        
-        .nav-item.active {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-        
-        .nav-item.active::before {
-            transform: translateX(-50%) scaleX(1);
-        }
-        
-        .nav-item i {
-            font-size: 28px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            color: var(--text-color);
-            display: block;
-        }
-        
-        .nav-item span {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            margin-top: 2px;
-        }
-        
-        .right-section {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            flex-shrink: 0;
-        }
-        
-        .phone-section {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 11px 18px;
-            border-radius: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 82, 163, 0.05) 100%);
-            border: 1.5px solid rgba(0, 102, 204, 0.15);
-        }
-        
-        .phone-section:hover {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
-            border-color: var(--primary-color);
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
-            transform: translateY(-2px);
-        }
-        
-        .phone-section i {
-            font-size: 18px;
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-        
-        .phone-number {
-            font-weight: 700;
-            color: var(--dark-color);
-            font-size: 15px;
-            letter-spacing: 0.2px;
-            white-space: nowrap;
-        }
-        
-        .whatsapp-btn {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            padding: 6px;
-            border-radius: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            text-decoration: none;
-            border: 1.5px solid transparent;
-        }
-        
-        .whatsapp-btn:hover {
-            background: linear-gradient(135deg, rgba(37, 211, 102, 0.05) 0%, rgba(25, 128, 56, 0.05) 100%);
-            border-color: rgba(37, 211, 102, 0.2);
-        }
-        
-        .whatsapp-icon {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .whatsapp-btn:hover .whatsapp-icon {
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(37, 211, 102, 0.35);
-        }
-        
-        .whatsapp-icon i {
-            font-size: 19px;
-        }
-        
-        .user-profile-wrapper {
-            position: relative;
-        }
-        
-        .user-profile {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            cursor: pointer;
-            padding: 6px 12px;
-            border-radius: 12px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1.5px solid transparent;
-        }
-        
-        .user-profile:hover {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 82, 163, 0.05) 100%);
-            border-color: rgba(0, 102, 204, 0.2);
-        }
-        
-        .user-icon {
-            width: 38px;
-            height: 38px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .user-profile:hover .user-icon {
-            transform: scale(1.1);
-            box-shadow: 0 6px 16px rgba(0, 102, 204, 0.35);
-        }
-        
-        .user-icon i {
-            font-size: 19px;
-        }
-        
-        .dropdown-menu {
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            box-shadow: var(--shadow-lg);
-            margin-top: 10px;
-            padding: 8px;
-            min-width: 180px;
-        }
-        
-        .dropdown-item {
-            padding: 12px 18px;
-            transition: all 0.2s ease;
-            border-radius: 8px;
-            font-weight: 500;
-            color: var(--text-color);
-        }
-        
-        .dropdown-item:hover {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
-            color: var(--primary-color);
-            transform: translateX(4px);
-        }
-        
-        .dropdown-item i {
-            color: var(--primary-color);
-            font-size: 16px;
-            width: 20px;
-            text-align: center;
-        }
-        
-        .mobile-menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 28px;
-            color: var(--dark-color);
-            cursor: pointer;
-            padding: 8px;
+        /* Prevent headings from being centered */
+        h1, h2, h3, h4, h5, h6,
+        .hotel-name,
+        .section-title,
+        .gallery-title,
+        .review-form-title,
+        .reviewer-details h4,
+        .similar-hotel-name {
+            text-align: left !important;
         }
         
         /* Hotel Details Hero */
         .hotel-hero {
-            padding: 50px 0 40px;
+            padding: 60px 0 50px;
+            margin-top: 100px;
             background: linear-gradient(180deg, #ffffff 0%, var(--light-bg) 100%);
             position: relative;
             overflow: hidden;
         }
         
         .hotel-header {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             position: relative;
             z-index: 1;
         }
@@ -367,7 +53,7 @@
         }
         
         .hotel-breadcrumb a {
-            color: var(--primary-color);
+            color: var(--blue);
             text-decoration: none;
             font-weight: 600;
             transition: all 0.3s ease;
@@ -396,13 +82,13 @@
             justify-content: space-between;
             align-items: flex-start;
             flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 24px;
+            gap: 50px;
+            margin-bottom: 40px;
             background: white;
-            padding: 32px;
+            padding: 48px 56px;
             border-radius: 20px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+            border: none;
         }
         
         .hotel-name-wrapper {
@@ -411,80 +97,59 @@
         }
         
         .hotel-name {
+            font-family: "Quattrocento", serif;
             font-size: 48px;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--dark-color) 0%, var(--primary-color) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+            font-weight: 700;
+            color: var(--dark-color);
             margin-bottom: 16px;
-            letter-spacing: -1.5px;
-            line-height: 1.1;
-            position: relative;
-            padding-bottom: 16px;
-        }
-        
-        .hotel-name::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            border-radius: 2px;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            text-align: left;
         }
         
         .hotel-location {
             display: flex;
             align-items: center;
-            gap: 10px;
-            color: var(--text-color);
-            font-size: 17px;
-            font-weight: 600;
-            margin-bottom: 12px;
-            padding: 10px 16px;
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.05) 0%, rgba(0, 82, 163, 0.05) 100%);
-            border-radius: 12px;
-            border: 1px solid rgba(0, 102, 204, 0.1);
+            gap: 8px;
+            color: var(--text-light);
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 20px;
+            padding: 0;
+            background: none;
+            border: none;
             width: fit-content;
-            transition: all 0.3s ease;
-        }
-        
-        .hotel-location:hover {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
-            transform: translateX(4px);
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
         }
         
         .hotel-location i {
-            color: var(--primary-color);
-            font-size: 20px;
+            color: var(--text-light);
+            font-size: 16px;
             flex-shrink: 0;
+            opacity: 0.7;
         }
         
         .hotel-location span {
-            color: var(--text-color);
+            color: var(--text-light);
         }
         
         .hotel-stars {
             display: flex;
             align-items: center;
             gap: 6px;
-            margin-top: 12px;
+            margin-bottom: 24px;
+            padding: 0;
         }
         
         .hotel-stars i {
-            font-size: 20px;
+            font-size: 18px;
             color: #ffc107;
-            text-shadow: 0 2px 4px rgba(255, 193, 7, 0.3);
         }
         
         .hotel-stars-label {
             font-size: 14px;
             color: var(--text-light);
-            font-weight: 600;
-            margin-left: 4px;
+            font-weight: 500;
+            margin-left: 8px;
         }
         
         .hotel-rating-section {
@@ -497,139 +162,127 @@
         
         .hotel-rating {
             display: flex;
-            flex-direction: column;
             align-items: center;
-            gap: 8px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            gap: 16px;
+            background: white;
             padding: 20px 24px;
-            border-radius: 18px;
-            font-weight: 800;
-            font-size: 32px;
-            color: white;
-            box-shadow: 0 8px 24px rgba(0, 102, 204, 0.3);
-            position: relative;
-            overflow: hidden;
-            min-width: 120px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .hotel-rating::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
-            animation: shimmer 3s infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .hotel-rating:hover {
-            transform: translateY(-4px) scale(1.05);
-            box-shadow: 0 12px 32px rgba(0, 102, 204, 0.4);
+            border-radius: 16px;
+            font-weight: 700;
+            font-size: 36px;
+            color: var(--dark-color);
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            width: 100%;
+            min-width: 180px;
         }
         
         .hotel-rating-value {
             display: flex;
-            align-items: center;
-            gap: 8px;
-            position: relative;
-            z-index: 1;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+            flex: 1;
+        }
+        
+        .hotel-rating-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--dark-color);
+            line-height: 1;
         }
         
         .hotel-rating i {
             color: #ffc107;
-            font-size: 28px;
-            filter: drop-shadow(0 2px 4px rgba(255, 193, 7, 0.4));
+            font-size: 32px;
+            flex-shrink: 0;
         }
         
         .hotel-rating-label {
-            font-size: 12px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.9);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            position: relative;
-            z-index: 1;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-light);
+            text-transform: none;
+            letter-spacing: 0;
         }
         
         .hotel-reviews {
             display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 6px;
-            padding: 14px 18px;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 24px;
             background: white;
-            border: 2px solid var(--border-color);
-            border-radius: 14px;
-            transition: all 0.3s ease;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
             cursor: pointer;
             width: 100%;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
         }
         
         .hotel-reviews:hover {
-            border-color: var(--primary-color);
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.15);
-            transform: translateY(-2px);
+            border-color: var(--blue);
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.1);
+        }
+        
+        .hotel-reviews-content {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 4px;
+            flex: 1;
         }
         
         .hotel-reviews-count {
-            font-size: 16px;
+            font-size: 36px;
             font-weight: 700;
             color: var(--dark-color);
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            line-height: 1;
         }
         
         .hotel-reviews-count i {
-            color: var(--primary-color);
-            font-size: 18px;
+            color: var(--blue);
+            font-size: 32px;
+            flex-shrink: 0;
         }
         
         .hotel-reviews-label {
-            font-size: 12px;
+            font-size: 14px;
             color: var(--text-light);
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-weight: 500;
+            text-transform: none;
+            letter-spacing: 0;
         }
         
         .hotel-badges {
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
-            margin-top: 16px;
+            margin-top: 0;
         }
         
         .hotel-badge {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            padding: 8px 14px;
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.1) 0%, rgba(0, 82, 163, 0.1) 100%);
-            border: 1px solid rgba(0, 102, 204, 0.2);
+            padding: 6px 14px;
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
             border-radius: 20px;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--primary-color);
-            transition: all 0.3s ease;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-color);
+            transition: all 0.2s ease;
         }
         
         .hotel-badge:hover {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+            background: var(--border-color);
+            border-color: var(--blue);
+            color: var(--blue);
         }
         
         .hotel-badge i {
-            font-size: 14px;
+            font-size: 12px;
+            color: var(--blue);
         }
         
         /* Image Gallery */
@@ -652,10 +305,11 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            text-align: left;
         }
         
         .gallery-title i {
-            color: var(--primary-color);
+            color: var(--blue);
             font-size: 26px;
         }
         
@@ -735,7 +389,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-color);
+            color: var(--blue);
             font-size: 20px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -743,7 +397,7 @@
         }
         
         .gallery-nav-btn:hover {
-            background: var(--primary-color);
+            background: var(--blue);
             color: white;
             transform: scale(1.1);
             box-shadow: 0 6px 24px rgba(0, 102, 204, 0.4);
@@ -791,7 +445,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-color);
+            color: var(--blue);
             font-size: 20px;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -805,7 +459,7 @@
         }
         
         .gallery-fullscreen-btn:hover {
-            background: var(--primary-color);
+            background: var(--blue);
             color: white;
             transform: scale(1.1);
             box-shadow: 0 6px 24px rgba(0, 102, 204, 0.4);
@@ -847,13 +501,13 @@
         }
         
         .gallery-thumb:hover {
-            border-color: var(--primary-color);
+            border-color: var(--blue);
             transform: translateY(-4px);
             box-shadow: 0 8px 24px rgba(0, 102, 204, 0.25);
         }
         
         .gallery-thumb.active {
-            border-color: var(--primary-color);
+            border-color: var(--blue);
             box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.2), 0 8px 24px rgba(0, 102, 204, 0.25);
         }
         
@@ -945,7 +599,7 @@
         .info-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-            border-color: var(--primary-color);
+            border-color: var(--blue);
         }
         
         .info-card-icon {
@@ -958,12 +612,12 @@
             justify-content: center;
             margin: 0 auto 16px;
             font-size: 28px;
-            color: var(--primary-color);
+            color: var(--blue);
             transition: all 0.3s ease;
         }
         
         .info-card:hover .info-card-icon {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
             color: white;
             transform: scale(1.1);
         }
@@ -988,6 +642,7 @@
         }
         
         .section-title {
+            font-family: "Quattrocento", serif;
             font-size: 36px;
             font-weight: 900;
             color: var(--dark-color);
@@ -995,6 +650,7 @@
             letter-spacing: -1px;
             position: relative;
             padding-bottom: 16px;
+            text-align: left;
         }
         
         .section-title::after {
@@ -1004,7 +660,7 @@
             left: 0;
             width: 60px;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+            background: linear-gradient(90deg, var(--blue), var(--blue-dark));
             border-radius: 2px;
         }
         
@@ -1042,7 +698,7 @@
             left: 0;
             width: 4px;
             height: 100%;
-            background: linear-gradient(180deg, var(--primary-color), var(--primary-dark));
+            background: linear-gradient(180deg, var(--blue), var(--blue-dark));
             transform: scaleY(0);
             transition: transform 0.3s ease;
         }
@@ -1052,7 +708,7 @@
         }
         
         .about-highlight-card:hover {
-            border-color: var(--primary-color);
+            border-color: var(--blue);
             transform: translateY(-4px);
             box-shadow: 0 8px 24px rgba(0, 102, 204, 0.15);
         }
@@ -1060,7 +716,7 @@
         .highlight-icon {
             width: 56px;
             height: 56px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
             border-radius: 14px;
             display: flex;
             align-items: center;
@@ -1113,7 +769,7 @@
         .stat-number {
             font-size: 36px;
             font-weight: 900;
-            color: var(--primary-color);
+            color: var(--blue);
             line-height: 1;
             margin-bottom: 8px;
             letter-spacing: -1px;
@@ -1164,7 +820,7 @@
         }
         
         .amenity-item:hover {
-            border-color: var(--primary-color);
+            border-color: var(--blue);
             transform: translateY(-4px);
             box-shadow: 0 8px 24px rgba(0, 102, 204, 0.15);
             background: linear-gradient(135deg, rgba(0, 102, 204, 0.02) 0%, rgba(0, 82, 163, 0.02) 100%);
@@ -1178,7 +834,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--primary-color);
+            color: var(--blue);
             font-size: 24px;
             flex-shrink: 0;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1188,7 +844,7 @@
         }
         
         .amenity-item:hover .amenity-icon {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
             color: white;
             transform: scale(1.1) rotate(5deg);
             box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
@@ -1202,7 +858,7 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+            background: linear-gradient(135deg, var(--blue), var(--blue-dark));
             border-radius: 14px;
             z-index: -1;
             opacity: 0;
@@ -1228,7 +884,7 @@
         }
         
         .amenity-item:hover .amenity-name {
-            color: var(--primary-color);
+            color: var(--blue);
         }
         
         .amenity-description {
@@ -1270,20 +926,28 @@
             padding: 0;
             box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
             position: sticky;
-            top: 155px;
+            top: 100px;
             margin-top: 40px;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            align-self: flex-start;
+        }
+        
+        @media (max-width: 991px) {
+            .booking-card {
+                position: relative;
+                top: 0;
+            }
         }
         
         .booking-card:hover {
             box-shadow: 0 12px 32px rgba(0, 102, 204, 0.15);
-            border-color: var(--primary-color);
+            border-color: var(--blue);
             transform: translateY(-4px);
         }
         
         .booking-card-header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
             padding: 20px 24px;
             color: white;
             position: relative;
@@ -1387,7 +1051,7 @@
         }
         
         .form-label i {
-            color: var(--primary-color);
+            color: var(--blue);
             font-size: 16px;
             width: 20px;
             display: flex;
@@ -1408,19 +1072,167 @@
         }
         
         .form-control:hover {
-            border-color: var(--primary-color);
+            border-color: var(--blue);
         }
         
         .form-control:focus {
             outline: none;
-            border-color: var(--primary-color);
+            border-color: var(--blue);
             box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
             background: white;
         }
         
+        /* Guests Dropdown Styles */
+        .guests-dropdown-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        
+        .guests-input {
+            cursor: pointer;
+        }
+        
+        .guests-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            padding: 20px;
+            display: none;
+            z-index: 10000;
+            min-width: 320px;
+        }
+        
+        .form-group {
+            overflow: visible;
+        }
+        
+        .booking-form {
+            overflow: visible;
+        }
+        
+        .guests-dropdown-wrapper.active .guests-dropdown-menu {
+            display: block;
+        }
+        
+        .guests-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .guests-option:last-of-type {
+            margin-bottom: 0;
+        }
+        
+        .guests-option-label {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .guests-option-label strong {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 4px;
+        }
+        
+        .guests-subtitle {
+            font-size: 12px;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+        
+        .guests-counter {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 4px;
+        }
+        
+        .guests-btn-minus,
+        .guests-btn-plus {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #ffffff;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .guests-btn-minus:hover,
+        .guests-btn-plus:hover {
+            background: var(--blue);
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+        
+        .guests-btn-minus:active,
+        .guests-btn-plus:active {
+            transform: scale(0.95);
+        }
+        
+        .guests-value {
+            min-width: 30px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .guests-message {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 16px;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        
+        .guests-apply-btn {
+            width: 100%;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--golden) 0%, var(--golden-dark) 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+            box-shadow: 0 4px 12px rgba(175, 135, 0, 0.25);
+        }
+        
+        .guests-apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(175, 135, 0, 0.3);
+            background: linear-gradient(135deg, var(--golden-dark) 0%, var(--golden) 100%);
+        }
+        
+        .guests-apply-btn:active {
+            transform: translateY(0);
+        }
+        
         .book-btn {
             width: 100%;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--golden) 0%, var(--golden-dark) 100%);
             color: white;
             border: none;
             padding: 16px;
@@ -1431,7 +1243,7 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
+            box-shadow: 0 4px 16px rgba(175, 135, 0, 0.3);
             position: relative;
             overflow: hidden;
             margin-top: 6px;
@@ -1445,7 +1257,7 @@
             width: 0;
             height: 0;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.3);
             transform: translate(-50%, -50%);
             transition: width 0.6s, height 0.6s;
         }
@@ -1457,8 +1269,8 @@
         
         .book-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            box-shadow: 0 8px 24px rgba(175, 135, 0, 0.4);
+            background: linear-gradient(135deg, var(--golden-dark) 0%, var(--golden) 100%);
         }
         
         .book-btn span {
@@ -1543,7 +1355,7 @@
             border-radius: 10px;
             font-size: 12px;
             font-weight: 700;
-            color: var(--primary-color);
+            color: var(--blue);
             flex: 1;
             min-width: calc(50% - 6px);
         }
@@ -1568,7 +1380,7 @@
         
         .review-form-container:hover {
             box-shadow: 0 12px 32px rgba(0, 102, 204, 0.15);
-            border-color: var(--primary-color);
+            border-color: var(--blue);
             transform: translateY(-4px);
         }
         
@@ -1581,7 +1393,7 @@
         
         .review-form-header i {
             font-size: 28px;
-            color: var(--primary-color);
+            color: var(--blue);
         }
         
         .review-form-title {
@@ -1589,6 +1401,7 @@
             font-weight: 800;
             color: var(--dark-color);
             margin: 0;
+            text-align: left;
         }
         
         .review-form-subtitle {
@@ -1629,7 +1442,7 @@
         }
         
         .review-form-label i {
-            color: var(--primary-color);
+            color: var(--blue);
             font-size: 16px;
         }
         
@@ -1654,7 +1467,7 @@
         .review-form-input:focus,
         .review-form-textarea:focus {
             outline: none;
-            border-color: var(--primary-color);
+            border-color: var(--blue);
             box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
         }
         
@@ -1726,14 +1539,15 @@
         }
         
         .review-form-btn.submit {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--golden) 0%, var(--golden-dark) 100%);
             color: white;
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+            box-shadow: 0 4px 12px rgba(175, 135, 0, 0.3);
         }
         
         .review-form-btn.submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+            box-shadow: 0 6px 20px rgba(175, 135, 0, 0.4);
+            background: linear-gradient(135deg, var(--golden-dark) 0%, var(--golden) 100%);
         }
         
         .review-form-btn.submit:active {
@@ -1765,7 +1579,7 @@
         }
         
         .review-form-help i {
-            color: var(--primary-color);
+            color: var(--blue);
             font-size: 14px;
         }
         
@@ -1780,7 +1594,7 @@
         
         .review-card:hover {
             box-shadow: 0 12px 32px rgba(0, 102, 204, 0.15);
-            border-color: var(--primary-color);
+            border-color: var(--blue);
             transform: translateY(-4px);
         }
         
@@ -1800,7 +1614,7 @@
         .reviewer-avatar {
             width: 50px;
             height: 50px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -1815,6 +1629,7 @@
             font-weight: 700;
             color: var(--dark-color);
             margin-bottom: 4px;
+            text-align: left;
         }
         
         .reviewer-details p {
@@ -1876,7 +1691,7 @@
         .similar-hotel-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 16px 48px rgba(0, 0, 0, 0.15);
-            border-color: var(--primary-color);
+            border-color: var(--blue);
         }
         
         .similar-hotel-image-wrapper {
@@ -1906,7 +1721,7 @@
             border-radius: 20px;
             font-size: 11px;
             font-weight: 800;
-            color: var(--primary-color);
+            color: var(--blue);
             text-transform: uppercase;
             letter-spacing: 0.8px;
             z-index: 2;
@@ -1957,6 +1772,7 @@
             margin-bottom: 10px;
             letter-spacing: -0.5px;
             line-height: 1.3;
+            text-align: left;
         }
         
         .similar-hotel-location {
@@ -1969,7 +1785,7 @@
         }
         
         .similar-hotel-location i {
-            color: var(--primary-color);
+            color: var(--blue);
             font-size: 16px;
         }
         
@@ -1993,7 +1809,7 @@
         }
         
         .similar-hotel-feature i {
-            color: var(--primary-color);
+            color: var(--blue);
             font-size: 14px;
         }
         
@@ -2023,13 +1839,13 @@
         .similar-hotel-price {
             font-size: 28px;
             font-weight: 900;
-            color: var(--primary-color);
+            color: var(--blue);
             line-height: 1;
             letter-spacing: -1px;
         }
         
         .similar-hotel-view-btn {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--golden) 0%, var(--golden-dark) 100%);
             color: white;
             border: none;
             padding: 12px 24px;
@@ -2040,7 +1856,7 @@
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             text-transform: uppercase;
             letter-spacing: 0.8px;
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.25);
+            box-shadow: 0 4px 12px rgba(175, 135, 0, 0.25);
             position: relative;
             overflow: hidden;
         }
@@ -2065,149 +1881,13 @@
         
         .similar-hotel-view-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+            box-shadow: 0 6px 20px rgba(175, 135, 0, 0.4);
+            background: linear-gradient(135deg, var(--golden-dark) 0%, var(--golden) 100%);
         }
         
         .similar-hotel-view-btn span {
             position: relative;
             z-index: 1;
-        }
-        
-        /* Footer */
-        .footer {
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-            color: white;
-            padding: 40px 0 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .footer::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0, 102, 204, 0.5), transparent);
-        }
-        
-        .footer .container {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .footer-title {
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 24px;
-            color: white;
-            letter-spacing: -0.3px;
-            position: relative;
-            padding-bottom: 12px;
-        }
-        
-        .footer-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
-            border-radius: 2px;
-        }
-        
-        .footer p {
-            color: #b0b0b0;
-            line-height: 1.7;
-            font-size: 15px;
-        }
-        
-        .footer-link {
-            color: #b0b0b0;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 14px;
-            transition: all 0.3s ease;
-            font-size: 15px;
-            font-weight: 400;
-            position: relative;
-            padding-left: 0;
-        }
-        
-        .footer-link::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 0;
-            height: 2px;
-            background: var(--primary-color);
-            transition: width 0.3s ease;
-        }
-        
-        .footer-link:hover {
-            color: white;
-            padding-left: 12px;
-        }
-        
-        .footer-link:hover::before {
-            width: 8px;
-        }
-        
-        .footer-social {
-            display: flex;
-            gap: 12px;
-            margin-top: 20px;
-        }
-        
-        .footer a[style*="color: white"] {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 42px;
-            height: 42px;
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
-            color: #b0b0b0 !important;
-            font-size: 18px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .footer a[style*="color: white"]:hover {
-            background: var(--primary-color);
-            color: white !important;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
-            border-color: var(--primary-color);
-        }
-        
-        .footer p[style*="color: #999"] {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 14px;
-            color: #b0b0b0;
-            font-size: 15px;
-        }
-        
-        .footer p[style*="color: #999"] i {
-            color: var(--primary-color);
-            font-size: 16px;
-            width: 20px;
-        }
-        
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 30px;
-            padding: 20px 0;
-            text-align: center;
-            color: #999;
-            background: rgba(0, 0, 0, 0.3);
-            font-size: 14px;
         }
         
         /* WhatsApp Fixed Button */
@@ -2257,44 +1937,16 @@
         }
         
         @media (max-width: 991px) {
-            .navbar-container {
-                padding: 0 20px;
-            }
-            
-            .nav-menu {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: white;
-                flex-direction: column;
-                padding: 20px;
-                box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-                border-top: 1px solid var(--border-color);
-                gap: 10px;
-            }
-            
-            .nav-menu.active {
-                display: flex;
-            }
-            
-            .mobile-menu-toggle {
-                display: block;
-            }
-            
-            .phone-number {
-                display: none;
-            }
             
             .hotel-hero {
-                padding: 30px 0 30px;
+                padding: 40px 0 30px;
+                margin-top: 80px;
             }
             
             .hotel-title-section {
                 flex-direction: column;
-                padding: 24px;
-                gap: 24px;
+                padding: 28px;
+                gap: 28px;
             }
             
             .hotel-name-wrapper {
@@ -2302,17 +1954,17 @@
             }
             
             .hotel-name {
-                font-size: 36px;
-                padding-bottom: 12px;
+                font-size: 34px;
+                margin-bottom: 14px;
             }
             
             .hotel-location {
                 font-size: 15px;
-                padding: 8px 14px;
+                margin-bottom: 16px;
             }
             
             .hotel-stars {
-                margin-top: 10px;
+                margin-bottom: 18px;
             }
             
             .hotel-stars i {
@@ -2320,37 +1972,61 @@
             }
             
             .hotel-badges {
-                margin-top: 12px;
                 gap: 8px;
+                margin-top: 0;
             }
             
             .hotel-badge {
                 padding: 6px 12px;
-                font-size: 12px;
+                font-size: 11px;
             }
             
             .hotel-rating-section {
                 width: 100%;
                 flex-direction: row;
-                align-items: center;
+                align-items: stretch;
                 justify-content: space-between;
-                gap: 16px;
+                gap: 12px;
             }
             
             .hotel-rating {
                 flex: 1;
-                padding: 16px 20px;
-                font-size: 28px;
-                min-width: auto;
+                padding: 18px 20px;
+                gap: 14px;
+                min-width: 0;
+            }
+            
+            .hotel-rating-number {
+                font-size: 30px;
             }
             
             .hotel-rating i {
-                font-size: 24px;
+                font-size: 26px;
+                flex-shrink: 0;
+            }
+            
+            .hotel-rating-label {
+                font-size: 13px;
             }
             
             .hotel-reviews {
                 flex: 1;
-                padding: 16px 20px;
+                padding: 18px 20px;
+                gap: 14px;
+                min-width: 0;
+            }
+            
+            .hotel-reviews-count {
+                font-size: 30px;
+            }
+            
+            .hotel-reviews-count i {
+                font-size: 26px;
+                flex-shrink: 0;
+            }
+            
+            .hotel-reviews-label {
+                font-size: 13px;
             }
             
             .gallery-main {
@@ -2378,12 +2054,39 @@
             }
             
             .gallery-thumbnails {
-                grid-template-columns: repeat(2, 1fr);
+                display: flex;
+                flex-direction: row;
                 gap: 12px;
+                overflow-x: auto;
+                overflow-y: hidden;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 4px;
+            }
+            
+            .gallery-thumbnails::-webkit-scrollbar {
+                height: 4px;
+            }
+            
+            .gallery-thumbnails::-webkit-scrollbar-track {
+                background: var(--light-bg);
+                border-radius: 2px;
+            }
+            
+            .gallery-thumbnails::-webkit-scrollbar-thumb {
+                background: var(--border-color);
+                border-radius: 2px;
+            }
+            
+            .gallery-thumbnails::-webkit-scrollbar-thumb:hover {
+                background: var(--blue);
             }
             
             .gallery-thumb {
-                height: 120px;
+                height: 100px;
+                min-width: 100px;
+                flex-shrink: 0;
+                scroll-snap-align: start;
             }
             
             .gallery-header {
@@ -2449,6 +2152,11 @@
         }
         
         @media (max-width: 576px) {
+            .hotel-hero {
+                margin-top: 70px;
+                padding: 30px 0 25px;
+            }
+            
             .amenities-grid {
                 grid-template-columns: 1fr;
                 gap: 14px;
@@ -2475,33 +2183,129 @@
             
             .hotel-name {
                 font-size: 28px;
+                margin-bottom: 10px;
             }
             
             .hotel-title-section {
-                padding: 20px;
+                padding: 24px;
+                gap: 24px;
             }
             
             .hotel-location {
                 font-size: 14px;
-                padding: 8px 12px;
+                margin-bottom: 14px;
+            }
+            
+            .hotel-stars {
+                margin-bottom: 18px;
+            }
+            
+            .hotel-badges {
+                gap: 6px;
+            }
+            
+            .hotel-badge {
+                padding: 5px 10px;
+                font-size: 11px;
+            }
+            
+            .hotel-title-section {
+                padding: 20px;
+                gap: 20px;
+            }
+            
+            .hotel-name {
+                font-size: 26px;
+                margin-bottom: 12px;
+            }
+            
+            .hotel-location {
+                font-size: 14px;
+                margin-bottom: 12px;
+            }
+            
+            .hotel-stars {
+                margin-bottom: 16px;
             }
             
             .hotel-stars i {
                 font-size: 16px;
             }
             
+            .hotel-badges {
+                gap: 6px;
+                margin-bottom: 20px;
+            }
+            
+            .hotel-badge {
+                padding: 5px 10px;
+                font-size: 10px;
+            }
+            
             .hotel-rating-section {
                 flex-direction: column;
                 gap: 12px;
+                width: 100%;
             }
             
             .hotel-rating {
                 width: 100%;
+                padding: 16px;
+                gap: 12px;
+            }
+            
+            .hotel-rating-value {
+                min-width: 0;
+                flex: 1;
+            }
+            
+            .hotel-rating-number {
+                font-size: 28px;
+                word-break: break-word;
+            }
+            
+            .hotel-rating i {
                 font-size: 24px;
+                flex-shrink: 0;
+            }
+            
+            .hotel-rating-label {
+                font-size: 13px;
             }
             
             .hotel-reviews {
                 width: 100%;
+                padding: 16px;
+                gap: 12px;
+            }
+            
+            .hotel-reviews-content {
+                min-width: 0;
+                flex: 1;
+            }
+            
+            .hotel-reviews-count {
+                font-size: 28px;
+                word-break: break-word;
+            }
+            
+            .hotel-reviews-count i {
+                font-size: 24px;
+                flex-shrink: 0;
+            }
+            
+            .hotel-reviews-label {
+                font-size: 13px;
+            }
+            
+            
+            .gallery-thumbnails {
+                gap: 10px;
+            }
+            
+            .gallery-thumb {
+                height: 90px;
+                min-width: 90px;
             }
             
             .review-form-container {
@@ -2568,7 +2372,7 @@
         .mobile-price-amount {
             font-size: 20px;
             font-weight: 800;
-            color: var(--primary-color);
+            color: var(--blue);
             line-height: 1;
         }
         
@@ -2596,7 +2400,7 @@
         }
         
         .mobile-book-btn {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--golden) 0%, var(--golden-dark) 100%);
             color: white;
             border: none;
             padding: 14px 24px;
@@ -2608,7 +2412,7 @@
             align-items: center;
             gap: 8px;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+            box-shadow: 0 4px 12px rgba(175, 135, 0, 0.3);
             position: relative;
             overflow: hidden;
             white-space: nowrap;
@@ -2635,8 +2439,8 @@
         
         .mobile-book-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
-            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+            box-shadow: 0 6px 20px rgba(175, 135, 0, 0.4);
+            background: linear-gradient(135deg, var(--golden-dark) 0%, var(--golden) 100%);
         }
         
         .mobile-book-btn:active {
@@ -2706,59 +2510,8 @@
     </style>
 </head>
 <body>
-    <div class="top-strip"></div>
-    <nav class="navbar" id="navbar">
-        <div class="navbar-container">
-            <div class="navbar-content">
-                <a href="index.html" class="logo-section">
-                    <img src="https://fayyaztravels.com/visa/admin/assets/img/main-logo.png" alt="Fayyaz Travels Logo" class="logo-image">
-                </a>
-                
-                <button class="mobile-menu-toggle" id="mobileMenuToggle">
-                    <i class="bi bi-list"></i>
-                </button>
-                
-                <div class="nav-menu" id="navMenu">
-                    <a href="#" class="nav-item">
-                        <i class="bi bi-airplane-fill"></i>
-                        <span>Flight</span>
-                    </a>
-                    <a href="#" class="nav-item active">
-                        <i class="bi bi-building-fill"></i>
-                        <span>Hotel</span>
-                    </a>
-                    <a href="#" class="nav-item">
-                        <i class="bi bi-tag-fill"></i>
-                        <span>Offers</span>
-                    </a>
-                </div>
-                
-                <div class="right-section">
-                    <div class="phone-section">
-                        <i class="bi bi-telephone-fill"></i>
-                        <span class="phone-number">+91 9953-888-841</span>
-                    </div>
-                    <a href="https://wa.me/919953888841" target="_blank" class="whatsapp-btn" title="WhatsApp">
-                        <div class="whatsapp-icon">
-                            <i class="bi bi-whatsapp"></i>
-                        </div>
-                    </a>
-                    <div class="user-profile-wrapper">
-                        <div class="user-profile" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="user-icon">
-                                <i class="bi bi-person-fill"></i>
-                            </div>
-                            <i class="bi bi-chevron-down"></i>
-                        </div>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-in-right me-2"></i>Login</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-person-plus me-2"></i>Sign Up</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </nav>
+    <?php include __DIR__ . '/components/header.php'; ?>
+    <?php include __DIR__ . '/components/navbar.php'; ?>
 
     <!-- Mobile Sticky Booking Bar -->
     <div class="mobile-booking-bar hidden" id="mobileBookingBar">
@@ -2822,18 +2575,18 @@
                     </div>
                     <div class="hotel-rating-section">
                         <div class="hotel-rating">
-                            <div class="hotel-rating-value">
                                 <i class="bi bi-star-fill"></i>
-                                <span>4.8</span>
-                            </div>
+                            <div class="hotel-rating-value">
+                                <div class="hotel-rating-number">4.8</div>
                             <div class="hotel-rating-label">Excellent</div>
+                            </div>
                         </div>
                         <div class="hotel-reviews">
-                            <div class="hotel-reviews-count">
                                 <i class="bi bi-chat-dots-fill"></i>
-                                <span>1,245</span>
-                            </div>
+                            <div class="hotel-reviews-content">
+                                <div class="hotel-reviews-count">1,245</div>
                             <div class="hotel-reviews-label">Guest Reviews</div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -3337,12 +3090,46 @@
                                     <i class="bi bi-people-fill"></i>
                                     Guests
                                 </label>
-                                <select class="form-control">
-                                    <option>1 Guest</option>
-                                    <option>2 Guests</option>
-                                    <option>3 Guests</option>
-                                    <option>4+ Guests</option>
-                                </select>
+                                <div class="guests-dropdown-wrapper">
+                                    <input type="text" class="form-control guests-input" id="guestsInputDetails" placeholder="Select guests" readonly>
+                                    <div class="guests-dropdown-menu" id="guestsDropdownDetails">
+                                        <div class="guests-option">
+                                            <div class="guests-option-label">
+                                                <strong>Room</strong>
+                                            </div>
+                                            <div class="guests-counter">
+                                                <button type="button" class="guests-btn-minus" data-type="room">-</button>
+                                                <span class="guests-value" data-type="room">1</span>
+                                                <button type="button" class="guests-btn-plus" data-type="room">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="guests-option">
+                                            <div class="guests-option-label">
+                                                <strong>Adults</strong>
+                                            </div>
+                                            <div class="guests-counter">
+                                                <button type="button" class="guests-btn-minus" data-type="adults">-</button>
+                                                <span class="guests-value" data-type="adults">2</span>
+                                                <button type="button" class="guests-btn-plus" data-type="adults">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="guests-option">
+                                            <div class="guests-option-label">
+                                                <strong>Children</strong>
+                                                <span class="guests-subtitle">0 - 17 Years Old</span>
+                                            </div>
+                                            <div class="guests-counter">
+                                                <button type="button" class="guests-btn-minus" data-type="children">-</button>
+                                                <span class="guests-value" data-type="children">0</span>
+                                                <button type="button" class="guests-btn-plus" data-type="children">+</button>
+                                            </div>
+                                        </div>
+                                        <div class="guests-message">
+                                            Please provide right number of children along with their right age for best options and prices.
+                                        </div>
+                                        <button type="button" class="guests-apply-btn">APPLY</button>
+                                    </div>
+                                </div>
                             </div>
                             <button type="submit" class="book-btn">
                                 <span>
@@ -3498,52 +3285,9 @@
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="footer-title">Fayyaz Travels</div>
-                    <p>Your trusted travel partner for flights, hotels, and vacation packages.</p>
-                    <div class="footer-social">
-                        <a href="#" style="color: white; font-size: 20px;"><i class="bi bi-facebook"></i></a>
-                        <a href="#" style="color: white; font-size: 20px;"><i class="bi bi-twitter"></i></a>
-                        <a href="#" style="color: white; font-size: 20px;"><i class="bi bi-instagram"></i></a>
-                        <a href="#" style="color: white; font-size: 20px;"><i class="bi bi-linkedin"></i></a>
+    <div class="footer">
+        <?php include __DIR__ . '/components/footer.php'; ?>
                     </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="footer-title">Company</div>
-                    <a href="#" class="footer-link">About Us</a>
-                    <a href="#" class="footer-link">Careers</a>
-                    <a href="#" class="footer-link">Contact</a>
-                    <a href="#" class="footer-link">Blog</a>
-                </div>
-                <div class="col-md-3">
-                    <div class="footer-title">Support</div>
-                    <a href="#" class="footer-link">Help Center</a>
-                    <a href="#" class="footer-link">FAQs</a>
-                    <a href="#" class="footer-link">Cancellation</a>
-                    <a href="#" class="footer-link">Refund Policy</a>
-                </div>
-                <div class="col-md-3">
-                    <div class="footer-title">Contact</div>
-                    <p style="color: #999; margin-bottom: 10px;">
-                        <i class="bi bi-telephone-fill"></i>+91 9953-888-841
-                    </p>
-                    <p style="color: #999; margin-bottom: 10px;">
-                        <i class="bi bi-envelope-fill"></i>support@fayyaztravels.com
-                    </p>
-                    <p style="color: #999;">
-                        <i class="bi bi-geo-alt-fill"></i>Mumbai, India
-                    </p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2024 Fayyaz Travels. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
 
     <!-- Fixed WhatsApp Button -->
     <a href="https://wa.me/919953888841" target="_blank" class="whatsapp-fixed-btn" title="Chat on WhatsApp">
@@ -3875,6 +3619,197 @@
             dateFormat: 'dd/MM/yyyy',
             locale: englishLocale
         });
+        
+        // Guests Dropdown Functionality
+        function initGuestsDropdown(inputId, dropdownId) {
+            const input = document.getElementById(inputId);
+            const dropdown = document.getElementById(dropdownId);
+            const wrapper = input ? input.closest('.guests-dropdown-wrapper') : null;
+            
+            if (!input || !dropdown || !wrapper) return;
+            
+            let guestsData = {
+                room: 1,
+                adults: 2,
+                children: 0
+            };
+            
+            function updateInputValue() {
+                const total = guestsData.adults + guestsData.children;
+                const roomText = guestsData.room > 1 ? `${guestsData.room} Rooms` : '1 Room';
+                let guestText = '';
+                
+                if (guestsData.children > 0) {
+                    const adultText = guestsData.adults > 1 ? `${guestsData.adults} Adults` : '1 Adult';
+                    const childText = guestsData.children > 1 ? `${guestsData.children} Children` : '1 Child';
+                    guestText = `${adultText}, ${childText}`;
+                } else {
+                    guestText = total > 1 ? `${total} Guests` : '1 Guest';
+                }
+                
+                input.value = `${roomText}, ${guestText}`;
+            }
+            
+            function updateValue(type, delta) {
+                if (type === 'room') {
+                    guestsData.room = Math.max(1, guestsData.room + delta);
+                } else if (type === 'adults') {
+                    guestsData.adults = Math.max(1, guestsData.adults + delta);
+                } else if (type === 'children') {
+                    guestsData.children = Math.max(0, guestsData.children + delta);
+                }
+                
+                const valueElement = dropdown.querySelector(`.guests-value[data-type="${type}"]`);
+                if (valueElement) {
+                    valueElement.textContent = guestsData[type];
+                }
+            }
+            
+            // Toggle dropdown
+            input.addEventListener('click', function(e) {
+                e.stopPropagation();
+                wrapper.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!wrapper.contains(e.target)) {
+                    wrapper.classList.remove('active');
+                }
+            });
+            
+            // Handle plus/minus buttons
+            dropdown.querySelectorAll('.guests-btn-minus, .guests-btn-plus').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const type = this.dataset.type;
+                    const delta = this.classList.contains('guests-btn-plus') ? 1 : -1;
+                    updateValue(type, delta);
+                });
+            });
+            
+            // Handle apply button
+            const applyBtn = dropdown.querySelector('.guests-apply-btn');
+            if (applyBtn) {
+                applyBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    updateInputValue();
+                    wrapper.classList.remove('active');
+                    input.dispatchEvent(new Event('change'));
+                });
+            }
+            
+            // Initialize input value
+            updateInputValue();
+        }
+        
+        // Initialize guests dropdown
+        initGuestsDropdown('guestsInputDetails', 'guestsDropdownDetails');
+        
+        // Sticky Booking Card - Stop at Footer
+        (function() {
+            const bookingCard = document.querySelector('.booking-card');
+            const footer = document.querySelector('.footer');
+            const bookingCardParent = bookingCard ? bookingCard.closest('.col-lg-4') : null;
+            
+            if (!bookingCard || !footer || !bookingCardParent) return;
+            
+            // Ensure parent has relative positioning for absolute positioning when needed
+            const parentStyle = window.getComputedStyle(bookingCardParent);
+            if (parentStyle.position === 'static') {
+                bookingCardParent.style.position = 'relative';
+            }
+            
+            let isStopped = false;
+            
+            function updateBookingCardSticky() {
+                // Mobile - no sticky
+                if (window.innerWidth <= 991) {
+                    bookingCard.style.position = '';
+                    bookingCard.style.top = '';
+                    bookingCard.style.bottom = '';
+                    isStopped = false;
+                    return;
+                }
+                
+                const navbar = document.getElementById('navbar');
+                const navbarHeight = navbar ? navbar.offsetHeight : 0;
+                const stickyTop = navbarHeight + 20;
+                const padding = 20;
+                
+                // Get current positions
+                const bookingCardRect = bookingCard.getBoundingClientRect();
+                const footerRect = footer.getBoundingClientRect();
+                const parentRect = bookingCardParent.getBoundingClientRect();
+                
+                // Calculate if footer is approaching and card would overlap
+                const cardBottom = bookingCardRect.bottom;
+                const footerTop = footerRect.top;
+                const spaceBetween = footerTop - cardBottom;
+                
+                // If footer is in viewport and card would overlap (with padding)
+                if (footerTop < window.innerHeight && spaceBetween < padding) {
+                    if (!isStopped) {
+                        // Switch to absolute positioning to stop before footer
+                        const parentBottom = parentRect.bottom;
+                        const bottomValue = parentBottom - footerTop + padding;
+                        
+                        bookingCard.style.position = 'absolute';
+                        bookingCard.style.top = 'auto';
+                        bookingCard.style.bottom = Math.max(0, bottomValue) + 'px';
+                        isStopped = true;
+                    } else {
+                        // Update bottom position if already stopped
+                        const parentBottom = parentRect.bottom;
+                        const bottomValue = parentBottom - footerTop + padding;
+                        bookingCard.style.bottom = Math.max(0, bottomValue) + 'px';
+                    }
+                } else {
+                    // Use sticky positioning (let CSS handle it)
+                    if (isStopped) {
+                        bookingCard.style.position = '';
+                        bookingCard.style.top = '';
+                        bookingCard.style.bottom = '';
+                        isStopped = false;
+                    }
+                }
+            }
+            
+            // Wait for page to load
+            function initSticky() {
+                if (window.innerWidth > 991) {
+                    // Don't interfere with CSS sticky initially
+                    bookingCard.style.position = '';
+                    bookingCard.style.top = '';
+                    bookingCard.style.bottom = '';
+                }
+                setTimeout(updateBookingCardSticky, 100);
+            }
+            
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initSticky);
+            } else {
+                initSticky();
+            }
+            
+            // Update on scroll
+            let ticking = false;
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(function() {
+                        updateBookingCardSticky();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+            
+            // Update on resize
+            window.addEventListener('resize', function() {
+                isStopped = false;
+                initSticky();
+            });
+        })();
     </script>
 </body>
 </html>

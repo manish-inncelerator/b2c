@@ -159,7 +159,7 @@
         
         .content-body h2 {
             font-size: 28px;
-            font-weight: 800;
+            font-weight: normal;
             color: var(--dark-color);
             margin-top: 40px;
             margin-bottom: 20px;
@@ -168,7 +168,7 @@
         
         .content-body h3 {
             font-size: 22px;
-            font-weight: 700;
+            font-weight: normal;
             color: var(--dark-color);
             margin-top: 32px;
             margin-bottom: 16px;
@@ -324,7 +324,7 @@
                 <div class="error-icon">
                     <i class="bi bi-exclamation-triangle-fill"></i>
                 </div>
-                <h2 style="font-size: 24px; font-weight: 800; margin-bottom: 12px; color: var(--dark-color);">Content Not Found</h2>
+                <h2 style="font-size: 24px; font-weight: normal; margin-bottom: 12px; color: var(--dark-color);">Content Not Found</h2>
                 <p style="color: var(--text-light); margin-bottom: 24px;">Unable to load the requested content. Please try again later.</p>
                 <a href="index.html" class="back-btn">
                     <i class="bi bi-arrow-left"></i>

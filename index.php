@@ -7,9 +7,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/air-datepicker@3.4.0/air-datepicker.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="assets/css/site.css">
     <style>
         /* Logo Icon Styles (page-specific) */
@@ -127,7 +131,7 @@
             background-repeat: no-repeat;
             padding: 80px 0;
             position: relative;
-            overflow: hidden;
+            overflow: visible;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -174,8 +178,9 @@
         }
         
         .hero-title {
+            font-family: "Quattrocento", serif;
             font-size: 56px;
-            font-weight: 900;
+            font-weight: 700;
             margin: 0 0 20px 0;
             letter-spacing: -1.5px;
             line-height: 1.15;
@@ -542,6 +547,152 @@
             background: var(--primary-dark);
         }
         
+        /* Guests Dropdown Styles */
+        .guests-dropdown-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        
+        .guests-input {
+            cursor: pointer;
+        }
+        
+        .guests-dropdown-menu {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+            padding: 20px;
+            display: none;
+            z-index: 10000;
+            min-width: 320px;
+        }
+        
+        .form-group {
+            overflow: visible;
+        }
+        
+        .search-form {
+            overflow: visible;
+        }
+        
+        .guests-dropdown-wrapper.active .guests-dropdown-menu {
+            display: block;
+        }
+        
+        .guests-option {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        
+        .guests-option:last-of-type {
+            margin-bottom: 0;
+        }
+        
+        .guests-option-label {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .guests-option-label strong {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--dark-color);
+            margin-bottom: 4px;
+        }
+        
+        .guests-subtitle {
+            font-size: 12px;
+            color: var(--text-light);
+            font-weight: 400;
+        }
+        
+        .guests-counter {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 4px;
+        }
+        
+        .guests-btn-minus,
+        .guests-btn-plus {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: #ffffff;
+            border-radius: 6px;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        
+        .guests-btn-minus:hover,
+        .guests-btn-plus:hover {
+            background: var(--blue);
+            color: #ffffff;
+            transform: scale(1.05);
+        }
+        
+        .guests-btn-minus:active,
+        .guests-btn-plus:active {
+            transform: scale(0.95);
+        }
+        
+        .guests-value {
+            min-width: 30px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--dark-color);
+        }
+        
+        .guests-message {
+            font-size: 12px;
+            color: var(--text-light);
+            margin-top: 16px;
+            margin-bottom: 16px;
+            line-height: 1.5;
+        }
+        
+        .guests-apply-btn {
+            width: 100%;
+            padding: 12px 24px;
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
+            color: #ffffff;
+            border: none;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+        
+        .guests-apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(20, 56, 92, 0.3);
+        }
+        
+        .guests-apply-btn:active {
+            transform: translateY(0);
+        }
+        
         .custom-select-option {
             padding: 14px 16px;
             cursor: pointer;
@@ -595,97 +746,183 @@
         
         
         /* Air Datepicker Blue Styling */
-        .air-datepicker {
-            --adp-color-primary: var(--blue);
-            --adp-color-primary-hover: var(--blue-dark);
-            --adp-color-current-date: var(--blue);
-            --adp-color-selected-date: var(--blue);
-            --adp-color-selected-date-background: var(--blue);
-            --adp-color-selected-date-hover: var(--blue-dark);
-            --adp-color-day-name: var(--blue);
-            --adp-color-day-name-hover: var(--blue-dark);
+        /* Flatpickr Date Picker Styles */
+        .flatpickr-calendar {
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            border: 1px solid var(--border-color);
         }
         
-        .air-datepicker-nav--title {
+        .flatpickr-months {
+            background: var(--blue) !important;
+            border-radius: 12px 12px 0 0;
+            padding: 10px 0;
+        }
+        
+        .flatpickr-month {
+            color: white !important;
+            background: var(--blue) !important;
+        }
+        
+        .flatpickr-current-month {
+            color: white !important;
+            font-weight: 700;
+        }
+        
+        .flatpickr-prev-month,
+        .flatpickr-next-month {
+            color: white !important;
+            fill: white !important;
+            stroke: white !important;
+        }
+        
+        .flatpickr-prev-month svg,
+        .flatpickr-next-month svg {
+            fill: white !important;
+            stroke: white !important;
+            width: 14px;
+            height: 14px;
+        }
+        
+        .flatpickr-prev-month:hover,
+        .flatpickr-next-month:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+            color: white !important;
+        }
+        
+        .flatpickr-prev-month:hover svg,
+        .flatpickr-next-month:hover svg {
+            fill: white !important;
+            stroke: white !important;
+        }
+        
+        /* Month/Year Dropdown Styles */
+        .flatpickr-monthDropdown-months {
+            background: var(--blue) !important;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .flatpickr-monthDropdown-month {
+            color: white !important;
+            background: transparent !important;
+        }
+        
+        .flatpickr-monthDropdown-month:hover {
+            background: rgba(255, 255, 255, 0.2) !important;
+            color: white !important;
+        }
+        
+        .flatpickr-monthDropdown-month.selected,
+        .flatpickr-monthDropdown-month.flatpickr-monthDropdown-month.selected {
+            background: rgba(255, 255, 255, 0.3) !important;
+            color: white !important;
+            font-weight: 700;
+        }
+        
+        /* Year Dropdown Styles */
+        .flatpickr-yearDropdown-years {
+            background: white !important;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--border-color);
+        }
+        
+        .flatpickr-yearDropdown-year {
+            color: var(--text-color) !important;
+            background: transparent !important;
+        }
+        
+        .flatpickr-yearDropdown-year:hover {
+            background: rgba(20, 56, 92, 0.1) !important;
+            color: var(--blue) !important;
+        }
+        
+        .flatpickr-yearDropdown-year.selected,
+        .flatpickr-yearDropdown-year.flatpickr-yearDropdown-year.selected {
+            background: var(--blue) !important;
+            color: white !important;
+            font-weight: 700;
+        }
+        
+        /* Year Input Wrapper Styles */
+        .numInputWrapper {
+            background: white !important;
+            border-radius: 6px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .numInputWrapper .numInput {
+            background: white !important;
+            color: var(--text-color) !important;
+            border: none !important;
+        }
+        
+        .numInputWrapper .arrowUp,
+        .numInputWrapper .arrowDown {
+            background: white !important;
+            border-color: var(--text-color) !important;
+        }
+        
+        .numInputWrapper .arrowUp:after,
+        .numInputWrapper .arrowDown:after {
+            border-color: var(--text-color) !important;
+        }
+        
+        .numInputWrapper .arrowUp:hover,
+        .numInputWrapper .arrowDown:hover {
+            background: rgba(20, 56, 92, 0.1) !important;
+        }
+        
+        .flatpickr-weekdays {
+            background: rgba(20, 56, 92, 0.1);
+        }
+        
+        .flatpickr-weekday {
             color: var(--blue);
             font-weight: 700;
         }
         
-        .air-datepicker-nav--title:hover {
-            color: var(--blue-dark);
-        }
-        
-        .air-datepicker-nav--action:hover {
-            background: rgba(20, 56, 92, 0.1);
-            color: var(--blue);
-        }
-        
-        .air-datepicker-cell.-day-.-selected- {
+        .flatpickr-day.selected,
+        .flatpickr-day.startRange,
+        .flatpickr-day.endRange {
             background: var(--blue);
+            border-color: var(--blue);
             color: white;
         }
         
-        .air-datepicker-cell.-day-.-selected-.-current- {
+        .flatpickr-day.selected:hover,
+        .flatpickr-day.startRange:hover,
+        .flatpickr-day.endRange:hover {
             background: var(--blue-dark);
-            color: white;
+            border-color: var(--blue-dark);
         }
         
-        .air-datepicker-cell.-day-.-range-from-,
-        .air-datepicker-cell.-day-.-range-to- {
-            background: var(--blue);
-            color: white;
-        }
-        
-        .air-datepicker-cell.-day-.-range-from-.-range-to- {
-            background: var(--blue);
-        }
-        
-        .air-datepicker-cell.-day-.-in-range- {
+        .flatpickr-day.inRange {
             background: rgba(20, 56, 92, 0.1);
+            border-color: rgba(20, 56, 92, 0.2);
             color: var(--blue);
         }
         
-        .air-datepicker-cell.-day-:hover {
+        .flatpickr-day:hover {
             background: rgba(20, 56, 92, 0.15);
-            color: var(--blue);
+            border-color: rgba(20, 56, 92, 0.3);
         }
         
-        .air-datepicker-cell.-day-.-current- {
+        .flatpickr-day.today {
+            border-color: var(--blue);
             color: var(--blue);
             font-weight: 700;
         }
         
-        .air-datepicker-cell.-day-.-current-:hover {
+        .flatpickr-day.today:hover {
             background: rgba(20, 56, 92, 0.15);
         }
         
-        .air-datepicker-cell.-day-.-weekend- {
-            color: var(--blue);
-        }
-        
-        .air-datepicker-cell.-day-.-weekend-:hover {
-            background: rgba(20, 56, 92, 0.15);
-        }
-        
-        .air-datepicker-cell.-day-.-other-month- {
+        .flatpickr-day.flatpickr-disabled {
             color: var(--text-light);
-        }
-        
-        .air-datepicker-nav--action svg {
-            fill: var(--blue);
-        }
-        
-        .air-datepicker-nav--action:hover svg {
-            fill: var(--blue-dark);
-        }
-        
-        .air-datepicker-body--day-names {
-            color: var(--blue);
-        }
-        
-        .air-datepicker-body--day-name {
-            color: var(--blue);
-            font-weight: 700;
+            cursor: not-allowed;
         }
         
         .search-btn {
@@ -798,18 +1035,33 @@
             }
         }
         
+        /* Quattrocento Font Styles */
+        .quattrocento-regular {
+            font-family: "Quattrocento", serif;
+            font-weight: 400;
+            font-style: normal;
+        }
+        
+        .quattrocento-bold {
+            font-family: "Quattrocento", serif;
+            font-weight: 700;
+            font-style: normal;
+        }
+        
         /* Content Section Styling */
         .section h1 {
+            font-family: "Quattrocento", serif;
             font-size: 42px;
-            font-weight: 800;
+            font-weight: normal;
             color: var(--dark-color);
             margin-bottom: 24px;
             line-height: 1.3;
         }
         
         .section h2 {
+            font-family: "Quattrocento", serif;
             font-size: 48px;
-            font-weight: 700;
+            font-weight: normal;
             color: var(--dark-color);
             margin-top: 48px;
             margin-bottom: 20px;
@@ -817,8 +1069,9 @@
         }
         
         .section h3 {
+            font-family: "Quattrocento", serif;
             font-size: 22px;
-            font-weight: 600;
+            font-weight: normal;
             color: var(--blue);
             margin-top: 32px;
             margin-bottom: 12px;
@@ -916,8 +1169,9 @@
         }
         
         .destination-name {
+            font-family: "Quattrocento", serif;
             font-size: 28px;
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: 8px;
             text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
             letter-spacing: -0.5px;
@@ -1071,8 +1325,9 @@
         }
         
         .hotel-name {
+            font-family: "Quattrocento", serif;
             font-size: 24px;
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: 10px;
             color: var(--dark-color);
             line-height: 1.3;
@@ -1198,6 +1453,131 @@
             z-index: 1;
         }
         
+        /* Hotel Cards Mobile Responsive */
+        @media (max-width: 768px) {
+            .hotel-card {
+                border-radius: 16px;
+            }
+            
+            .hotel-image-wrapper {
+                height: 200px;
+            }
+            
+            .hotel-content {
+                padding: 20px;
+            }
+            
+            .hotel-name {
+                font-size: 20px;
+                margin-bottom: 8px;
+            }
+            
+            .hotel-location {
+                font-size: 14px;
+                margin-bottom: 14px;
+            }
+            
+            .hotel-features {
+                gap: 10px;
+                margin-bottom: 16px;
+            }
+            
+            .hotel-feature {
+                font-size: 12px;
+                padding: 5px 10px;
+                gap: 5px;
+            }
+            
+            .hotel-feature i {
+                font-size: 13px;
+            }
+            
+            .hotel-price {
+                margin-top: 18px;
+                padding-top: 18px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 16px;
+            }
+            
+            .price {
+                font-size: 28px;
+            }
+            
+            .price-label {
+                font-size: 12px;
+            }
+            
+            .book-btn {
+                width: 100%;
+                padding: 12px 24px;
+                font-size: 13px;
+            }
+            
+            .hotel-badge {
+                top: 12px;
+                right: 12px;
+                padding: 6px 12px;
+                font-size: 10px;
+            }
+            
+            .hotel-rating {
+                top: 12px;
+                left: 12px;
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+            
+            .hotel-rating i {
+                font-size: 14px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hotel-image-wrapper {
+                height: 180px;
+            }
+            
+            .hotel-content {
+                padding: 16px;
+            }
+            
+            .hotel-name {
+                font-size: 18px;
+                margin-bottom: 6px;
+            }
+            
+            .hotel-location {
+                font-size: 13px;
+                margin-bottom: 12px;
+            }
+            
+            .hotel-features {
+                gap: 8px;
+                margin-bottom: 14px;
+            }
+            
+            .hotel-feature {
+                font-size: 11px;
+                padding: 4px 8px;
+            }
+            
+            .hotel-price {
+                margin-top: 16px;
+                padding-top: 16px;
+                gap: 14px;
+            }
+            
+            .price {
+                font-size: 24px;
+            }
+            
+            .book-btn {
+                padding: 11px 20px;
+                font-size: 12px;
+            }
+        }
+        
         /* Features Section */
         .feature-card {
             text-align: center;
@@ -1274,8 +1654,9 @@
         }
         
         .feature-title {
+            font-family: "Quattrocento", serif;
             font-size: 22px;
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: 12px;
             color: var(--dark-color);
             letter-spacing: -0.3px;
@@ -1472,18 +1853,20 @@
         }
         
         .promo-title-highlight {
+            font-family: "Quattrocento", serif;
             display: block;
             font-size: 20px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--blue);
             margin-bottom: 8px;
             letter-spacing: 0.5px;
         }
         
         .promo-title-main {
+            font-family: "Quattrocento", serif;
             display: block;
             font-size: 52px;
-            font-weight: 900;
+            font-weight: 700;
             color: var(--dark-color);
             letter-spacing: -2px;
             line-height: 1.1;
@@ -1567,6 +1950,7 @@
         }
         
         .promo-benefit-title {
+            font-family: "Quattrocento", serif;
             font-size: 16px;
             font-weight: 700;
             color: var(--dark-color);
@@ -1749,8 +2133,9 @@
         }
         
         .footer-title {
+            font-family: "Quattrocento", serif;
             font-size: 20px;
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: 24px;
             color: white;
             letter-spacing: -0.3px;
@@ -1795,7 +2180,7 @@
             transform: translateY(-50%);
             width: 0;
             height: 2px;
-            background: var(--primary-color);
+            background: var(--blue);
             transition: width 0.3s ease;
         }
         
@@ -1829,10 +2214,10 @@
         }
         
         .footer a[style*="color: white"]:hover {
-            background: var(--primary-color);
+            background: var(--blue);
             color: white !important;
             transform: translateY(-3px);
-            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.3);
+            box-shadow: 0 6px 20px rgba(20, 56, 92, 0.3);
             border-color: var(--blue);
         }
         
@@ -1897,7 +2282,7 @@
             transform: translateY(-50%);
             width: 0;
             height: 2px;
-            background: var(--primary-color);
+            background: var(--blue);
             transition: width 0.3s ease;
         }
         
@@ -1973,9 +2358,11 @@
                 grid-template-columns: 1fr;
             }
             
-            .section-title {
-                font-size: 32px;
-            }
+        .section-title {
+            font-family: "Quattrocento", serif;
+            font-size: 32px;
+            font-weight: 700;
+        }
         }
         
         @media (max-width: 576px) {
@@ -2021,12 +2408,46 @@
                         </div>
                         <div class="form-group">
                             <label><i class="bi bi-people-fill"></i>Guests</label>
-                            <select class="form-control">
-                                <option>1 Guest</option>
-                                <option>2 Guests</option>
-                                <option>3 Guests</option>
-                                <option>4+ Guests</option>
-                            </select>
+                            <div class="guests-dropdown-wrapper">
+                                <input type="text" class="form-control guests-input" id="guestsInput" placeholder="Select guests" readonly>
+                                <div class="guests-dropdown-menu" id="guestsDropdown">
+                                    <div class="guests-option">
+                                        <div class="guests-option-label">
+                                            <strong>Room</strong>
+                                        </div>
+                                        <div class="guests-counter">
+                                            <button type="button" class="guests-btn-minus" data-type="room">-</button>
+                                            <span class="guests-value" data-type="room">1</span>
+                                            <button type="button" class="guests-btn-plus" data-type="room">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="guests-option">
+                                        <div class="guests-option-label">
+                                            <strong>Adults</strong>
+                                        </div>
+                                        <div class="guests-counter">
+                                            <button type="button" class="guests-btn-minus" data-type="adults">-</button>
+                                            <span class="guests-value" data-type="adults">2</span>
+                                            <button type="button" class="guests-btn-plus" data-type="adults">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="guests-option">
+                                        <div class="guests-option-label">
+                                            <strong>Children</strong>
+                                            <span class="guests-subtitle">0 - 17 Years Old</span>
+                                        </div>
+                                        <div class="guests-counter">
+                                            <button type="button" class="guests-btn-minus" data-type="children">-</button>
+                                            <span class="guests-value" data-type="children">0</span>
+                                            <button type="button" class="guests-btn-plus" data-type="children">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="guests-message">
+                                        Please provide right number of children along with their right age for best options and prices.
+                                    </div>
+                                    <button type="button" class="guests-apply-btn">APPLY</button>
+                                </div>
+                            </div>
                         </div>
                         <button type="submit" class="search-btn">
                             <i class="bi bi-search"></i>
@@ -2153,7 +2574,7 @@
                                     <div class="price">₹4,500</div>
                                     <div class="price-label">per night</div>
                                 </div>
-                                <button class="book-btn"><span>Book Now</span></button>
+                                <button class="book-btn"><span>View Details</span></button>
                             </div>
                         </div>
                     </div>
@@ -2190,7 +2611,7 @@
                                     <div class="price">₹6,200</div>
                                     <div class="price-label">per night</div>
                                 </div>
-                                <button class="book-btn"><span>Book Now</span></button>
+                                <button class="book-btn"><span>View Details</span></button>
                             </div>
                         </div>
                     </div>
@@ -2227,7 +2648,7 @@
                                     <div class="price">₹3,800</div>
                                     <div class="price-label">per night</div>
                                 </div>
-                                <button class="book-btn"><span>Book Now</span></button>
+                                <button class="book-btn"><span>View Details</span></button>
                             </div>
                         </div>
                     </div>
@@ -2384,7 +2805,7 @@
     <?php include __DIR__ . '/components/footer.php'; ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/air-datepicker@3.4.0/air-datepicker.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
     <script>
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
@@ -2412,20 +2833,30 @@
             const secondaryCheckinInput = document.getElementById('secondaryCheckinInput');
             const checkoutInput = document.getElementById('checkoutInput');
             const secondaryCheckoutInput = document.getElementById('secondaryCheckoutInput');
-            const mainGuestsSelect = document.querySelector('.search-form select');
-            const secondaryGuestsSelect = document.getElementById('secondaryGuestsSelect');
             
             if (destinationInput && secondaryDestinationInput) {
                 secondaryDestinationInput.value = destinationInput.value;
             }
-            if (checkinInput && secondaryCheckinInput) {
-                secondaryCheckinInput.value = checkinInput.value;
+            // Sync dates: check-in first, then check-out (to maintain proper validation)
+            if (checkinInput && secondaryCheckinInput && checkinDatepicker && secondaryCheckinDatepicker) {
+                const selectedDates = checkinDatepicker.selectedDates;
+                if (selectedDates.length > 0) {
+                    secondaryCheckinDatepicker.setDate(selectedDates[0]);
+                } else {
+                    secondaryCheckinInput.value = checkinInput.value;
+                }
             }
-            if (checkoutInput && secondaryCheckoutInput) {
-                secondaryCheckoutInput.value = checkoutInput.value;
+            if (checkoutInput && secondaryCheckoutInput && checkoutDatepicker && secondaryCheckoutDatepicker) {
+                const selectedDates = checkoutDatepicker.selectedDates;
+                if (selectedDates.length > 0) {
+                    secondaryCheckoutDatepicker.setDate(selectedDates[0]);
+                } else {
+                    secondaryCheckoutInput.value = checkoutInput.value;
+                }
             }
-            if (mainGuestsSelect && secondaryGuestsSelect) {
-                secondaryGuestsSelect.value = mainGuestsSelect.value;
+            if (mainGuestsDropdown && secondaryGuestsDropdown) {
+                const data = mainGuestsDropdown.getData();
+                secondaryGuestsDropdown.setData(data);
             }
         }
         
@@ -2713,6 +3144,7 @@
             if (suggestion) {
                 destinationInput.value = suggestion.dataset.value;
                 destinationSuggestions.classList.remove('show');
+                syncToSecondaryForm();
             }
         });
         
@@ -2920,44 +3352,58 @@
             });
         }
         
-        // Air Datepicker English Locale
-        const englishLocale = {
-            days: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
-            daysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
-            daysMin: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
-            months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
-            monthsShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            today: 'Today',
-            clear: 'Clear',
-            dateFormat: 'dd/MM/yyyy',
-            timeFormat: 'hh:mm aa',
-            firstDay: 0
-        };
-        
-        // Air Datepicker for Check-in
+        // Flatpickr Date Pickers
         const checkinInput = document.getElementById('checkinInput');
         const checkoutInput = document.getElementById('checkoutInput');
         
-        const checkinDatepicker = new AirDatepicker(checkinInput, {
-            minDate: new Date(),
-            dateFormat: 'dd/MM/yyyy',
-            locale: englishLocale,
-            onSelect: function({date}) {
-                if (date) {
-                    const minCheckout = new Date(date);
-                    minCheckout.setDate(minCheckout.getDate() + 1);
-                    checkoutDatepicker.update({
-                        minDate: minCheckout
-                    });
+        // Calculate max date (24 months from today)
+        const maxDate = new Date();
+        maxDate.setMonth(maxDate.getMonth() + 24);
+        
+        let checkinDatepicker, checkoutDatepicker;
+        
+        checkinDatepicker = flatpickr(checkinInput, {
+            minDate: 'today',
+            maxDate: maxDate,
+            dateFormat: 'd/m/Y',
+            allowInput: false,
+            clickOpens: true,
+            onChange: function(selectedDates, dateStr, instance) {
+                if (selectedDates.length > 0) {
+                    const selectedDate = selectedDates[0];
+                    // Set minimum date for checkout
+                    checkoutDatepicker.set('minDate', selectedDate);
+                    // If checkout already selected but invalid → reset
+                    const checkoutDates = checkoutDatepicker.selectedDates;
+                    if (checkoutDates.length > 0 && checkoutDates[0] <= selectedDate) {
+                        checkoutDatepicker.clear();
+                    }
+                    syncToSecondaryForm();
                 }
             }
         });
         
-        // Air Datepicker for Check-out
-        const checkoutDatepicker = new AirDatepicker(checkoutInput, {
-            minDate: new Date(new Date().setDate(new Date().getDate() + 1)),
-            dateFormat: 'dd/MM/yyyy',
-            locale: englishLocale
+        checkoutDatepicker = flatpickr(checkoutInput, {
+            minDate: 'today',
+            maxDate: maxDate,
+            dateFormat: 'd/m/Y',
+            allowInput: false,
+            clickOpens: true,
+            onChange: function(selectedDates, dateStr, instance) {
+                if (selectedDates.length > 0) {
+                    const selectedDate = selectedDates[0];
+                    const checkinDates = checkinDatepicker.selectedDates;
+                    const cin = checkinDates.length > 0 ? checkinDates[0] : null;
+                    // If user selects checkout BEFORE checkin → auto-set checkin
+                    if (!cin || selectedDate <= cin) {
+                        const newCin = new Date(selectedDate);
+                        newCin.setDate(newCin.getDate() - 1); // 1 day before checkout
+                        checkinDatepicker.setDate(newCin);
+                        checkoutDatepicker.set('minDate', newCin);
+                    }
+                    syncToSecondaryForm();
+                }
+            }
         });
         
         // Secondary Navbar Functionality
@@ -3030,6 +3476,7 @@
                 if (suggestion) {
                     secondaryDestinationInput.value = suggestion.dataset.value;
                     secondaryDestinationSuggestions.classList.remove('show');
+                    syncToMainForm();
                 }
             });
             
@@ -3044,27 +3491,153 @@
         let secondaryCheckinDatepicker, secondaryCheckoutDatepicker;
         
         if (secondaryCheckinInput && secondaryCheckoutInput) {
-            secondaryCheckinDatepicker = new AirDatepicker(secondaryCheckinInput, {
-                minDate: new Date(),
-                dateFormat: 'dd/MM/yyyy',
-                locale: englishLocale,
-                onSelect: function({date}) {
-                    if (date) {
-                        const minCheckout = new Date(date);
-                        minCheckout.setDate(minCheckout.getDate() + 1);
-                        secondaryCheckoutDatepicker.update({
-                            minDate: minCheckout
-                        });
+            secondaryCheckinDatepicker = flatpickr(secondaryCheckinInput, {
+                minDate: 'today',
+                maxDate: maxDate,
+                dateFormat: 'd/m/Y',
+                allowInput: false,
+                clickOpens: true,
+                onChange: function(selectedDates, dateStr, instance) {
+                    if (selectedDates.length > 0) {
+                        const selectedDate = selectedDates[0];
+                        // Set minimum date for checkout
+                        secondaryCheckoutDatepicker.set('minDate', selectedDate);
+                        // If checkout already selected but invalid → reset
+                        const checkoutDates = secondaryCheckoutDatepicker.selectedDates;
+                        if (checkoutDates.length > 0 && checkoutDates[0] <= selectedDate) {
+                            secondaryCheckoutDatepicker.clear();
+                        }
+                        syncToMainForm();
                     }
                 }
             });
             
-            secondaryCheckoutDatepicker = new AirDatepicker(secondaryCheckoutInput, {
-                minDate: new Date(new Date().setDate(new Date().getDate() + 1)),
-                dateFormat: 'dd/MM/yyyy',
-                locale: englishLocale
+            secondaryCheckoutDatepicker = flatpickr(secondaryCheckoutInput, {
+                minDate: 'today',
+                maxDate: maxDate,
+                dateFormat: 'd/m/Y',
+                allowInput: false,
+                clickOpens: true,
+                onChange: function(selectedDates, dateStr, instance) {
+                    if (selectedDates.length > 0) {
+                        const selectedDate = selectedDates[0];
+                        const checkinDates = secondaryCheckinDatepicker.selectedDates;
+                        const cin = checkinDates.length > 0 ? checkinDates[0] : null;
+                        // If user selects checkout BEFORE checkin → auto-set checkin
+                        if (!cin || selectedDate <= cin) {
+                            const newCin = new Date(selectedDate);
+                            newCin.setDate(newCin.getDate() - 1); // 1 day before checkout
+                            secondaryCheckinDatepicker.setDate(newCin);
+                            secondaryCheckoutDatepicker.set('minDate', newCin);
+                        }
+                        syncToMainForm();
+                    }
+                }
             });
         }
+        
+        // Guests Dropdown Functionality
+        function initGuestsDropdown(inputId, dropdownId) {
+            const input = document.getElementById(inputId);
+            const dropdown = document.getElementById(dropdownId);
+            const wrapper = input ? input.closest('.guests-dropdown-wrapper') : null;
+            
+            if (!input || !dropdown || !wrapper) return;
+            
+            let guestsData = {
+                room: 1,
+                adults: 2,
+                children: 0
+            };
+            
+            function updateInputValue() {
+                const total = guestsData.adults + guestsData.children;
+                const roomText = guestsData.room > 1 ? `${guestsData.room} Rooms` : '1 Room';
+                let guestText = '';
+                
+                if (guestsData.children > 0) {
+                    const adultText = guestsData.adults > 1 ? `${guestsData.adults} Adults` : '1 Adult';
+                    const childText = guestsData.children > 1 ? `${guestsData.children} Children` : '1 Child';
+                    guestText = `${adultText}, ${childText}`;
+                } else {
+                    guestText = total > 1 ? `${total} Guests` : '1 Guest';
+                }
+                
+                input.value = `${roomText}, ${guestText}`;
+            }
+            
+            function updateValue(type, delta) {
+                if (type === 'room') {
+                    guestsData.room = Math.max(1, guestsData.room + delta);
+                } else if (type === 'adults') {
+                    guestsData.adults = Math.max(1, guestsData.adults + delta);
+                } else if (type === 'children') {
+                    guestsData.children = Math.max(0, guestsData.children + delta);
+                }
+                
+                const valueElement = dropdown.querySelector(`.guests-value[data-type="${type}"]`);
+                if (valueElement) {
+                    valueElement.textContent = guestsData[type];
+                }
+            }
+            
+            // Toggle dropdown
+            input.addEventListener('click', function(e) {
+                e.stopPropagation();
+                wrapper.classList.toggle('active');
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!wrapper.contains(e.target)) {
+                    wrapper.classList.remove('active');
+                }
+            });
+            
+            // Handle plus/minus buttons
+            dropdown.querySelectorAll('.guests-btn-minus, .guests-btn-plus').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const type = this.dataset.type;
+                    const delta = this.classList.contains('guests-btn-plus') ? 1 : -1;
+                    updateValue(type, delta);
+                });
+            });
+            
+            // Handle apply button
+            const applyBtn = dropdown.querySelector('.guests-apply-btn');
+            if (applyBtn) {
+                applyBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    updateInputValue();
+                    wrapper.classList.remove('active');
+                    input.dispatchEvent(new Event('change'));
+                });
+            }
+            
+            // Initialize input value
+            updateInputValue();
+            
+            return {
+                getData: () => ({ ...guestsData }),
+                setData: (data) => {
+                    guestsData = { ...data };
+                    dropdown.querySelectorAll('.guests-value').forEach(el => {
+                        const type = el.dataset.type;
+                        el.textContent = guestsData[type];
+                    });
+                    updateInputValue();
+                }
+            };
+        }
+        
+        // Initialize guests dropdowns
+        const mainGuestsDropdown = initGuestsDropdown('guestsInput', 'guestsDropdown');
+        const secondaryGuestsDropdown = initGuestsDropdown('secondaryGuestsInput', 'secondaryGuestsDropdown');
+        const detailsGuestsDropdown = initGuestsDropdown('guestsInputDetails', 'guestsDropdownDetails');
+        
+        const mainGuestsInput = document.getElementById('guestsInput');
+        const secondaryGuestsInput = document.getElementById('secondaryGuestsInput');
         
         // Sync values from secondary form to main form
         function syncToMainForm() {
@@ -3074,51 +3647,49 @@
             const secondaryCheckinInput = document.getElementById('secondaryCheckinInput');
             const checkoutInput = document.getElementById('checkoutInput');
             const secondaryCheckoutInput = document.getElementById('secondaryCheckoutInput');
-            const mainGuestsSelect = document.querySelector('.search-form select');
-            const secondaryGuestsSelect = document.getElementById('secondaryGuestsSelect');
             
             if (secondaryDestinationInput && destinationInput) {
                 destinationInput.value = secondaryDestinationInput.value;
             }
-            if (secondaryCheckinInput && checkinInput) {
-                checkinInput.value = secondaryCheckinInput.value;
+            // Sync dates: check-in first, then check-out (to maintain proper validation)
+            if (secondaryCheckinInput && checkinInput && secondaryCheckinDatepicker && checkinDatepicker) {
+                const selectedDates = secondaryCheckinDatepicker.selectedDates;
+                if (selectedDates.length > 0) {
+                    checkinDatepicker.setDate(selectedDates[0]);
+                } else {
+                    checkinInput.value = secondaryCheckinInput.value;
+                }
             }
-            if (secondaryCheckoutInput && checkoutInput) {
-                checkoutInput.value = secondaryCheckoutInput.value;
+            if (secondaryCheckoutInput && checkoutInput && secondaryCheckoutDatepicker && checkoutDatepicker) {
+                const selectedDates = secondaryCheckoutDatepicker.selectedDates;
+                if (selectedDates.length > 0) {
+                    checkoutDatepicker.setDate(selectedDates[0]);
+                } else {
+                    checkoutInput.value = secondaryCheckoutInput.value;
+                }
             }
-            if (secondaryGuestsSelect && mainGuestsSelect) {
-                mainGuestsSelect.value = secondaryGuestsSelect.value;
+            if (secondaryGuestsDropdown && mainGuestsDropdown) {
+                const data = secondaryGuestsDropdown.getData();
+                mainGuestsDropdown.setData(data);
             }
         }
         
-        // Sync on main form changes (using already declared variables)
-        const mainGuestsSelect = document.querySelector('.search-form select');
-        
+        // Sync on main form changes
         if (destinationInput) {
+            destinationInput.addEventListener('input', syncToSecondaryForm);
             destinationInput.addEventListener('change', syncToSecondaryForm);
         }
-        if (checkinInput) {
-            checkinInput.addEventListener('change', syncToSecondaryForm);
-        }
-        if (checkoutInput) {
-            checkoutInput.addEventListener('change', syncToSecondaryForm);
-        }
-        if (mainGuestsSelect) {
-            mainGuestsSelect.addEventListener('change', syncToSecondaryForm);
+        if (mainGuestsInput) {
+            mainGuestsInput.addEventListener('change', syncToSecondaryForm);
         }
         
-        // Sync on secondary form changes (using already declared variables)
+        // Sync on secondary form changes
         if (secondaryDestinationInput) {
+            secondaryDestinationInput.addEventListener('input', syncToMainForm);
             secondaryDestinationInput.addEventListener('change', syncToMainForm);
         }
-        if (secondaryCheckinInput) {
-            secondaryCheckinInput.addEventListener('change', syncToMainForm);
-        }
-        if (secondaryCheckoutInput) {
-            secondaryCheckoutInput.addEventListener('change', syncToMainForm);
-        }
-        if (secondaryGuestsSelect) {
-            secondaryGuestsSelect.addEventListener('change', syncToMainForm);
+        if (secondaryGuestsInput) {
+            secondaryGuestsInput.addEventListener('change', syncToMainForm);
         }
         
         // Secondary form submission

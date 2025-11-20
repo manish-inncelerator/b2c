@@ -133,7 +133,7 @@
         </div>
     </div>
     <div class="footer-bottom">
-        <p>&copy; 2024 Fayyaz Travels. All rights reserved.</p>
+        <p>&copy; <?php echo date('Y'); ?> Fayyaz Travels. All rights reserved.</p>
     </div>
 </footer>
 
