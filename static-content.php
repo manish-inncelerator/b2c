@@ -9,91 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="assets/css/site.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        :root {
-            --primary-color: #0066cc;
-            --primary-dark: #0052a3;
-            --secondary-color: #20c997;
-            --accent-color: #ff6b35;
-            --success-color: #28a745;
-            --dark-color: #1a1a1a;
-            --text-color: #2c3e50;
-            --text-light: #6c757d;
-            --light-bg: #f8f9fa;
-            --border-color: #e0e0e0;
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
-            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
-        }
-        
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background-color: #ffffff;
-            color: var(--text-color);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-        
-        /* Top Strip */
-        .top-strip {
-            background: linear-gradient(90deg, #c9a568 0%, #d4a574 50%, #c9a568 100%);
-            height: 3px;
-            background-size: 200% 100%;
-            animation: shimmer 3s linear infinite;
-        }
-        
-        @keyframes shimmer {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-        
-        /* Navbar */
-        .navbar {
-            background: #ffffff;
-            border-bottom: 1px solid var(--border-color);
-            padding: 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        }
-        
-        .navbar-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 50px;
-        }
-        
-        .navbar-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 16px 0;
-        }
-        
-        .logo-section {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .logo-section:hover {
-            transform: translateY(-2px);
-        }
-        
-        .logo-image {
-            height: 44px;
-            width: auto;
-            object-fit: contain;
-        }
         
         /* Content Section */
         .content-page {
@@ -125,7 +42,7 @@
         .content-icon {
             width: 70px;
             height: 70px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
             border-radius: 16px;
             display: flex;
             align-items: center;
@@ -133,7 +50,7 @@
             color: white;
             font-size: 32px;
             margin-bottom: 24px;
-            box-shadow: 0 8px 24px rgba(0, 102, 204, 0.3);
+            box-shadow: 0 8px 24px rgba(20, 56, 92, 0.3);
         }
         
         .content-title {
@@ -204,7 +121,7 @@
             width: 50px;
             height: 50px;
             border: 4px solid var(--light-bg);
-            border-top-color: var(--primary-color);
+            border-top-color: var(--blue);
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin: 0 auto 24px;
@@ -237,7 +154,7 @@
             align-items: center;
             gap: 8px;
             padding: 12px 24px;
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
             color: white;
             border: none;
             border-radius: 12px;
@@ -246,36 +163,23 @@
             text-decoration: none;
             margin-top: 32px;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.3);
+            box-shadow: 0 4px 12px rgba(20, 56, 92, 0.3);
         }
         
         .back-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
+            box-shadow: 0 6px 20px rgba(20, 56, 92, 0.4);
             color: white;
         }
         
-        .footer {
-            background: linear-gradient(135deg, #1a1a1a 0%, #0d0d0d 100%);
-            color: white;
-            padding: 40px 0 0;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            margin-top: 30px;
-            padding: 20px 0;
-            text-align: center;
-            color: #999;
-            background: rgba(0, 0, 0, 0.3);
-            font-size: 14px;
+        /* Content Page Spacing */
+        .content-page {
+            margin-top: 76px;
         }
         
         @media (max-width: 768px) {
-            .navbar-container {
-                padding: 0 20px;
+            .content-page {
+                margin-top: 76px;
             }
             
             .content-page {
@@ -302,16 +206,8 @@
     </style>
 </head>
 <body>
-    <div class="top-strip"></div>
-    <nav class="navbar">
-        <div class="navbar-container">
-            <div class="navbar-content">
-                <a href="index.html" class="logo-section">
-                    <img src="https://fayyaztravels.com/visa/admin/assets/img/main-logo.png" alt="Fayyaz Travels Logo" class="logo-image">
-                </a>
-            </div>
-        </div>
-    </nav>
+    <?php include __DIR__ . '/components/header.php'; ?>
+    <?php include __DIR__ . '/components/navbar.php'; ?>
 
     <section class="content-page">
         <div class="content-container">
@@ -353,13 +249,9 @@
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2024 Fayyaz Travels. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <div class="footer">
+        <?php include __DIR__ . '/components/footer.php'; ?>
+    </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
