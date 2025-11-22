@@ -9,7 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/telegraf" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/air-datepicker@3.4.0/air-datepicker.min.css">
@@ -97,7 +98,8 @@
         }
         
         .hotel-name {
-            font-family: "Quattrocento", serif;
+            font-family: "Hedvig Letters Serif", serif;
+            font-optical-sizing: auto;
             font-size: 48px;
             font-weight: 700;
             color: var(--dark-color);
@@ -642,7 +644,7 @@
         }
         
         .section-title {
-            font-family: "Quattrocento", serif;
+            font-family: 'Telegraf', sans-serif;
             font-size: 36px;
             font-weight: 900;
             color: var(--dark-color);

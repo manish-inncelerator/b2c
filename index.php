@@ -9,7 +9,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Quattrocento:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hedvig+Letters+Serif:opsz@12..24&display=swap" rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/telegraf" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -178,7 +179,7 @@
         }
         
         .hero-title {
-            font-family: "Quattrocento", serif;
+            font-family: 'Telegraf', sans-serif;
             font-size: 56px;
             font-weight: 700;
             margin: 0 0 20px 0;
@@ -378,6 +379,30 @@
             border-bottom: 4px solid var(--blue);
         }
         
+        .tab-new-badge {
+            display: inline-block;
+            margin-left: 8px;
+            background: linear-gradient(135deg, var(--accent-color) 0%, #ff8c5a 100%);
+            color: white;
+            font-size: 9px;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 10px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 6px rgba(255, 107, 53, 0.4);
+            animation: badgePulse 2s ease-in-out infinite;
+            vertical-align: middle;
+        }
+        
+        @keyframes badgePulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+        
         .search-form {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr 1fr auto;
@@ -389,7 +414,8 @@
         }
         
         .search-form[data-form="packages"],
-        .search-form[data-form="visa"] {
+        .search-form[data-form="visa"],
+        .search-form[data-form="esim"] {
             grid-template-columns: 1fr 1fr 1fr 1fr auto;
         }
         
@@ -401,6 +427,14 @@
         
         .search-form[data-form="packages"] .form-control,
         .search-form[data-form="visa"] .form-control {
+            width: 100%;
+        }
+        
+        .search-form[data-form="esim"] {
+            grid-template-columns: 2fr 1fr auto;
+        }
+        
+        .search-form[data-form="esim"] .form-group {
             width: 100%;
         }
         
@@ -444,10 +478,11 @@
         .custom-select-value {
             flex: 1;
             text-align: left;
+            color: var(--text-color);
         }
         
         .custom-select-value.placeholder {
-            color: var(--text-light);
+            color: var(--text-light) !important;
         }
         
         .custom-select-arrow {
@@ -926,7 +961,7 @@
         }
         
         .search-btn {
-            background: linear-gradient(135deg, var(--golden) 0%, var(--golden-dark) 100%);
+            background: linear-gradient(135deg, var(--blue) 0%, var(--blue-dark) 100%);
             color: white;
             border: none;
             padding: 16px 40px;
@@ -936,7 +971,7 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
-            box-shadow: 0 4px 16px rgba(175, 135, 0, 0.3);
+            box-shadow: 0 4px 16px rgba(20, 56, 92, 0.3);
             position: relative;
             overflow: hidden;
             display: flex;
@@ -965,8 +1000,8 @@
         
         .search-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 24px rgba(175, 135, 0, 0.4);
-            background: linear-gradient(135deg, var(--golden-dark) 0%, var(--golden) 100%);
+            box-shadow: 0 8px 24px rgba(20, 56, 92, 0.4);
+            background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue) 100%);
         }
         
         .search-btn:active {
@@ -1035,22 +1070,24 @@
             }
         }
         
-        /* Quattrocento Font Styles */
-        .quattrocento-regular {
-            font-family: "Quattrocento", serif;
+        /* Hedvig Letters Serif Font Styles */
+        .hedvig-letters-serif-regular {
+            font-family: "Hedvig Letters Serif", serif;
+            font-optical-sizing: auto;
             font-weight: 400;
             font-style: normal;
         }
         
-        .quattrocento-bold {
-            font-family: "Quattrocento", serif;
+        .hedvig-letters-serif-bold {
+            font-family: "Hedvig Letters Serif", serif;
+            font-optical-sizing: auto;
             font-weight: 700;
             font-style: normal;
         }
         
         /* Content Section Styling */
         .section h1 {
-            font-family: "Quattrocento", serif;
+            font-family: 'Telegraf', sans-serif;
             font-size: 42px;
             font-weight: normal;
             color: var(--dark-color);
@@ -1059,7 +1096,7 @@
         }
         
         .section h2 {
-            font-family: "Quattrocento", serif;
+            font-family: 'Telegraf', sans-serif;
             font-size: 48px;
             font-weight: normal;
             color: var(--dark-color);
@@ -1069,7 +1106,7 @@
         }
         
         .section h3 {
-            font-family: "Quattrocento", serif;
+            font-family: 'Telegraf', sans-serif;
             font-size: 22px;
             font-weight: normal;
             color: var(--blue);
@@ -1169,7 +1206,8 @@
         }
         
         .destination-name {
-            font-family: "Quattrocento", serif;
+            font-family: "Hedvig Letters Serif", serif;
+            font-optical-sizing: auto;
             font-size: 28px;
             font-weight: 700;
             margin-bottom: 8px;
@@ -1325,7 +1363,8 @@
         }
         
         .hotel-name {
-            font-family: "Quattrocento", serif;
+            font-family: "Hedvig Letters Serif", serif;
+            font-optical-sizing: auto;
             font-size: 24px;
             font-weight: 700;
             margin-bottom: 10px;
@@ -1654,7 +1693,8 @@
         }
         
         .feature-title {
-            font-family: "Quattrocento", serif;
+            font-family: "Hedvig Letters Serif", serif;
+            font-optical-sizing: auto;
             font-size: 22px;
             font-weight: 700;
             margin-bottom: 12px;
@@ -1853,7 +1893,8 @@
         }
         
         .promo-title-highlight {
-            font-family: "Quattrocento", serif;
+            font-family: "Hedvig Letters Serif", serif;
+            font-optical-sizing: auto;
             display: block;
             font-size: 20px;
             font-weight: 700;
@@ -1863,7 +1904,8 @@
         }
         
         .promo-title-main {
-            font-family: "Quattrocento", serif;
+            font-family: "Hedvig Letters Serif", serif;
+            font-optical-sizing: auto;
             display: block;
             font-size: 52px;
             font-weight: 700;
@@ -1950,7 +1992,8 @@
         }
         
         .promo-benefit-title {
-            font-family: "Quattrocento", serif;
+            font-family: "Hedvig Letters Serif", serif;
+            font-optical-sizing: auto;
             font-size: 16px;
             font-weight: 700;
             color: var(--dark-color);
@@ -2133,7 +2176,8 @@
         }
         
         .footer-title {
-            font-family: "Quattrocento", serif;
+            font-family: "Hedvig Letters Serif", serif;
+            font-optical-sizing: auto;
             font-size: 20px;
             font-weight: 700;
             margin-bottom: 24px;
@@ -2359,7 +2403,7 @@
             }
             
         .section-title {
-            font-family: "Quattrocento", serif;
+            font-family: 'Telegraf', sans-serif;
             font-size: 32px;
             font-weight: 700;
         }
@@ -2389,6 +2433,7 @@
                         <button class="search-tab active" data-tab="hotels">Hotels</button>
                         <button class="search-tab" data-tab="packages">Packages</button>
                         <button class="search-tab" data-tab="visa">Visa</button>
+                        <button class="search-tab" data-tab="esim">eSim<span class="tab-new-badge">New!</span></button>
                     </div>
                     
                     <!-- Hotels Form -->
@@ -2480,6 +2525,48 @@
                             <span>Search</span>
                         </button>
                     </form>
+                    
+                    <!-- eSim Form -->
+                    <form class="search-form" id="esimForm" data-form="esim" style="display: none;">
+                        <div class="form-group">
+                            <label><i class="bi bi-geo-alt-fill"></i>Destination</label>
+                            <div class="custom-select-wrapper" id="esimDestinationWrapper">
+                                <div class="custom-select-trigger" id="esimDestinationTrigger">
+                                    <span class="custom-select-value placeholder">Choose a destination</span>
+                                    <i class="bi bi-chevron-down custom-select-arrow"></i>
+                                </div>
+                                <div class="custom-select-dropdown" id="esimDestinationDropdown">
+                                    <div class="custom-select-search">
+                                        <i class="bi bi-search"></i>
+                                        <input type="text" class="custom-select-search-input" id="esimDestinationSearchInput" placeholder="Search countries...">
+                                    </div>
+                                    <div class="custom-select-options" id="esimDestinationOptions">
+                                        <div class="custom-select-option" style="padding: 12px; text-align: center; color: var(--text-light);">Loading countries...</div>
+                                    </div>
+                                    <div class="custom-select-no-results">No countries found</div>
+                                </div>
+                                <input type="hidden" id="esimDestinationHidden" name="esim_destination" value="">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label><i class="bi bi-card-text"></i>Plan</label>
+                            <select id="esimPlanSelect" class="form-control">
+                                <option value="">Select a plan</option>
+                                <option value="1gb-7days">1GB - 7 Days</option>
+                                <option value="3gb-15days">3GB - 15 Days</option>
+                                <option value="5gb-30days">5GB - 30 Days</option>
+                                <option value="10gb-30days">10GB - 30 Days</option>
+                                <option value="20gb-30days">20GB - 30 Days</option>
+                                <option value="unlimited-7days">Unlimited - 7 Days</option>
+                                <option value="unlimited-15days">Unlimited - 15 Days</option>
+                                <option value="unlimited-30days">Unlimited - 30 Days</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="search-btn">
+                            <i class="bi bi-search"></i>
+                            <span>Search</span>
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -2489,18 +2576,18 @@
     <section class="section" style="background: var(--light-bg);">
         <div class="container">
             <h2 class="section-title">Popular Destinations</h2>
-            <p class="section-subtitle">Explore the world's most beautiful places</p>
+            <p class="section-subtitle">Explore Southeast Asia's most beautiful places</p>
             
             <div class="row g-4">
                 <div class="col-md-4">
                     <div class="destination-card">
                         <div class="destination-badge">Popular</div>
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800" alt="Mountain" class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=800" alt="Singapore" class="destination-image">
                         <div class="destination-overlay">
-                            <div class="destination-name">Mountain View</div>
+                            <div class="destination-name">Singapore</div>
                             <div class="destination-info">
                                 <i class="bi bi-building-fill"></i>
-                                <span>120+ Hotels Available</span>
+                                <span>250+ Hotels Available</span>
                             </div>
                         </div>
                     </div>
@@ -2508,12 +2595,12 @@
                 <div class="col-md-4">
                     <div class="destination-card">
                         <div class="destination-badge">Trending</div>
-                        <img src="https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?w=800" alt="Beach" class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?w=800" alt="Bali" class="destination-image">
                         <div class="destination-overlay">
-                            <div class="destination-name">Beach Paradise</div>
+                            <div class="destination-name">Bali, Indonesia</div>
                             <div class="destination-info">
                                 <i class="bi bi-building-fill"></i>
-                                <span>85+ Hotels Available</span>
+                                <span>180+ Hotels Available</span>
                             </div>
                         </div>
                     </div>
@@ -2521,12 +2608,12 @@
                 <div class="col-md-4">
                     <div class="destination-card">
                         <div class="destination-badge">Best Seller</div>
-                        <img src="https://images.unsplash.com/photo-1498307833015-e7b400441eb8?w=800" alt="City" class="destination-image">
+                        <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=800" alt="Thailand" class="destination-image">
                         <div class="destination-overlay">
-                            <div class="destination-name">City Lights</div>
+                            <div class="destination-name">Thailand</div>
                             <div class="destination-info">
                                 <i class="bi bi-building-fill"></i>
-                                <span>200+ Hotels Available</span>
+                                <span>320+ Hotels Available</span>
                             </div>
                         </div>
                     </div>
@@ -2930,6 +3017,34 @@
                 const targetForm = document.querySelector(`[data-form="${tabType}"]`);
                 if (targetForm) {
                     targetForm.style.display = 'flex';
+                }
+                
+                // Fetch eSim countries when eSim tab is clicked (refresh data)
+                if (tabType === 'esim') {
+                    if (esimCountries.length === 0) {
+                        fetchEsimCountries();
+                    }
+                    // Reset plan select when switching to eSim tab
+                    if (esimPlanSelect) {
+                        esimPlanSelect.innerHTML = '<option value="">Select a plan</option>';
+                        esimPlanSelect.disabled = false;
+                    }
+                    // If destination is already selected, fetch packages
+                    if (esimDestinationHidden && esimDestinationHidden.value) {
+                        const selectedOption = esimDestinationOptions.querySelector('.custom-select-option.selected');
+                        if (selectedOption) {
+                            const code = selectedOption.dataset.code;
+                            if (code) {
+                                fetchEsimPackages(code);
+                            }
+                        }
+                    }
+                } else {
+                    // Reset plan select when switching away from eSim tab
+                    if (esimPlanSelect) {
+                        esimPlanSelect.innerHTML = '<option value="">Select a plan</option>';
+                        esimPlanSelect.disabled = false;
+                    }
                 }
             });
         });
@@ -3351,6 +3466,249 @@
                 }
             });
         }
+        
+        // eSim Destination Custom Select - Fetch from API via PHP proxy
+        const esimDestinationWrapper = document.getElementById('esimDestinationWrapper');
+        const esimDestinationTrigger = document.getElementById('esimDestinationTrigger');
+        const esimDestinationDropdown = document.getElementById('esimDestinationDropdown');
+        const esimDestinationOptions = document.getElementById('esimDestinationOptions');
+        const esimDestinationSearchInput = document.getElementById('esimDestinationSearchInput');
+        const esimDestinationHidden = document.getElementById('esimDestinationHidden');
+        const esimDestinationValue = esimDestinationTrigger?.querySelector('.custom-select-value');
+        let esimCountries = [];
+        let filteredEsimCountries = [];
+        
+        // Fetch eSim countries from API via PHP proxy
+        async function fetchEsimCountries() {
+            if (!esimDestinationOptions) return;
+            
+            try {
+                const response = await fetch('api-proxy.php?endpoint=esim-countries', {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    let countries = [];
+                    
+                    // Handle API response structure: { status: "success", data: { countries: [...] } }
+                    if (result.status === 'success' && result.data && result.data.countries && Array.isArray(result.data.countries)) {
+                        countries = result.data.countries;
+                    } else if (Array.isArray(result)) {
+                        countries = result;
+                    } else if (result.data && Array.isArray(result.data)) {
+                        countries = result.data;
+                    } else if (result.countries && Array.isArray(result.countries)) {
+                        countries = result.countries;
+                    }
+                    
+                    // Filter and sort countries
+                    esimCountries = countries
+                        .map(country => ({
+                            name: country.name || country.countryName || country.name_en || '',
+                            code: country.code || country.countryCode || country.iso2 || '',
+                            geography: country.geography || ''
+                        }))
+                        .filter(country => country.name)
+                        .sort((a, b) => a.name.localeCompare(b.name));
+                    
+                    filteredEsimCountries = [...esimCountries];
+                    renderEsimCountries();
+                } else {
+                    const errorText = await response.text();
+                    esimDestinationOptions.innerHTML = '<div class="custom-select-option" style="padding: 12px; text-align: center; color: var(--text-light);">Error loading countries</div>';
+                    console.error('Failed to fetch eSim countries:', response.status, errorText);
+                }
+            } catch (error) {
+                esimDestinationOptions.innerHTML = '<div class="custom-select-option" style="padding: 12px; text-align: center; color: var(--text-light);">Error loading countries</div>';
+                console.error('Error fetching eSim countries:', error);
+            }
+        }
+        
+        // Render countries in dropdown
+        function renderEsimCountries() {
+            if (!esimDestinationOptions) return;
+            
+            if (filteredEsimCountries.length === 0) {
+                esimDestinationOptions.innerHTML = '<div class="custom-select-option" style="padding: 12px; text-align: center; color: var(--text-light);">No countries found</div>';
+                const noResults = esimDestinationDropdown.querySelector('.custom-select-no-results');
+                if (noResults) noResults.classList.add('show');
+                return;
+            }
+            
+            const noResults = esimDestinationDropdown.querySelector('.custom-select-no-results');
+            if (noResults) noResults.classList.remove('show');
+            
+            esimDestinationOptions.innerHTML = filteredEsimCountries.map(country => `
+                <div class="custom-select-option" data-value="${country.code || country.name}" data-code="${country.code || ''}" data-name="${country.name}">
+                    ${country.name}
+                </div>
+            `).join('');
+        }
+        
+        // Initialize eSim custom select
+        if (esimDestinationWrapper && esimDestinationTrigger && esimDestinationDropdown) {
+            // Toggle dropdown
+            esimDestinationTrigger.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const isActive = esimDestinationWrapper.classList.contains('active');
+                
+                // Close all other selects
+                document.querySelectorAll('.custom-select-wrapper').forEach(w => {
+                    if (w !== esimDestinationWrapper) {
+                        w.classList.remove('active');
+                    }
+                });
+                
+                esimDestinationWrapper.classList.toggle('active');
+                
+                // Focus search input when opening
+                if (!isActive && esimDestinationSearchInput) {
+                    setTimeout(() => esimDestinationSearchInput.focus(), 100);
+                }
+            });
+            
+            // Search functionality
+            if (esimDestinationSearchInput) {
+                esimDestinationSearchInput.addEventListener('input', function(e) {
+                    const searchTerm = e.target.value.toLowerCase().trim();
+                    
+                    if (searchTerm.length === 0) {
+                        filteredEsimCountries = [...esimCountries];
+                    } else {
+                        filteredEsimCountries = esimCountries.filter(country => 
+                            country.name.toLowerCase().includes(searchTerm) ||
+                            (country.code && country.code.toLowerCase().includes(searchTerm))
+                        );
+                    }
+                    
+                    renderEsimCountries();
+                });
+            }
+            
+            // Option selection
+            esimDestinationOptions.addEventListener('click', function(e) {
+                const option = e.target.closest('.custom-select-option');
+                if (option && !option.style.padding) {
+                    const value = option.dataset.value;
+                    const name = option.dataset.name;
+                    const code = option.dataset.code;
+                    
+                    // Update selected state
+                    esimDestinationOptions.querySelectorAll('.custom-select-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    option.classList.add('selected');
+                    
+                    // Update trigger value
+                    if (esimDestinationValue) {
+                        esimDestinationValue.textContent = name;
+                        esimDestinationValue.classList.remove('placeholder');
+                        esimDestinationValue.style.color = 'var(--text-color)';
+                    }
+                    
+                    // Update hidden input
+                    if (esimDestinationHidden) {
+                        esimDestinationHidden.value = value;
+                    }
+                    
+                    // Close dropdown
+                    esimDestinationWrapper.classList.remove('active');
+                    
+                    // Clear search
+                    if (esimDestinationSearchInput) {
+                        esimDestinationSearchInput.value = '';
+                        filteredEsimCountries = [...esimCountries];
+                    }
+                    
+                    // Fetch packages for selected country
+                    if (code) {
+                        fetchEsimPackages(code);
+                    }
+                }
+            });
+            
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!esimDestinationWrapper.contains(e.target)) {
+                    esimDestinationWrapper.classList.remove('active');
+                }
+            });
+            
+            // Prevent dropdown from closing when clicking inside
+            esimDestinationDropdown.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+        
+        // Fetch eSim packages for a country
+        const esimPlanSelect = document.getElementById('esimPlanSelect');
+        
+        async function fetchEsimPackages(countryCode) {
+            if (!esimPlanSelect) return;
+            
+            // Show loading state
+            esimPlanSelect.innerHTML = '<option value="">Loading packages...</option>';
+            esimPlanSelect.disabled = true;
+            
+            try {
+                const response = await fetch(`api-proxy.php?endpoint=esim-packages&country=${encodeURIComponent(countryCode)}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    const result = await response.json();
+                    let packages = [];
+                    
+                    // Handle different API response structures
+                    if (result.status === 'success' && result.data && Array.isArray(result.data)) {
+                        packages = result.data;
+                    } else if (result.data && result.data.packages && Array.isArray(result.data.packages)) {
+                        packages = result.data.packages;
+                    } else if (Array.isArray(result)) {
+                        packages = result;
+                    } else if (result.packages && Array.isArray(result.packages)) {
+                        packages = result.packages;
+                    }
+                    
+                    // Populate plan select dropdown
+                    if (packages.length > 0) {
+                        esimPlanSelect.innerHTML = '<option value="">Select a plan</option>';
+                        packages.forEach(pkg => {
+                            const data = pkg.data || pkg;
+                            const name = data.name || `${data.dataAmount || ''} - ${data.validity || ''}`;
+                            const value = data.id || data.packageId || `${data.dataAmount}-${data.validity}`;
+                            const displayText = name || `${data.dataAmount || 'N/A'}${data.dataUnit || 'GB'} - ${data.validity || 'N/A'} Days`;
+                            
+                            const option = document.createElement('option');
+                            option.value = value;
+                            option.textContent = displayText;
+                            esimPlanSelect.appendChild(option);
+                        });
+                    } else {
+                        esimPlanSelect.innerHTML = '<option value="">No packages available</option>';
+                    }
+                } else {
+                    const errorText = await response.text();
+                    esimPlanSelect.innerHTML = '<option value="">Error loading packages</option>';
+                    console.error('Failed to fetch eSim packages:', response.status, errorText);
+                }
+            } catch (error) {
+                esimPlanSelect.innerHTML = '<option value="">Error loading packages</option>';
+                console.error('Error fetching eSim packages:', error);
+            } finally {
+                esimPlanSelect.disabled = false;
+            }
+        }
+        
+        // Fetch countries on page load
+        fetchEsimCountries();
         
         // Flatpickr Date Pickers
         const checkinInput = document.getElementById('checkinInput');

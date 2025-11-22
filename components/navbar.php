@@ -1,7 +1,7 @@
 <nav class="navbar" id="navbar">
     <div class="navbar-container">
         <div class="navbar-content">
-            <a href="#" class="logo-section">
+            <a href="/" class="logo-section">
                 <img src="https://fayyaztravels.com/visa/admin/assets/img/main-logo.png" alt="Fayyaz Travels Logo" class="logo-image">
             </a>
             

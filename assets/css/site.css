@@ -56,6 +56,14 @@ body {
 /* Remove boldness from heading tags */
 h1, h2, h3 {
     font-weight: normal;
+    font-family: 'Telegraf', sans-serif;
+}
+
+h4, h5, h6 {
+    font-family: "Hedvig Letters Serif", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 /* Top Strip */
@@ -974,6 +982,7 @@ h1, h2, h3 {
 }
 
 .section-title {
+    font-family: 'Telegraf', sans-serif;
     font-size: 48px;
     font-weight: 800;
     text-align: center;
@@ -1430,7 +1439,8 @@ h1, h2, h3 {
 }
 
 .footer-title {
-    font-family: "Quattrocento", serif;
+    font-family: "Hedvig Letters Serif", serif;
+    font-optical-sizing: auto;
     font-size: 20px;
     font-weight: 700;
     margin-bottom: 24px;
